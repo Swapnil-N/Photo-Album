@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ToolBar prefHeight="40.0" prefWidth="600.0" AnchorPane.bottomAnchor="360.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <BorderPane prefHeight="200.0" prefWidth="585.0">
+               <center>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Home" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="AppleGothic Regular" size="13.0" />
+                     </font>
+                  </Text>
+               </center>
+               <left>
+                <Button mnemonicParsing="false" text="Logout" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="AppleGothic Regular" size="13.0" />
+                     </font>
+                  </Button>
+               </left>
+               <right>
+                  <Button mnemonicParsing="false" text="Search" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="AppleGothic Regular" size="13.0" />
+                     </font>
+                  </Button>
+               </right>
+            </BorderPane>
+         </items>
+      </ToolBar>
+      <AnchorPane layoutX="3.0" layoutY="41.0" prefHeight="318.0" prefWidth="594.0" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="41.0" />
+      <ToolBar layoutY="359.0" prefHeight="40.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="359.0">
+         <items>
+            <BorderPane prefHeight="30.0" prefWidth="585.0">
+               <center>
+                <Button contentDisplay="CENTER" mnemonicParsing="false" text="Create New Album" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="AppleGothic Regular" size="13.0" />
+                     </font>
+                  </Button>
+               </center>
+            </BorderPane>
+         </items></ToolBar>
+   </children>
+</AnchorPane>
