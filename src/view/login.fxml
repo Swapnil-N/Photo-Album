@@ -23,12 +23,12 @@
             <Font name="AppleGothic Regular" size="13.0" />
          </font>
       </Text>
-      <TextField id="username" layoutX="480.0" layoutY="384.0" prefHeight="32.0" prefWidth="107.0" AnchorPane.bottomAnchor="334.0" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="413.0" AnchorPane.topAnchor="384.0">
+      <TextField fx:id="username" layoutX="480.0" layoutY="384.0" prefHeight="32.0" prefWidth="107.0" AnchorPane.bottomAnchor="334.0" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="413.0" AnchorPane.topAnchor="384.0">
          <font>
             <Font name="AppleGothic Regular" size="13.0" />
          </font>
       </TextField>
-      <Button id="loginButton" layoutX="427.0" layoutY="455.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="147.0" text="Login" textAlignment="CENTER" AnchorPane.bottomAnchor="255.0" AnchorPane.leftAnchor="427.0" AnchorPane.rightAnchor="426.0" AnchorPane.topAnchor="455.0">
+      <Button fx:id="loginButton" layoutX="427.0" layoutY="455.0" mnemonicParsing="false" onAction="#onActionLogin" prefHeight="40.0" prefWidth="147.0" text="Login" textAlignment="CENTER" AnchorPane.bottomAnchor="255.0" AnchorPane.leftAnchor="427.0" AnchorPane.rightAnchor="426.0" AnchorPane.topAnchor="455.0">
          <font>
             <Font name="AppleGothic Regular" size="13.0" />
          </font>

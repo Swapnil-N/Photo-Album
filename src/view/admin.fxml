@@ -9,11 +9,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ToolBar prefHeight="40.0" prefWidth="600.0" AnchorPane.bottomAnchor="360.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ToolBar prefHeight="49.0" prefWidth="1000.0" AnchorPane.bottomAnchor="701.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
-            <BorderPane prefWidth="525.0">
+            <BorderPane prefWidth="985.0">
                <center>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Control" textOrigin="CENTER" BorderPane.alignment="CENTER">
                      <font>
@@ -32,17 +32,17 @@
          </items>
       </ToolBar>
       <ScrollPane layoutX="13.0" layoutY="48.0" prefHeight="219.0" prefWidth="574.0" AnchorPane.bottomAnchor="133.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="48.0" />
-      <Text layoutX="239.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CREATE NEW USER" AnchorPane.bottomAnchor="93.77499961853027" AnchorPane.leftAnchor="239.0" AnchorPane.rightAnchor="238.48800659179688" AnchorPane.topAnchor="290.41699981689453">
+      <Text layoutX="450.0" layoutY="647.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CREATE NEW USER" AnchorPane.bottomAnchor="98.77499961853027" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="427.4880065917969" AnchorPane.topAnchor="635.4169998168945">
          <font>
             <Font name="AppleGothic Regular" size="13.0" />
          </font>
       </Text>
-      <TextField layoutX="164.0" layoutY="329.0" prefHeight="27.0" prefWidth="172.0" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="164.0" AnchorPane.rightAnchor="265.0" AnchorPane.topAnchor="329.0">
+      <TextField layoutX="272.0" layoutY="677.0" prefHeight="36.0" prefWidth="233.0" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="272.0" AnchorPane.rightAnchor="495.0" AnchorPane.topAnchor="677.0">
          <font>
             <Font name="AppleGothic Regular" size="13.0" />
          </font>
       </TextField>
-      <Button layoutX="352.0" layoutY="329.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="84.0" text="Add User" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="352.0" AnchorPane.rightAnchor="164.0" AnchorPane.topAnchor="329.0">
+      <Button layoutX="543.0" layoutY="677.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="114.0" text="Add User" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="543.0" AnchorPane.rightAnchor="343.0" AnchorPane.topAnchor="677.0">
          <font>
             <Font name="AppleGothic Regular" size="13.0" />
          </font>
