@@ -42,7 +42,7 @@ public class LoginController {
 			UserList userList = new UserList();
 			User user = new User(usernameInput);
 			
-			if (userList.containsUser(user)) {
+			if (!userList.containsUser(user)) {
 				invalidUsernameAlert();
 			}
 		}	
