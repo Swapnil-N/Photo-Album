@@ -24,9 +24,6 @@ public class LoginController {
 	@FXML
 	Button loginButton;
 	
-	public void start(Stage mainStage) {
-	}
-	
 	public void onActionLogin(ActionEvent e) throws IOException {
 		String usernameInput = username.getText().trim();
 		
@@ -44,15 +41,8 @@ public class LoginController {
 		} else {
 			UserList userList = new UserList();
 			User user = new User(usernameInput);
-			boolean exists = false;
 			
-			try {
-				exists = userList.userExists(user);
-			} catch (ClassNotFoundException | IOException ex) {
-				invalidUsernameAlert();
-			}
-			
-			if (exists) {
+			if (!userList.containsUser(user)) {
 				invalidUsernameAlert();
 			}
 		}	

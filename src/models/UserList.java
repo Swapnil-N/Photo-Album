@@ -16,11 +16,10 @@ public class UserList implements Serializable {
 	private static final String storeDir = "resources";
 	private static final String storeFile = "SerializedUsers.dat";
 	
-	static List<User> userList;
+	static List<User> userList = new ArrayList<>();
 	
 	public UserList() {
-		userList = new ArrayList<>();
-		userList.add(new User("stock"));
+		deserialize();
 	}
 	
 	private static void serialize() throws IOException {
@@ -28,36 +27,38 @@ public class UserList implements Serializable {
 		oos.writeObject(userList);
 	}
 	
-	private static void deserialize() throws ClassNotFoundException, IOException {
-		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));
-		userList = (ArrayList<User>) ois.readObject();
-	}
-	
-	public boolean userExists(User user) throws ClassNotFoundException, IOException {
-		deserialize();
-		
-		for (User currentUser: userList) {
-			if (currentUser.getUsername() == user.getUsername())
-				return true;
+	private static void deserialize() {
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));
+			userList = (List<User>) ois.readObject();
+		} catch (ClassNotFoundException | IOException e) {
+			userList = new ArrayList<>();
 		}
 		
+	}
+	
+	public boolean containsUser(User user) {	
+		for (User currentUser: userList) {
+			if (currentUser.getUsername().equals(user.getUsername())) {
+				return true;
+			}
+				
+		}
 		return false;
 		
 	}
 	
-	public boolean addUser(User user) throws ClassNotFoundException, IOException {
-		if (user.getUsername().isEmpty() || userExists(user))
+	public boolean addUser(User user) throws IOException {
+		if (user.getUsername().isEmpty() || containsUser(user))
 			return false;
-		
+				
 		userList.add(user);
 		serialize();
 		
 		return true;
 	}
 	
-	public boolean deleteUser(User user) throws ClassNotFoundException, IOException {
-		deserialize();
-		
+	public boolean deleteUser(User user) throws IOException {		
 		if (user.getUsername() == "admin")
 			return false;
 		
@@ -72,8 +73,7 @@ public class UserList implements Serializable {
 		return false;
 	}
 	
-	public List<User> getUsers() throws ClassNotFoundException, IOException{
-		deserialize();
+	public List<User> getUsers() {
 		return userList;
 	}
 
