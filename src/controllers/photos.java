@@ -14,6 +14,7 @@ public class photos extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();
 
