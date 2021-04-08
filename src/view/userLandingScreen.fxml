@@ -42,7 +42,7 @@
          <items>
             <BorderPane prefHeight="125.0" prefWidth="985.0">
                <center>
-                <Button fx:id="newAlbum" contentDisplay="CENTER" mnemonicParsing="false" text="Create New Album" BorderPane.alignment="CENTER">
+                <Button fx:id="newAlbum" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onActionAddAlbum" text="Create New Album" BorderPane.alignment="CENTER">
                      <font>
                         <Font name="AppleGothic Regular" size="15.0" />
                      </font>

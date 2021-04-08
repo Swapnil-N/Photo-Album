@@ -8,19 +8,29 @@ public class Album {
 	
 	private String name;
 	private List<Photo> photoList;
-	private User user;
 	private Date firstDate;
 	private Date lastDate;
 	
 	
-	public Album(String name, User user) {
+	public Album(String name) {
 		this.name = name;
-		this.user = user;
 		photoList = new ArrayList<>();
 	}
 	
-	public boolean addPhoto(Photo photo) {
-		photoList.add(photo);
+	public boolean addPhoto(Photo newPhoto) {
+		
+		for (Photo currPhoto: photoList) {
+			if (newPhoto.equals(currPhoto))
+				return false;
+		}
+		
+		if (firstDate.after(newPhoto.getDate()))
+			firstDate = newPhoto.getDate();
+		if (lastDate.before(newPhoto.getDate()))
+			lastDate = newPhoto.getDate();
+
+		photoList.add(newPhoto);
+		
 		return true;
 	}
 
@@ -38,14 +48,6 @@ public class Album {
 
 	public void setPhotoList(List<Photo> photoList) {
 		this.photoList = photoList;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	public Date getFirstDate() {

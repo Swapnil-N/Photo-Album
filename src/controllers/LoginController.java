@@ -53,6 +53,7 @@ public class LoginController {
 				Stage primaryStage = (Stage) node.getScene().getWindow();
 				
 				UserLandingController userLandingController = loader.getController();
+				userLandingController.setCurrentUser(user);
 				userLandingController.start(primaryStage);
 				
 				Scene scene = new Scene(root, 1000, 750);

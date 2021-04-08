@@ -20,6 +20,15 @@ public class Photo {
 		tags = new HashMap<>();
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Photo))
+			return false;
+		
+		return file.equals(((Photo)obj).getFile());
+		
+	}
+
 	public String getName() {
 		return name;
 	}
