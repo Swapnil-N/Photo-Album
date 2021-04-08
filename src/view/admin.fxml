@@ -31,21 +31,21 @@
             </BorderPane>
          </items>
       </ToolBar>
-      <Text layoutX="420.0" layoutY="663.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CREATE NEW USER" AnchorPane.bottomAnchor="81.14999961853027" AnchorPane.leftAnchor="420.0" AnchorPane.rightAnchor="410.3679962158203" AnchorPane.topAnchor="646.9619998931885">
+      <Text layoutX="435.0" layoutY="572.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CREATE NEW USER" AnchorPane.bottomAnchor="173.125" AnchorPane.leftAnchor="435.0" AnchorPane.rightAnchor="423.6399841308594" AnchorPane.topAnchor="558.6350002288818">
          <font>
             <Font name="AppleGothic Regular" size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="newUsername" layoutX="305.0" layoutY="684.0" prefHeight="37.0" prefWidth="234.0" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="305.0" AnchorPane.rightAnchor="461.0" AnchorPane.topAnchor="684.0">
+      <TextField fx:id="newUsername" layoutX="333.0" layoutY="601.0" prefHeight="37.0" prefWidth="234.0" AnchorPane.bottomAnchor="112.0" AnchorPane.leftAnchor="333.0" AnchorPane.rightAnchor="433.0" AnchorPane.topAnchor="601.0">
          <font>
             <Font name="AppleGothic Regular" size="13.0" />
          </font>
       </TextField>
-      <Button fx:id="addUser" alignment="CENTER" layoutX="551.0" layoutY="685.0" mnemonicParsing="false" onAction="#onActionAddUser" prefHeight="37.0" prefWidth="100.0" text="Add User" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="551.0" AnchorPane.rightAnchor="349.0" AnchorPane.topAnchor="685.0">
+      <Button fx:id="addUser" alignment="CENTER" layoutX="579.0" layoutY="602.0" mnemonicParsing="false" onAction="#onActionAddUser" prefHeight="37.0" prefWidth="100.0" text="Add User" AnchorPane.bottomAnchor="111.0" AnchorPane.leftAnchor="579.0" AnchorPane.rightAnchor="321.0" AnchorPane.topAnchor="602.0">
          <font>
             <Font name="AppleGothic Regular" size="13.0" />
          </font>
       </Button>
-      <ListView fx:id="listView" layoutX="14.0" layoutY="60.0" prefHeight="562.0" prefWidth="968.0" AnchorPane.bottomAnchor="128.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0" />
+      <ListView fx:id="listView" layoutX="125.0" layoutY="75.0" prefHeight="438.0" prefWidth="796.0" AnchorPane.bottomAnchor="237.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="75.0" />
    </children>
 </AnchorPane>

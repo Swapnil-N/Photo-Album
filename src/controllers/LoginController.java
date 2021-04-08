@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Alert.AlertType;
@@ -29,10 +28,10 @@ public class LoginController {
 		if (usernameInput.equals("admin")) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/admin.fxml"));
 			AnchorPane root = (AnchorPane) loader.load();
-			
+
 			Node node = (Node) e.getSource();
 			Stage primaryStage = (Stage) node.getScene().getWindow();
-			
+
 			AdminController listController = loader.getController();
 			listController.start(primaryStage);
 
@@ -47,22 +46,20 @@ public class LoginController {
 
 			if (!userList.containsUser(user)) {
 				invalidUsernameAlert();
-			}
-			else {
+			} else {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/userLandingScreen.fxml"));
 				AnchorPane root = (AnchorPane) loader.load();
-				
+
 				Node node = (Node) e.getSource();
 				Stage primaryStage = (Stage) node.getScene().getWindow();
 				Scene scene = new Scene(root, 1000, 750);
 				primaryStage.setScene(scene);
 				primaryStage.setTitle("Home Screen");
 				primaryStage.setResizable(false);
-				primaryStage.show();				
+				primaryStage.show();
 			}
 		}
 
-	
 	}
 
 	public void invalidUsernameAlert() {
