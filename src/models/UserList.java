@@ -25,12 +25,14 @@ public class UserList implements Serializable {
 	private static void serialize() throws IOException {
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
 		oos.writeObject(userList);
+		oos.close();
 	}
 
 	private static void deserialize() {
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));
 			userList = (List<User>) ois.readObject();
+			ois.close();
 		} catch (ClassNotFoundException | IOException e) {
 			userList = new ArrayList<>();
 		}
