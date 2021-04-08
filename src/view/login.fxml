@@ -6,31 +6,31 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <children>
-      <Text layoutX="448.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome!" AnchorPane.bottomAnchor="511.9765625" AnchorPane.leftAnchor="448.0" AnchorPane.rightAnchor="446.02734375" AnchorPane.topAnchor="206.1015625">
+      <Text layoutX="416.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome!" AnchorPane.bottomAnchor="516.2999992370605" AnchorPane.leftAnchor="416.0" AnchorPane.rightAnchor="416.27601623535156" AnchorPane.topAnchor="189.92399978637695">
          <font>
-            <Font name="AppleGothic Regular" size="24.0" />
+            <Font name="AppleGothic Regular" size="36.0" />
          </font>
       </Text>
-      <Text layoutX="402.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please login with your credentials. " AnchorPane.bottomAnchor="453.7373046875" AnchorPane.leftAnchor="402.0" AnchorPane.rightAnchor="400.23876953125" AnchorPane.topAnchor="278.9716796875">
+      <Text layoutX="360.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please login with your credentials. " AnchorPane.bottomAnchor="479.1499996185303" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="359.09197998046875" AnchorPane.topAnchor="248.96199989318848">
          <font>
-            <Font name="AppleGothic Regular" size="13.0" />
+            <Font name="AppleGothic Regular" size="18.0" />
          </font>
       </Text>
-      <Text layoutX="390.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" AnchorPane.bottomAnchor="391.7373046875" AnchorPane.leftAnchor="390.0" AnchorPane.rightAnchor="749.44970703125" AnchorPane.topAnchor="390.9716796875">
+      <Text layoutX="384.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" AnchorPane.bottomAnchor="382.125" AnchorPane.leftAnchor="384.0" AnchorPane.rightAnchor="538.0299987792969" AnchorPane.topAnchor="349.63500022888184">
          <font>
-            <Font name="AppleGothic Regular" size="13.0" />
+            <Font name="AppleGothic Regular" size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="username" layoutX="480.0" layoutY="384.0" prefHeight="32.0" prefWidth="107.0" AnchorPane.bottomAnchor="334.0" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="413.0" AnchorPane.topAnchor="384.0">
+      <TextField fx:id="username" layoutX="477.0" layoutY="343.0" prefHeight="30.0" prefWidth="130.0" AnchorPane.bottomAnchor="375.0" AnchorPane.leftAnchor="477.0" AnchorPane.rightAnchor="385.0" AnchorPane.topAnchor="343.0">
          <font>
-            <Font name="AppleGothic Regular" size="13.0" />
+            <Font name="AppleGothic Regular" size="15.0" />
          </font>
       </TextField>
-      <Button fx:id="loginButton" layoutX="427.0" layoutY="455.0" mnemonicParsing="false" onAction="#onActionLogin" prefHeight="40.0" prefWidth="147.0" text="Login" textAlignment="CENTER" AnchorPane.bottomAnchor="255.0" AnchorPane.leftAnchor="427.0" AnchorPane.rightAnchor="426.0" AnchorPane.topAnchor="455.0">
+      <Button fx:id="login" layoutX="426.0" layoutY="398.0" mnemonicParsing="false" onAction="#onActionLogin" prefHeight="40.0" prefWidth="147.0" text="Login" textAlignment="CENTER" AnchorPane.bottomAnchor="312.0" AnchorPane.leftAnchor="426.0" AnchorPane.rightAnchor="427.0" AnchorPane.topAnchor="398.0">
          <font>
-            <Font name="AppleGothic Regular" size="13.0" />
+            <Font name="AppleGothic Regular" size="15.0" />
          </font>
       </Button>
    </children>

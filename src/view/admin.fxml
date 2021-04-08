@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,20 +9,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminController">
    <children>
       <ToolBar prefHeight="49.0" prefWidth="1000.0" AnchorPane.bottomAnchor="701.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
             <BorderPane prefWidth="985.0">
                <center>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Control" textOrigin="CENTER" BorderPane.alignment="CENTER">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Control" textOrigin="CENTER" translateX="-30.0" BorderPane.alignment="CENTER">
                      <font>
                         <Font name="AppleGothic Regular" size="13.0" />
                      </font>
                   </Text>
                </center>
                <left>
-                <Button mnemonicParsing="false" text="Logout" BorderPane.alignment="CENTER">
+                <Button fx:id="logout" mnemonicParsing="false" onAction="#onActionLogout" text="Logout" BorderPane.alignment="CENTER">
                      <font>
                         <Font name="AppleGothic Regular" size="13.0" />
                      </font>
@@ -31,21 +31,21 @@
             </BorderPane>
          </items>
       </ToolBar>
-      <ScrollPane layoutX="13.0" layoutY="48.0" prefHeight="219.0" prefWidth="574.0" AnchorPane.bottomAnchor="133.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="48.0" />
-      <Text layoutX="450.0" layoutY="647.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CREATE NEW USER" AnchorPane.bottomAnchor="98.77499961853027" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="427.4880065917969" AnchorPane.topAnchor="635.4169998168945">
+      <Text layoutX="420.0" layoutY="663.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CREATE NEW USER" AnchorPane.bottomAnchor="81.14999961853027" AnchorPane.leftAnchor="420.0" AnchorPane.rightAnchor="410.3679962158203" AnchorPane.topAnchor="646.9619998931885">
          <font>
-            <Font name="AppleGothic Regular" size="13.0" />
+            <Font name="AppleGothic Regular" size="15.0" />
          </font>
       </Text>
-      <TextField layoutX="272.0" layoutY="677.0" prefHeight="36.0" prefWidth="233.0" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="272.0" AnchorPane.rightAnchor="495.0" AnchorPane.topAnchor="677.0">
+      <TextField fx:id="newUsername" layoutX="305.0" layoutY="684.0" prefHeight="37.0" prefWidth="234.0" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="305.0" AnchorPane.rightAnchor="461.0" AnchorPane.topAnchor="684.0">
          <font>
             <Font name="AppleGothic Regular" size="13.0" />
          </font>
       </TextField>
-      <Button layoutX="543.0" layoutY="677.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="114.0" text="Add User" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="543.0" AnchorPane.rightAnchor="343.0" AnchorPane.topAnchor="677.0">
+      <Button fx:id="addUser" alignment="CENTER" layoutX="551.0" layoutY="685.0" mnemonicParsing="false" onAction="#onActionAddUser" prefHeight="37.0" prefWidth="100.0" text="Add User" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="551.0" AnchorPane.rightAnchor="349.0" AnchorPane.topAnchor="685.0">
          <font>
             <Font name="AppleGothic Regular" size="13.0" />
          </font>
       </Button>
+      <ListView fx:id="listView" layoutX="14.0" layoutY="60.0" prefHeight="562.0" prefWidth="968.0" AnchorPane.bottomAnchor="128.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0" />
    </children>
 </AnchorPane>
