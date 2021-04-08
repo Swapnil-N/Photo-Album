@@ -15,7 +15,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import models.User;
 import models.UserList;
-import controllers.AdminController;
 
 public class LoginController {
 
@@ -32,8 +31,8 @@ public class LoginController {
 			Node node = (Node) e.getSource();
 			Stage primaryStage = (Stage) node.getScene().getWindow();
 
-			AdminController listController = loader.getController();
-			listController.start(primaryStage);
+			AdminController adminController = loader.getController();
+			adminController.start(primaryStage);
 
 			Scene scene = new Scene(root, 1000, 750);
 			primaryStage.setScene(scene);
@@ -52,6 +51,10 @@ public class LoginController {
 
 				Node node = (Node) e.getSource();
 				Stage primaryStage = (Stage) node.getScene().getWindow();
+				
+				UserLandingController userLandingController = loader.getController();
+				userLandingController.start(primaryStage);
+				
 				Scene scene = new Scene(root, 1000, 750);
 				primaryStage.setScene(scene);
 				primaryStage.setTitle("Home Screen");

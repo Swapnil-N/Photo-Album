@@ -44,7 +44,7 @@
                <center>
                 <Button fx:id="newAlbum" contentDisplay="CENTER" mnemonicParsing="false" text="Create New Album" BorderPane.alignment="CENTER">
                      <font>
-                        <Font name="AppleGothic Regular" size="13.0" />
+                        <Font name="AppleGothic Regular" size="15.0" />
                      </font>
                   </Button>
                </center>
@@ -52,7 +52,7 @@
          </items></ToolBar>
       <ScrollPane layoutX="35.0" layoutY="70.0" prefHeight="580.0" prefWidth="930.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="70.0">
          <content>
-            <TilePane fx:id="tilepane" prefHeight="550.0" prefWidth="900.0" translateX="15.0" translateY="13.0" />
+            <TilePane fx:id="tilepane" alignment="CENTER_LEFT" hgap="25.0" prefHeight="550.0" prefWidth="900.0" translateX="15.0" translateY="13.0" vgap="20.0" />
          </content>
       </ScrollPane>
    </children>
