@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.ToolBar?>
@@ -50,9 +51,12 @@
                </center>
             </BorderPane>
          </items></ToolBar>
-      <ScrollPane layoutX="35.0" layoutY="70.0" prefHeight="580.0" prefWidth="930.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="70.0">
+      <ScrollPane fx:id="scrollpane" layoutX="35.0" layoutY="70.0" prefHeight="580.0" prefWidth="930.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="70.0">
          <content>
-            <TilePane fx:id="tilepane" alignment="CENTER_LEFT" hgap="25.0" prefHeight="550.0" prefWidth="900.0" translateX="15.0" translateY="13.0" vgap="20.0" />
+            <TilePane fx:id="tilepane" alignment="CENTER_LEFT" hgap="25.0" prefHeight="550.0" prefWidth="900.0" translateX="15.0" translateY="13.0" vgap="0.0">
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+               </padding></TilePane>
          </content>
       </ScrollPane>
    </children>

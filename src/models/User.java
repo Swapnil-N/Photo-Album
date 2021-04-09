@@ -15,7 +15,6 @@ public class User implements Serializable {
 	}
 	
 	public boolean addAlbum(String name) {
-		
 		for (Album item: albums) {
 			if (item.getName().equals(name))
 				return false;

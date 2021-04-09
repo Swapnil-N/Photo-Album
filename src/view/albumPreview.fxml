@@ -9,16 +9,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="275.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id = "container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="275.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AlbumPreviewController">
    <children>
-      <ImageView fitHeight="170.0" fitWidth="265.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+      <ImageView fx:id="imageView" fitHeight="170.0" fitWidth="265.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
          <VBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </VBox.margin>
       </ImageView>
       <BorderPane prefHeight="40.0" prefWidth="233.0">
          <left>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Album Name" BorderPane.alignment="CENTER">
+            <Text fx:id="albumName" strokeType="OUTSIDE" strokeWidth="0.0" text="Album Name" BorderPane.alignment="CENTER">
                <font>
                   <Font name="AppleGothic Regular" size="14.0" />
                </font>
@@ -31,7 +31,7 @@
             <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
          </padding>
          <right>
-            <MenuButton mnemonicParsing="false" BorderPane.alignment="CENTER">
+            <MenuButton fx:id="settings" mnemonicParsing="false" BorderPane.alignment="CENTER">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
                 <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -39,7 +39,7 @@
             </MenuButton>
          </right>
       </BorderPane>
-      <Text fill="#000000a6" strokeType="OUTSIDE" strokeWidth="0.0" text="Photo Count">
+      <Text fx:id="photoCount" fill="#000000a6" strokeType="OUTSIDE" strokeWidth="0.0" text="Photo Count">
          <font>
             <Font name="AppleGothic Regular" size="14.0" />
          </font>
@@ -47,7 +47,7 @@
             <Insets bottom="5.0" left="10.0" right="10.0" />
          </VBox.margin>
       </Text>
-      <Text fill="#000000a6" strokeType="OUTSIDE" strokeWidth="0.0" text="Dates">
+      <Text fx:id="dateRange" fill="#000000a6" strokeType="OUTSIDE" strokeWidth="0.0" text="Dates">
          <VBox.margin>
             <Insets left="10.0" right="10.0" />
          </VBox.margin>
