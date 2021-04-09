@@ -1,5 +1,6 @@
 package models;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,7 +8,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class Album {
+public class Album implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	private String name;
 	private List<Photo> photoList;
@@ -58,6 +61,8 @@ public class Album {
 	}
 
 	public String getFirstDate() {
+		if (firstDate == null)
+			return "";
 		return formatDate(firstDate);
 	}
 
@@ -66,6 +71,8 @@ public class Album {
 	}
 
 	public String getLastDate() {
+		if (lastDate == null)
+			return "";
 		return formatDate(lastDate);
 	}
 

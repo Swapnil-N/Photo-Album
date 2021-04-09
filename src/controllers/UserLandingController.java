@@ -30,30 +30,20 @@ public class UserLandingController {
 	
 	private User currentUser;
 		
-	public void start(Stage primaryStage) throws IOException {
+	public void loadAlbums() throws IOException {
+		tilepane.getChildren().clear();
+		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/albumPreview.fxml"));
         VBox root = (VBox) loader.load();
         
 		List<Album> currentAlbums = currentUser.getAlbums();
 		for (int i = 0; i < currentAlbums.size(); i++) {
 			AlbumPreviewController albumPreviewController = loader.getController();
+			albumPreviewController.start();
 	        albumPreviewController.setAlbum(currentAlbums.get(i));
 	        
 	        tilepane.getChildren().add(albumPreviewController.container);
 		}
-		
-		System.out.println (currentAlbums.size());
-		
-		
-        
-//        Album album = new Album("text");
-//        album.setFirstDate(new Date(100000));
-//        album.setLastDate(new Date(100000));
-//        
-//        AlbumPreviewController albumPreviewController = loader.getController();
-//        albumPreviewController.setAlbum(album);
-//        
-//        tilepane.getChildren().add(albumPreviewController.container);
 	}
 	
 	public void onActionLogout(ActionEvent e) throws IOException {
@@ -69,7 +59,7 @@ public class UserLandingController {
 		primaryStage.show();
 	}
 	
-	public void onActionAddAlbum(ActionEvent e){
+	public void onActionAddAlbum(ActionEvent e) throws IOException{
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle(" ");
 		dialog.setHeaderText("Enter New Album Name");
@@ -81,8 +71,9 @@ public class UserLandingController {
 		
 		if (!currentUser.addAlbum(albumName)) {
 			invalidAlbumAlert();
+		} else {
+			loadAlbums();
 		}
-		
 	}
 
 	public void invalidAlbumAlert() {

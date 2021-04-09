@@ -1,5 +1,10 @@
 package controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuButton;
 import javafx.scene.image.Image;
@@ -22,23 +27,34 @@ public class AlbumPreviewController {
 	@FXML
 	MenuButton settings;
 	
+	Album album;
+	
+	public void start() throws FileNotFoundException {
+		ImageView menuIcon = new ImageView(new Image("file:///Users/srinandinim/Documents/Coursework/software-methodology/Photo-Album/src/controllers/flower.jpg"));
+	    menuIcon.setFitHeight(20);
+	    menuIcon.setFitWidth(20);
+	    settings.setGraphic(menuIcon);
+	}
+	
 	public void setAlbum(Album album) {
 		//TODO: update with image from album
-//		Image image = new Image("https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fimages%2Fnature%2Fsunset&psig=AOvVaw3sYhZWWxC_ieayE98kZKrH&ust=1617944658552000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLjA5dbv7e8CFQAAAAAdAAAAABAD");
-//		imageView = new ImageView();
-//		imageView.setImage(image);
 		
 		albumName.setText(album.getName());
 		photoCount.setText(album.getSize() + "");
 		
 		if (!album.getFirstDate().isEmpty())
 			dateRange.setText(album.getFirstDate() + " - " + album.getLastDate());
+		else
+			dateRange.setText("N/A");
 		
-		System.out.println(albumName.getText());
-		System.out.println(photoCount.getText());
-		System.out.println(dateRange.getText());
+		this.album = album;
 	}
 	
-	// add button onclick
+	public void onActionRename(ActionEvent e) {
+		
+	}
 	
+	public void onActionDelete(ActionEvent e) {
+		
+	}
 }

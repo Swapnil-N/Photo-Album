@@ -54,7 +54,7 @@ public class LoginController {
 				
 				UserLandingController userLandingController = loader.getController();
 				userLandingController.setCurrentUser(user);
-				userLandingController.start(primaryStage);
+				userLandingController.loadAlbums();
 				
 				Scene scene = new Scene(root, 1000, 750);
 				primaryStage.setScene(scene);

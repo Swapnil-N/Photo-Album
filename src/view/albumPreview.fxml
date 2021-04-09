@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id = "container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="275.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AlbumPreviewController">
+<VBox fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="275.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AlbumPreviewController">
    <children>
       <ImageView fx:id="imageView" fitHeight="170.0" fitWidth="265.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
          <VBox.margin>
@@ -33,8 +33,8 @@
          <right>
             <MenuButton fx:id="settings" mnemonicParsing="false" BorderPane.alignment="CENTER">
               <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
+                <MenuItem fx:id="rename" mnemonicParsing="false" onAction="#onActionRename" text="Rename" />
+                <MenuItem fx:id="delete" mnemonicParsing="false" onAction="#onActionDelete" text="Delete" />
               </items>
             </MenuButton>
          </right>

@@ -22,7 +22,6 @@ public class User implements Serializable {
 		
 		albums.add(new Album(name));
 		return true;
-		
 	}
 
 	public String getUsername() {
