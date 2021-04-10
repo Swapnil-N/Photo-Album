@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class photos extends Application {
@@ -16,7 +15,7 @@ public class photos extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/slideshow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();
 
 		Scene scene = new Scene(root, 1000, 750);

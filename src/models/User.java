@@ -56,4 +56,11 @@ public class User implements Serializable {
 		this.albums = albums;
 	}
 
+	@Override
+	public String toString() {
+		
+		return username +" "+ albums.size();
+		
+	}
+
 }

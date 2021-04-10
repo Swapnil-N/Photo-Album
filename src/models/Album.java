@@ -87,4 +87,13 @@ public class Album implements Serializable {
 		return dateFormatted;
 	}
 
+	@Override
+	public String toString() {
+		
+		return name +" "+ photoList.size() +" "+ firstDate +" "+ lastDate;
+		
+	}
+	
+	
+
 }

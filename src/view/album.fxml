@@ -30,7 +30,7 @@
                   </Button>
                </left>
                <right>
-                  <Button fx:id="home" mnemonicParsing="false" text="Home" BorderPane.alignment="CENTER">
+                  <Button fx:id="home" mnemonicParsing="false" onAction="#onActionHome" text="Home" BorderPane.alignment="CENTER">
                      <font>
                         <Font name="AppleGothic Regular" size="13.0" />
                      </font>
