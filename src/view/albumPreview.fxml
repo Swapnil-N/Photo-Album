@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
@@ -36,6 +37,13 @@
                 <MenuItem fx:id="rename" mnemonicParsing="false" onAction="#onActionRename" text="Rename" />
                 <MenuItem fx:id="delete" mnemonicParsing="false" onAction="#onActionDelete" text="Delete" />
               </items>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0">
+                     <image>
+                        <Image url="@../../resources/images/settings.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </MenuButton>
          </right>
       </BorderPane>
