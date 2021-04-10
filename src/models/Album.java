@@ -40,6 +40,18 @@ public class Album implements Serializable {
 
 		return true;
 	}
+	
+	public boolean deletePhoto(Photo photo) {
+		
+		for (int i=0; i<photoList.size(); i++) {
+			if ( photo.equals(photoList.get(i)) ) {
+				photoList.remove(i);
+				return true;
+			}
+		}
+		
+		return false;
+	}
 
 	public int getSize() {
 		return photoList.size();

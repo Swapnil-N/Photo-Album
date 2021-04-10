@@ -36,6 +36,7 @@ public class AlbumViewController {
 		//System.out.println(currentUser +" "+ currentAlbum);
 		this.currentUser = currentUser;
 		this.currentAlbum = currentAlbum;
+		albumName.setText(currentAlbum.getName());
 		
 	}
 		

@@ -104,7 +104,7 @@ public class AlbumPreviewController {
 		alert.showAndWait();
 	}
 	
-	public void onActionDelete(ActionEvent e) throws IOException {
+	public void onActionDelete(ActionEvent e)  {
 		if (currentUser.deleteAlbumWithName(album.getName()))
 			userLandingController.deleteAlbum(album.getName());
 	}
