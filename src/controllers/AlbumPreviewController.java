@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,7 +44,9 @@ public class AlbumPreviewController {
 	}
 	
 	public void setAlbum(Album album) {
-		//TODO: update with image from album
+		imageView.setImage(new Image("file:../../resources/images/settings.png"));
+		imageView.setFitHeight(170);
+		imageView.setFitHeight(265);
 		
 		albumName.setText(album.getName());
 		photoCount.setText(album.getSize() + "");
