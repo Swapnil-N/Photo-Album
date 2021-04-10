@@ -44,9 +44,9 @@ public class AlbumPreviewController {
 	}
 	
 	public void setAlbum(Album album) {
-		imageView.setImage(new Image("file:../../resources/images/settings.png"));
-		imageView.setFitHeight(170);
-		imageView.setFitHeight(265);
+//		imageView.setImage(new Image("file:../../resources/images/settings.png"));
+//		imageView.setFitHeight(170);
+//		imageView.setFitWidth(265);
 		
 		albumName.setText(album.getName());
 		photoCount.setText(album.getSize() + "");
@@ -77,6 +77,7 @@ public class AlbumPreviewController {
 		} else {
 			album.setName(newName);
 			albumName.setText(album.getName());
+			container.setId(newName);
 		}
 	}
 	

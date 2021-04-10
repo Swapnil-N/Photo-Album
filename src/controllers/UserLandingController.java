@@ -45,23 +45,6 @@ public class UserLandingController {
 	        
 	        tilepane.getChildren().add(albumPreviewController.container);
 		}
-		
-//		try {
-//			for (int i = 0; i < currentAlbums.size(); i++) {
-//				AlbumPreviewController albumPreviewController = loader.getController();
-//				albumPreviewController.start();
-//		        albumPreviewController.setAlbum(currentAlbums.get(i));
-//		        
-//		        tilepane.getChildren().add(albumPreviewController.container);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		System.out.println (tilepane.getChildren());
-//		if (tilepane.getChildren().size() == 3 && !done) {
-//			tilepane.getChildren().remove(2);
-//			done = true;
-//		}
 	}
 	
 	public void deleteAlbum(String albumName) {
