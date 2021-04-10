@@ -32,7 +32,7 @@ public class AlbumPreviewController {
 	
 	Album album;
 	User currentUser;
-	UserLandingController userLandingController;
+	UserHomeController userLandingController;
 	
 	public void start(User currentUser) {
 		this.currentUser = currentUser;
@@ -93,7 +93,7 @@ public class AlbumPreviewController {
 			userLandingController.deleteAlbum(album.getName());
 	}
 	
-	public void setUserLandingController(UserLandingController controller) {
+	public void setUserLandingController(UserHomeController controller) {
 		userLandingController = controller;
 	}
 }

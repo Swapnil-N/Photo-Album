@@ -46,13 +46,13 @@ public class LoginController {
 			if (!userList.containsUser(user)) {
 				invalidUsernameAlert();
 			} else {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/userLandingScreen.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/userHome.fxml"));
 				AnchorPane root = (AnchorPane) loader.load();
 
 				Node node = (Node) e.getSource();
 				Stage primaryStage = (Stage) node.getScene().getWindow();
 				
-				UserLandingController userLandingController = loader.getController();
+				UserHomeController userLandingController = loader.getController();
 				userLandingController.setCurrentUser(user);
 				userLandingController.loadAlbums();
 				

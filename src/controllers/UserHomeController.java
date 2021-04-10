@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 import models.Album;
 import models.User;
 
-public class UserLandingController {
+public class UserHomeController {
 	
 	@FXML
 	Button logout, search, newAlbum;
