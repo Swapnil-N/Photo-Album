@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,7 +29,7 @@ public class UserHomeController {
 	@FXML
 	TilePane tilepane;
 	
-	private User currentUser;
+	User currentUser;
 		
 	public void loadAlbums() throws IOException {
 		tilepane.getChildren().removeAll();
@@ -71,12 +72,17 @@ public class UserHomeController {
 	}
 	
 	public void onActionAddAlbum(ActionEvent e) throws IOException{
-		//TO DO HANDLE CANCEL
+		
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle(" ");
 		dialog.setHeaderText("Enter New Album Name");
 		
-		String albumName = dialog.showAndWait().get().trim();
+		Optional<String> opt = dialog.showAndWait();
+		
+		if (opt.isEmpty())
+			return;
+		
+		String albumName = opt.get().trim();
 		if(albumName.length() == 0) {
 			invalidAlbumAlert();
 			return;

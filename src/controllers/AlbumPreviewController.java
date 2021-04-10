@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -61,12 +62,17 @@ public class AlbumPreviewController {
 	}
 	
 	public void onActionRename(ActionEvent e) {
-		//TO DO HANDLE CANCEL
+		
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle(" ");
 		dialog.setHeaderText("Enter New Album Name");
 		
-		String newName = dialog.showAndWait().get().trim();
+		Optional<String> opt = dialog.showAndWait();
+		
+		if (opt.isEmpty())
+			return;
+		
+		String newName = opt.get().trim();
 		if(newName.length() == 0) {
 			invalidAlbumAlert();
 			return;
