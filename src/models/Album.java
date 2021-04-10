@@ -31,9 +31,9 @@ public class Album implements Serializable {
 				return false;
 		}
 
-		if (firstDate.after(newPhoto.getDate()))
+		if (firstDate == null || firstDate.after(newPhoto.getDate()))
 			firstDate = newPhoto.getDate();
-		if (lastDate.before(newPhoto.getDate()))
+		if (lastDate == null || lastDate.before(newPhoto.getDate()))
 			lastDate = newPhoto.getDate();
 
 		photoList.add(newPhoto);

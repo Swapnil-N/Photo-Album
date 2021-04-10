@@ -58,7 +58,7 @@
                   </Button>
                </right>
                <center>
-                  <Button fx:id="addPhoto" contentDisplay="CENTER" mnemonicParsing="false" text="Add Photo" translateX="45.0" BorderPane.alignment="CENTER">
+                  <Button fx:id="addPhoto" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onActionAddPhoto" text="Add Photo" translateX="45.0" BorderPane.alignment="CENTER">
                      <font>
                         <Font name="AppleGothic Regular" size="15.0" />
                      </font>

@@ -16,7 +16,7 @@ public class Photo implements Serializable {
 	private Date date;
 	private HashMap<String, List<String>> tags;
 	
-	public Photo(File file, Album album) {
+	public Photo(File file) {
 		name = file.getName();
 		this.file = file;
 		date = new Date(file.lastModified());
@@ -28,7 +28,7 @@ public class Photo implements Serializable {
 		if (!(obj instanceof Photo))
 			return false;
 		
-		return file.equals(((Photo)obj).getFile());
+		return file.equals( ((Photo)obj).getFile() );
 		
 	}
 
