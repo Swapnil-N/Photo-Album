@@ -18,6 +18,7 @@ public class Album implements Serializable {
 	private Date lastDate;
 
 	public Album(String name) {
+		// CASE SENSSITIIVE
 		this.name = name;
 		photoList = new ArrayList<>();
 		this.firstDate = null;

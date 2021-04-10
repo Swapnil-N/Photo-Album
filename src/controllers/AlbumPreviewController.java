@@ -1,17 +1,19 @@
 package controllers;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import models.Album;
+import models.User;
 
 public class AlbumPreviewController {
 
@@ -28,9 +30,13 @@ public class AlbumPreviewController {
 	MenuButton settings;
 	
 	Album album;
+	User currentUser;
+	UserLandingController userLandingController;
 	
-	public void start() throws FileNotFoundException {
-		ImageView menuIcon = new ImageView(new Image("file:///Users/srinandinim/Documents/Coursework/software-methodology/Photo-Album/src/controllers/flower.jpg"));
+	public void start(User currentUser) {
+		this.currentUser = currentUser;
+
+		ImageView menuIcon = new ImageView(new Image("file:../../resources/images/settings.png"));
 	    menuIcon.setFitHeight(20);
 	    menuIcon.setFitWidth(20);
 	    settings.setGraphic(menuIcon);
@@ -47,14 +53,43 @@ public class AlbumPreviewController {
 		else
 			dateRange.setText("N/A");
 		
+		container.setId(album.getName());
 		this.album = album;
 	}
 	
 	public void onActionRename(ActionEvent e) {
+		//TO DO HANDLE CANCEL
+		TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle(" ");
+		dialog.setHeaderText("Enter New Album Name");
 		
+		String newName = dialog.showAndWait().get().trim();
+		if(newName.length() == 0) {
+			invalidAlbumAlert();
+			return;
+		}
+		
+		if (currentUser.hasAlbumWithName(newName)) {
+			invalidAlbumAlert();
+		} else {
+			album.setName(newName);
+			albumName.setText(album.getName());
+		}
 	}
 	
-	public void onActionDelete(ActionEvent e) {
-		
+	private void invalidAlbumAlert() {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Add Album Failed");
+		alert.setContentText("That album name is not available.");
+		alert.showAndWait();
+	}
+	
+	public void onActionDelete(ActionEvent e) throws IOException {
+		if (currentUser.deleteAlbumWithName(album.getName()))
+			userLandingController.deleteAlbum(album.getName());
+	}
+	
+	public void setUserLandingController(UserLandingController controller) {
+		userLandingController = controller;
 	}
 }

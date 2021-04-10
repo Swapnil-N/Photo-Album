@@ -1,9 +1,9 @@
 package controllers;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,18 +31,46 @@ public class UserLandingController {
 	private User currentUser;
 		
 	public void loadAlbums() throws IOException {
-		tilepane.getChildren().clear();
+		tilepane.getChildren().removeAll();
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/albumPreview.fxml"));
         VBox root = (VBox) loader.load();
-        
+
 		List<Album> currentAlbums = currentUser.getAlbums();
-		for (int i = 0; i < currentAlbums.size(); i++) {
+		if (currentAlbums.size() > 0) {
 			AlbumPreviewController albumPreviewController = loader.getController();
-			albumPreviewController.start();
-	        albumPreviewController.setAlbum(currentAlbums.get(i));
+			albumPreviewController.start(currentUser);
+			albumPreviewController.setUserLandingController(this);
+	        albumPreviewController.setAlbum(currentAlbums.get(currentAlbums.size()-1));
 	        
 	        tilepane.getChildren().add(albumPreviewController.container);
+		}
+		
+//		try {
+//			for (int i = 0; i < currentAlbums.size(); i++) {
+//				AlbumPreviewController albumPreviewController = loader.getController();
+//				albumPreviewController.start();
+//		        albumPreviewController.setAlbum(currentAlbums.get(i));
+//		        
+//		        tilepane.getChildren().add(albumPreviewController.container);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		System.out.println (tilepane.getChildren());
+//		if (tilepane.getChildren().size() == 3 && !done) {
+//			tilepane.getChildren().remove(2);
+//			done = true;
+//		}
+	}
+	
+	public void deleteAlbum(String albumName) {
+		ObservableList<Node> currentChildren = tilepane.getChildren();
+		for (int i = 0; i < currentChildren.size(); i++) {
+			if (currentChildren.get(i).getId().equals(albumName)) {
+				currentChildren.remove(i);
+			}
+				
 		}
 	}
 	
@@ -60,9 +88,11 @@ public class UserLandingController {
 	}
 	
 	public void onActionAddAlbum(ActionEvent e) throws IOException{
+		//TO DO HANDLE CANCEL
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle(" ");
 		dialog.setHeaderText("Enter New Album Name");
+		
 		String albumName = dialog.showAndWait().get().trim();
 		if(albumName.length() == 0) {
 			invalidAlbumAlert();
@@ -76,7 +106,7 @@ public class UserLandingController {
 		}
 	}
 
-	public void invalidAlbumAlert() {
+	private void invalidAlbumAlert() {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Add Album Failed");
 		alert.setContentText("That album name is not available.");
