@@ -17,7 +17,9 @@ public class SlideshowController {
 
 		Node node = (Node) e.getSource();
 		Stage primaryStage = (Stage) node.getScene().getWindow();
+		
 		Scene scene = new Scene(root, 1000, 750);
+		
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Admin Control");
 		primaryStage.setResizable(false);

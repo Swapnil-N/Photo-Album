@@ -28,6 +28,7 @@ public class UserList implements Serializable {
 		oos.close();
 	}
 
+	@SuppressWarnings("unchecked")
 	private static void deserialize() {
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));

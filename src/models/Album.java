@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class Album implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private String name;
@@ -18,7 +18,6 @@ public class Album implements Serializable {
 	private Date lastDate;
 
 	public Album(String name) {
-		// CASE SENSSITIIVE
 		this.name = name;
 		photoList = new ArrayList<>();
 		this.firstDate = null;
@@ -40,17 +39,22 @@ public class Album implements Serializable {
 
 		return true;
 	}
-	
+
 	public boolean deletePhoto(Photo photo) {
-		
-		for (int i=0; i<photoList.size(); i++) {
-			if ( photo.equals(photoList.get(i)) ) {
+		for (int i = 0; i < photoList.size(); i++) {
+			if (photo.equals(photoList.get(i))) {
 				photoList.remove(i);
 				return true;
 			}
 		}
-		
+
 		return false;
+	}
+
+	private String formatDate(Date date) {
+		DateFormat format = new SimpleDateFormat("MM.d.yyyy", Locale.ENGLISH);
+		String dateFormatted = format.format(date);
+		return dateFormatted;
 	}
 
 	public int getSize() {
@@ -93,19 +97,10 @@ public class Album implements Serializable {
 		this.lastDate = lastDate;
 	}
 
-	private String formatDate(Date date) {
-		DateFormat format = new SimpleDateFormat("MM.d.yyyy", Locale.ENGLISH);
-		String dateFormatted = format.format(date);
-		return dateFormatted;
-	}
-
 	@Override
 	public String toString() {
-		
-		return name +" "+ photoList.size() +" "+ firstDate +" "+ lastDate;
-		
+		return name + " " + photoList.size() + " " + getFirstDate() + " " + getLastDate();
+
 	}
-	
-	
 
 }

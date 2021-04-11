@@ -35,6 +35,7 @@ public class LoginController {
 			adminController.start(primaryStage);
 
 			Scene scene = new Scene(root, 1000, 750);
+
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Admin Control");
 			primaryStage.setResizable(false);
@@ -51,12 +52,13 @@ public class LoginController {
 
 				Node node = (Node) e.getSource();
 				Stage primaryStage = (Stage) node.getScene().getWindow();
-				
+
 				UserHomeController userLandingController = loader.getController();
 				userLandingController.setCurrentUser(user);
 				userLandingController.loadAlbums();
-				
+
 				Scene scene = new Scene(root, 1000, 750);
+				
 				primaryStage.setScene(scene);
 				primaryStage.setTitle("Home Screen");
 				primaryStage.setResizable(false);
@@ -71,6 +73,7 @@ public class LoginController {
 		alert.setTitle("Login Failed");
 		alert.setContentText("Please enter a valid username.");
 		alert.showAndWait();
+
 		username.setText("");
 	}
 }

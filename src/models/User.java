@@ -2,6 +2,7 @@ package models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class User implements Serializable {
@@ -15,7 +16,16 @@ public class User implements Serializable {
 		this.username = username.toLowerCase();
 		albums = new ArrayList<>();
 	}
-
+	
+	// TODO: decide whether album names must be case sensitive
+	public boolean hasAlbumWithName(String name) {
+		for (Album item : albums) {
+			if (item.getName().toLowerCase().equals(name.toLowerCase()))
+				return true;
+		}
+		return false;
+	}
+	
 	public boolean addAlbum(String name) {
 		if (hasAlbumWithName(name))
 			return false;
@@ -24,22 +34,15 @@ public class User implements Serializable {
 		return true;
 	}
 
-	public boolean hasAlbumWithName(String name) {
-		for (Album item : albums) {
-			if (item.getName().equals(name))
-				return true;
-		}
-		return false;
-	}
-
-	public boolean deleteAlbumWithName(String name) {
+	public boolean deleteAlbum(String name) {
 		if (!hasAlbumWithName(name))
 			return false;
-		
+
 		for (int i = 0; i < albums.size(); i++) {
-			if (albums.get(i).getName().equals(name))
+			if (albums.get(i).getName().equals(name)) {
 				albums.remove(i);
 				return true;
+			}
 		}
 		return false;
 	}
@@ -49,6 +52,7 @@ public class User implements Serializable {
 	}
 
 	public List<Album> getAlbums() {
+		Collections.sort(albums, (a, b) -> a.getName().compareTo(b.getName()));
 		return albums;
 	}
 
@@ -58,9 +62,8 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		
-		return username +" "+ albums.size();
-		
+		return username + " " + albums.size();
+
 	}
 
 }

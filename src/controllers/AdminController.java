@@ -125,6 +125,7 @@ public class AdminController {
 		alert.setTitle("Add User Failed");
 		alert.setContentText("That username is not available.");
 		alert.showAndWait();
+
 		newUsername.setText("");
 	}
 
@@ -134,7 +135,9 @@ public class AdminController {
 
 		Node node = (Node) e.getSource();
 		Stage primaryStage = (Stage) node.getScene().getWindow();
+		
 		Scene scene = new Scene(root, 1000, 750);
+
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Admin Control");
 		primaryStage.setResizable(false);
