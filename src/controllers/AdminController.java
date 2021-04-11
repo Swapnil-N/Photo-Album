@@ -142,7 +142,7 @@ public class AdminController {
 		Scene scene = new Scene(root, 1000, 750);
 
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("Admin Control");
+		primaryStage.setTitle("Login Page");
 		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
