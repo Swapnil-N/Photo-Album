@@ -33,7 +33,7 @@
                   </Button>
                </left>
                <right>
-                  <Button fx:id="home" mnemonicParsing="false" text="Home" BorderPane.alignment="CENTER">
+                  <Button fx:id="home" mnemonicParsing="false" onAction="#onActionHome" text="Home" BorderPane.alignment="CENTER">
                      <font>
                         <Font name="AppleGothic Regular" size="13.0" />
                      </font>
@@ -88,12 +88,12 @@
                               <Font name="AppleGothic Regular" size="14.0" />
                            </font>
                         </TextArea>
-                        <Button fx:id="cancel" layoutX="112.0" layoutY="350.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="87.0" text="Cancel" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="112.0" AnchorPane.rightAnchor="283.5" AnchorPane.topAnchor="350.0">
+                        <Button fx:id="cancel" layoutX="112.0" layoutY="350.0" mnemonicParsing="false" onAction="#onActionCancel" prefHeight="32.0" prefWidth="87.0" text="Cancel" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="112.0" AnchorPane.rightAnchor="283.5" AnchorPane.topAnchor="350.0">
                            <font>
                               <Font name="AppleGothic Regular" size="15.0" />
                            </font>
                         </Button>
-                        <Button fx:id="save" layoutX="234.0" layoutY="350.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="87.0" text="Save" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="234.0" AnchorPane.rightAnchor="161.5" AnchorPane.topAnchor="350.0">
+                        <Button fx:id="save" layoutX="234.0" layoutY="350.0" mnemonicParsing="false" onAction="#onActionSave" prefHeight="32.0" prefWidth="87.0" text="Save" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="234.0" AnchorPane.rightAnchor="161.5" AnchorPane.topAnchor="350.0">
                            <font>
                               <Font name="AppleGothic Regular" size="15.0" />
                            </font>
@@ -108,7 +108,7 @@
                         <ListView fx:id="tags" layoutX="86.0" layoutY="27.0" prefHeight="298.0" prefWidth="300.0" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="25.0" />
                         <TextField fx:id="tagInput" layoutX="46.0" layoutY="338.0" promptText="Tag" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="235.0" AnchorPane.topAnchor="335.0" />
                         <TextField fx:id="valueInput" layoutX="243.0" layoutY="336.0" promptText="Value" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="235.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="335.0" />
-                        <Button fx:id="add" layoutX="183.0" layoutY="367.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="87.0" text="Add" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="181.5" AnchorPane.rightAnchor="181.5" AnchorPane.topAnchor="380.0">
+                        <Button fx:id="add" layoutX="183.0" layoutY="367.0" mnemonicParsing="false" onAction="#onActionAdd" prefHeight="32.0" prefWidth="87.0" text="Add" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="181.5" AnchorPane.rightAnchor="181.5" AnchorPane.topAnchor="380.0">
                            <font>
                               <Font name="AppleGothic Regular" size="15.0" />
                            </font>
@@ -122,12 +122,12 @@
          <items>
             <AnchorPane prefHeight="50.0" prefWidth="985.0">
                <children>
-                  <Button fx:id="move" layoutX="366.0" layoutY="14.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="87.0" text="Move" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="366.0" AnchorPane.rightAnchor="533.0" AnchorPane.topAnchor="14.0">
+                  <Button fx:id="move" layoutX="407.0" layoutY="15.0" mnemonicParsing="false" onAction="#onActionMove" prefHeight="32.0" prefWidth="87.0" text="Move" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="367.0" AnchorPane.rightAnchor="531.0" AnchorPane.topAnchor="15.0">
                      <font>
                         <Font name="AppleGothic Regular" size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="copy" layoutX="476.0" layoutY="14.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="87.0" text="Copy" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="476.0" AnchorPane.rightAnchor="422.0" AnchorPane.topAnchor="14.0">
+                  <Button fx:id="copy" layoutX="493.0" layoutY="15.0" mnemonicParsing="false" onAction="#onActionCopy" prefHeight="32.0" prefWidth="87.0" text="Copy" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="533.0" AnchorPane.rightAnchor="365.0" AnchorPane.topAnchor="15.0">
                      <font>
                         <Font name="AppleGothic Regular" size="15.0" />
                      </font>

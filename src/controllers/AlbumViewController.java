@@ -59,7 +59,7 @@ public class AlbumViewController {
 			VBox root = (VBox) loader.load();
 
 			PhotoPreviewController photoPreviewController = loader.getController();
-			photoPreviewController.start(album, albumPhotos.get(i));
+			photoPreviewController.start(album, albumPhotos.get(i), currentUser);
 			photoPreviewController.setAlbumViewController(this);
 
 			tilepane.getChildren().add(root);

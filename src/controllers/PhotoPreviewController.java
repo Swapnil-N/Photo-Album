@@ -1,7 +1,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +16,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.Album;
 import models.Photo;
+import models.User;
 
 public class PhotoPreviewController {
 	
@@ -31,12 +31,14 @@ public class PhotoPreviewController {
 	
 	Photo currentPhoto;
 	Album currentAlbum;
+	User currentUser;
 	
 	AlbumViewController albumViewController;
 	
-	public void start(Album currentAlbum, Photo currentPhoto) {
+	public void start(Album currentAlbum, Photo currentPhoto, User currentUser) {
 		this.currentPhoto = currentPhoto;
 		this.currentAlbum = currentAlbum;
+		this.currentUser = currentUser;
 		
 		photoName.setText(currentPhoto.getName());
 		caption.setText(currentPhoto.getCaption());
@@ -56,8 +58,8 @@ public class PhotoPreviewController {
 		Node node = (Node) e.getSource();
 		Stage primaryStage = (Stage) node.getScene().getWindow();
 		
-		//EditPhotoController editPhotoController = loader.getController();
-		//albumViewController.start(currentUser, album);
+		EditPhotoController editPhotoController = loader.getController();
+		editPhotoController.start(currentUser, currentPhoto);
 		
 		Scene scene = new Scene(root, 1000, 750);
 		primaryStage.setScene(scene);
