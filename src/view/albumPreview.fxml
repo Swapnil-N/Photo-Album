@@ -10,12 +10,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="275.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AlbumPreviewController">
+<VBox fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="275.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AlbumPreviewController">
    <children>
-      <HBox alignment="CENTER" prefHeight="27.0" prefWidth="275.0">
+      <HBox alignment="CENTER" prefHeight="180.0" prefWidth="265.0">
          <children>
-            <ImageView fx:id="imageView" fitHeight="170.0" fitWidth="265.0" onMouseClicked="#imageViewMouseClicked" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageView" fitHeight="170.0" fitWidth="250.0" onMouseClicked="#imageViewMouseClicked" pickOnBounds="true" preserveRatio="true" />
          </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
       </HBox>
       <BorderPane prefHeight="40.0" prefWidth="233.0">
          <left>
@@ -57,4 +63,7 @@
          </font>
       </Text>
    </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
 </VBox>
