@@ -40,7 +40,7 @@ public class Album implements Serializable {
 		return true;
 	}
 
-	public boolean deletePhoto(Photo photo) {
+	public boolean deletePhoto(Photo photo) { //TODO update dates
 		for (int i = 0; i < photoList.size(); i++) {
 			if (photo.equals(photoList.get(i))) {
 				photoList.remove(i);

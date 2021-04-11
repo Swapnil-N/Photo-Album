@@ -37,10 +37,13 @@ public class AlbumViewController {
 	User currentUser;
 	Album currentAlbum;
 
-	public void start(User currentUser, Album currentAlbum) {
+	public void start(User currentUser, Album currentAlbum) throws IOException {
 		this.currentUser = currentUser;
 		this.currentAlbum = currentAlbum;
+		
 		albumName.setText(currentAlbum.getName());
+		
+		loadAlbum();
 	}
 	
 	public void loadAlbum() throws IOException {

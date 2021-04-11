@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Optional;
 
 import javafx.event.ActionEvent;
@@ -40,7 +41,7 @@ public class AlbumPreviewController {
 	User currentUser;
 	UserHomeController userHomeController;
 
-	public void start(User currentUser, Album album) {
+	public void start(User currentUser, Album album) throws MalformedURLException {
 		this.currentUser = currentUser;
 		this.album = album;
 
@@ -54,11 +55,13 @@ public class AlbumPreviewController {
 		settings.setGraphic(menuIcon);
 	}
 
-	public void setAlbum() {
-		// TODO: add an image from the album
-		imageView.setImage(new Image("file:../../resources/images/settings.png"));
-		imageView.setFitHeight(170);
-		imageView.setFitWidth(265);
+	public void setAlbum() throws MalformedURLException {
+		
+		if (album.getSize() > 0)
+			imageView.setImage(new Image(album.getPhotoList().get(0).getFile().toURI().toURL().toString()));
+		else {
+			imageView.setImage(new Image("file:../../resources/images/noimageavailable.png"));
+		}
 
 		albumName.setText(album.getName());
 		photoCount.setText(album.getSize() + "");
