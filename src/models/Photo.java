@@ -2,6 +2,7 @@ package models;
 
 import java.io.File;
 import java.io.Serializable;
+import java.net.MalformedURLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -45,6 +46,14 @@ public class Photo implements Serializable {
 
 	public void setCaption(String caption) {
 		this.caption = caption;
+	}
+	
+	public String getPhotoURL() {
+		try {
+			return file.toURI().toURL().toString();
+		} catch (MalformedURLException e) {
+			return null;
+		}
 	}
 
 	public File getFile() {

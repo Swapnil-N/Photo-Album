@@ -34,13 +34,13 @@ public class PhotoPreviewController {
 	
 	AlbumViewController albumViewController;
 	
-	public void start(Album currentAlbum, Photo currentPhoto) throws MalformedURLException {
+	public void start(Album currentAlbum, Photo currentPhoto) {
 		this.currentPhoto = currentPhoto;
 		this.currentAlbum = currentAlbum;
 		
 		photoName.setText(currentPhoto.getName());
 		caption.setText(currentPhoto.getCaption());
-		imageView.setImage(new Image(currentPhoto.getFile().toURI().toURL().toString()));
+		imageView.setImage(new Image(currentPhoto.getPhotoURL()));
 	}
 	
 	

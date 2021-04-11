@@ -55,10 +55,10 @@ public class AlbumPreviewController {
 		settings.setGraphic(menuIcon);
 	}
 
-	public void setAlbum() throws MalformedURLException {
+	public void setAlbum() {
 		
 		if (album.getSize() > 0)
-			imageView.setImage(new Image(album.getPhotoList().get(0).getFile().toURI().toURL().toString()));
+			imageView.setImage(new Image(album.getPhotoList().get(0).getPhotoURL()));
 		else {
 			imageView.setImage(new Image("file:../../resources/images/noimageavailable.png"));
 		}

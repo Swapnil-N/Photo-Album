@@ -29,7 +29,7 @@
                   </Button>
                </left>
                <right>
-                  <Button fx:id="home" mnemonicParsing="false" text="Home" BorderPane.alignment="CENTER">
+                  <Button fx:id="home" mnemonicParsing="false" onAction="#onActionHome" text="Home" BorderPane.alignment="CENTER">
                      <font>
                         <Font name="AppleGothic Regular" size="13.0" />
                      </font>
@@ -38,16 +38,16 @@
             </BorderPane>
          </items>
       </ToolBar>
-      <ImageView fx:id="image" fitHeight="450.0" fitWidth="450.0" layoutX="276.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="175.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="125.0">
+      <ImageView fx:id="imageView" fitHeight="450.0" fitWidth="450.0" layoutX="276.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="175.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="125.0">
          <image>
             <Image url="@../../resources/images/noimageavailable.png" />
          </image></ImageView>
-      <Button fx:id="next" layoutX="511.0" layoutY="68.0" mnemonicParsing="false" text="Next" AnchorPane.bottomAnchor="66.0" AnchorPane.leftAnchor="511.0" AnchorPane.rightAnchor="425.0" AnchorPane.topAnchor="652.0">
+      <Button fx:id="next" layoutX="511.0" layoutY="68.0" mnemonicParsing="false" onAction="#onActionNext" prefHeight="32.0" prefWidth="80.0" text="Next" AnchorPane.bottomAnchor="66.0" AnchorPane.leftAnchor="511.0" AnchorPane.rightAnchor="409.0" AnchorPane.topAnchor="652.0">
          <font>
             <Font name="AppleGothic Regular" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="last" layoutX="427.0" layoutY="66.0" mnemonicParsing="false" text="Last" AnchorPane.bottomAnchor="66.0" AnchorPane.leftAnchor="425.0" AnchorPane.rightAnchor="507.5" AnchorPane.topAnchor="652.0">
+      <Button fx:id="previous" layoutX="412.0" layoutY="66.0" mnemonicParsing="false" onAction="#onActionPrevious" prefHeight="32.0" prefWidth="80.0" text="Previous" AnchorPane.bottomAnchor="66.0" AnchorPane.leftAnchor="412.0" AnchorPane.rightAnchor="508.0" AnchorPane.topAnchor="652.0">
          <font>
             <Font name="AppleGothic Regular" size="15.0" />
          </font>

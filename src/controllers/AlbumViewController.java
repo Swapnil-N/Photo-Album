@@ -103,7 +103,7 @@ public class AlbumViewController {
 		Scene scene = new Scene(root, 1000, 750);
 
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("Admin Control");
+		primaryStage.setTitle("Login Screen");
 		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
@@ -123,6 +123,24 @@ public class AlbumViewController {
 
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Home Screen");
+		primaryStage.setResizable(false);
+		primaryStage.show();
+	}
+	
+	public void onActionSlideshow(ActionEvent e) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/slideshow.fxml"));
+		AnchorPane root = (AnchorPane) loader.load();
+
+		Node node = (Node) e.getSource();
+		Stage primaryStage = (Stage) node.getScene().getWindow();
+
+		SlideshowController slideshowController = loader.getController();
+		slideshowController.start(currentUser, currentAlbum);
+
+		Scene scene = new Scene(root, 1000, 750);
+
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("Album Slideshow");
 		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
