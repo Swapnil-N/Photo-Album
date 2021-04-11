@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -37,9 +38,11 @@ public class AdminController {
 
 		public UserItem() {
 			super();
-
-			hBox.getChildren().addAll(username, blank, delete);
+			
 			HBox.setHgrow(blank, Priority.ALWAYS);
+			hBox.getChildren().addAll(username, blank, delete);
+			hBox.setAlignment(Pos.CENTER);
+			
 			delete.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {

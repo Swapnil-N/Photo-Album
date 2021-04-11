@@ -3,9 +3,13 @@ package models;
 import java.io.File;
 import java.io.Serializable;
 import java.net.MalformedURLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class Photo implements Serializable {
 
@@ -30,6 +34,39 @@ public class Photo implements Serializable {
 			return false;
 
 		return file.equals(((Photo) obj).getFile());
+	}
+	
+	public boolean addTag(String key, String value) {
+		key = key.trim().toLowerCase();
+		value = value.trim();
+		
+		if (!tags.containsKey(key)){
+			tags.put(key, new ArrayList<>());
+		}
+		
+		if (tags.get(key).contains(value)) {
+			return false;
+		}
+		
+		tags.get(key).add(value);
+		return true;
+	}
+	
+	public boolean removeTag(String key, String value) {
+		key = key.trim().toLowerCase();
+		value = value.trim();
+		
+		if (!tags.containsKey(key))
+			return false;
+		
+		for (int i = 0; i < tags.get(key).size(); i++) {
+			if (tags.get(key).get(i).equals(value)) {
+				tags.get(key).remove(i);
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 	public String getName() {
@@ -66,6 +103,12 @@ public class Photo implements Serializable {
 
 	public Date getDate() {
 		return date;
+	}
+	
+	public String getDateString() {
+		DateFormat format = new SimpleDateFormat("MM.d.yyyy", Locale.ENGLISH);
+		String dateFormatted = format.format(date);
+		return dateFormatted;
 	}
 
 	public void setDate(Date date) {

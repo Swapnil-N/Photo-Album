@@ -11,16 +11,22 @@ public class User implements Serializable {
 
 	private String username;
 	private List<Album> albums;
+	private List<String> tags;
+	
+	private String addNewTag = "Add New Tag";
 
 	public User(String username) {
 		this.username = username.toLowerCase();
 		albums = new ArrayList<>();
+		tags = new ArrayList<>();
+		
+		tags.add("location");
+		tags.add("person");
+		tags.add(addNewTag);
 	}
 	
-	// TODO: decide whether album names must be case sensitive
 	public boolean hasAlbumWithName(String name) {
 		for (Album item : albums) {
-//			if (item.getName().toLowerCase().equals(name.toLowerCase()))
 			if (item.getName().equals(name))
 				return true;
 		}
@@ -47,6 +53,25 @@ public class User implements Serializable {
 		}
 		return false;
 	}
+	
+	public boolean addTag(String tag) {
+		tag = tag.trim().toLowerCase();
+		
+		if (tag.equals(addNewTag.toLowerCase()) && !tags.contains(addNewTag)) {
+			tags.add(tag);
+			return true;
+		} else if (tag.equals(addNewTag.toLowerCase()))
+			return false;
+		
+		tag = tag.toLowerCase();
+		
+		if (tags.contains(tag))
+			return false;
+		
+		tags.add(0, tag);
+		
+		return true;
+	}
 
 	public String getUsername() {
 		return username;
@@ -72,7 +97,19 @@ public class User implements Serializable {
 	public void setAlbums(List<Album> albums) {
 		this.albums = albums;
 	}
-
+	
+	public List<String> getTags() {
+		tags.remove(tags.size()-1);
+		Collections.sort(tags);
+		tags.add(addNewTag);
+		
+		return tags;
+	}
+	
+	public String getAddNewTag() {
+		return addNewTag;
+	}
+	
 	@Override
 	public String toString() {
 		return username + " " + albums.size();

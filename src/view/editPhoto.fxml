@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -10,6 +11,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -42,58 +44,58 @@
             </BorderPane>
          </items>
       </ToolBar>
-      <TabPane layoutX="495.0" layoutY="123.0" prefHeight="450.0" prefWidth="450.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="495.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="110.0">
+      <TabPane fx:id="tabpane" layoutX="495.0" layoutY="123.0" prefHeight="450.0" prefWidth="450.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="495.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="110.0">
         <tabs>
           <Tab fx:id="detailsTab" text="Details">
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Text layoutX="60.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" AnchorPane.bottomAnchor="360.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="50.0">
+                        <Text layoutX="57.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" AnchorPane.bottomAnchor="388.44999980926514" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="395.23799896240234" AnchorPane.topAnchor="26.526000022888184">
                            <font>
                               <Font name="AppleGothic Regular" size="14.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="photoName" editable="false" layoutX="184.0" layoutY="39.0" prefHeight="30.0" prefWidth="205.0" text="Name of Photo" AnchorPane.bottomAnchor="357.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="42.0">
+                        <TextField fx:id="photoName" editable="false" layoutX="189.0" layoutY="21.0" prefHeight="30.0" prefWidth="205.0" text="Name of Photo" AnchorPane.bottomAnchor="378.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="21.0">
                            <font>
                               <Font name="AppleGothic Regular" size="14.0" />
                            </font>
                         </TextField>
-                        <Text layoutX="62.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" AnchorPane.bottomAnchor="303.94999980926514" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="106.52600002288818">
+                        <Text layoutX="65.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" AnchorPane.bottomAnchor="335.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="398.5260009765625" AnchorPane.topAnchor="76.0">
                            <font>
                               <Font name="AppleGothic Regular" size="14.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="photoDate" editable="false" layoutX="196.0" layoutY="102.0" prefHeight="30.0" prefWidth="205.0" text="Date" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="99.0">
+                        <TextField fx:id="photoDate" editable="false" layoutX="184.0" layoutY="69.0" prefHeight="30.0" prefWidth="205.0" text="Date" AnchorPane.bottomAnchor="330.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="69.0">
                            <font>
                               <Font name="AppleGothic Regular" size="14.0" />
                            </font>
                         </TextField>
-                        <Text layoutX="62.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Albums" AnchorPane.bottomAnchor="229.94999980926514" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="358.6560001373291" AnchorPane.topAnchor="163.0">
+                        <Text layoutX="61.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Albums" AnchorPane.bottomAnchor="268.44999980926514" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="384.91400146484375" AnchorPane.topAnchor="146.52600002288818">
                            <font>
                               <Font name="AppleGothic Regular" size="14.0" />
                            </font>
                         </Text>
-                        <TextArea fx:id="photoAlbums" editable="false" layoutX="182.0" layoutY="163.0" prefHeight="30.0" prefWidth="205.0" text="Albums" AnchorPane.bottomAnchor="225.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="156.0">
+                        <TextArea fx:id="photoAlbums" editable="false" layoutX="190.0" layoutY="115.0" prefHeight="80.0" prefWidth="246.0" text="Albums" AnchorPane.bottomAnchor="237.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="115.0">
                            <font>
                               <Font name="AppleGothic Regular" size="14.0" />
                            </font>
                         </TextArea>
-                        <Text layoutX="57.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption" AnchorPane.bottomAnchor="115.94999980926514" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="382.1560001373291" AnchorPane.topAnchor="240.0">
+                        <Text layoutX="60.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption" AnchorPane.bottomAnchor="151.44999980926514" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="385.242000579834" AnchorPane.topAnchor="263.5260000228882">
                            <font>
                               <Font name="AppleGothic Regular" size="14.0" />
                            </font>
                         </Text>
-                        <TextArea fx:id="photoCaption" layoutX="204.0" layoutY="233.0" prefHeight="60.0" prefWidth="205.0" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="235.0">
+                        <TextArea fx:id="photoCaption" layoutX="185.0" layoutY="220.0" prefHeight="115.0" prefWidth="246.0" AnchorPane.bottomAnchor="97.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="210.0">
                            <font>
                               <Font name="AppleGothic Regular" size="14.0" />
                            </font>
                         </TextArea>
-                        <Button fx:id="cancel" layoutX="112.0" layoutY="350.0" mnemonicParsing="false" onAction="#onActionCancel" prefHeight="32.0" prefWidth="87.0" text="Cancel" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="112.0" AnchorPane.rightAnchor="283.5" AnchorPane.topAnchor="350.0">
+                        <Button fx:id="cancel" layoutX="150.0" layoutY="383.0" mnemonicParsing="false" onAction="#onActionCancel" prefHeight="32.0" prefWidth="87.0" text="Cancel" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="245.5" AnchorPane.topAnchor="383.0">
                            <font>
                               <Font name="AppleGothic Regular" size="15.0" />
                            </font>
                         </Button>
-                        <Button fx:id="save" layoutX="234.0" layoutY="350.0" mnemonicParsing="false" onAction="#onActionSave" prefHeight="32.0" prefWidth="87.0" text="Save" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="234.0" AnchorPane.rightAnchor="161.5" AnchorPane.topAnchor="350.0">
+                        <Button fx:id="save" layoutX="272.0" layoutY="383.0" mnemonicParsing="false" onAction="#onActionSave" prefHeight="32.0" prefWidth="87.0" text="Save" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="272.0" AnchorPane.rightAnchor="123.5" AnchorPane.topAnchor="383.0">
                            <font>
                               <Font name="AppleGothic Regular" size="15.0" />
                            </font>
@@ -105,8 +107,8 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <ListView fx:id="tags" layoutX="86.0" layoutY="27.0" prefHeight="298.0" prefWidth="300.0" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="25.0" />
-                        <TextField fx:id="tagInput" layoutX="46.0" layoutY="338.0" promptText="Tag" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="235.0" AnchorPane.topAnchor="335.0" />
+                        <ListView fx:id="tagsView" layoutX="86.0" layoutY="27.0" prefHeight="298.0" prefWidth="300.0" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="25.0" />
+                        <ChoiceBox fx:id="tagInput" layoutX="54.0" layoutY="337.0" prefHeight="27.0" prefWidth="170.0" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="235.0" AnchorPane.topAnchor="335.0" />
                         <TextField fx:id="valueInput" layoutX="243.0" layoutY="336.0" promptText="Value" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="235.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="335.0" />
                         <Button fx:id="add" layoutX="183.0" layoutY="367.0" mnemonicParsing="false" onAction="#onActionAdd" prefHeight="32.0" prefWidth="87.0" text="Add" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="181.5" AnchorPane.rightAnchor="181.5" AnchorPane.topAnchor="380.0">
                            <font>
@@ -135,6 +137,10 @@
                </children>
             </AnchorPane>
          </items></ToolBar>
-      <ImageView fx:id="photoImage" fitHeight="400.0" fitWidth="400.0" layoutX="48.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="552.0" AnchorPane.topAnchor="150.0" />
+      <HBox alignment="CENTER" layoutX="51.0" layoutY="152.0" prefHeight="400.0" prefWidth="400.0" AnchorPane.bottomAnchor="201.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="538.0" AnchorPane.topAnchor="150.0">
+         <children>
+            <ImageView fx:id="photoImage" fitHeight="400.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
