@@ -49,22 +49,20 @@
       </ScrollPane>
       <ToolBar layoutY="682.0" prefHeight="68.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="682.0">
          <items>
-            <BorderPane prefHeight="125.0" prefWidth="985.0">
-               <right>
-                <Button fx:id="slideshow" contentDisplay="CENTER" mnemonicParsing="false" text="Slideshow" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="200.0" prefWidth="985.0">
+               <children>
+                <Button fx:id="slideshow" contentDisplay="CENTER" layoutX="492.0" layoutY="10.0" mnemonicParsing="false" text="Slideshow" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="492.0" AnchorPane.rightAnchor="405.5" AnchorPane.topAnchor="10.0">
                      <font>
                         <Font name="AppleGothic Regular" size="15.0" />
                      </font>
                   </Button>
-               </right>
-               <center>
-                  <Button fx:id="addPhoto" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onActionAddPhoto" text="Add Photo" translateX="45.0" BorderPane.alignment="CENTER">
+                  <Button fx:id="addPhoto" contentDisplay="CENTER" layoutX="362.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionAddPhoto" prefHeight="32.0" prefWidth="113.0" text="Add Photo" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="362.0" AnchorPane.rightAnchor="511.0" AnchorPane.topAnchor="10.0">
                      <font>
                         <Font name="AppleGothic Regular" size="15.0" />
                      </font>
                   </Button>
-               </center>
-            </BorderPane>
+               </children>
+            </AnchorPane>
          </items></ToolBar>
    </children>
 </AnchorPane>

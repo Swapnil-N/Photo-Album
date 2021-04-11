@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -41,14 +44,97 @@
       </ToolBar>
       <TabPane layoutX="495.0" layoutY="123.0" prefHeight="450.0" prefWidth="450.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="495.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="110.0">
         <tabs>
-          <Tab fx:id="details" text="Details" />
-          <Tab fx:id="tags" text="Tags" />
+          <Tab fx:id="detailsTab" text="Details">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Text layoutX="60.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" AnchorPane.bottomAnchor="360.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="50.0">
+                           <font>
+                              <Font name="AppleGothic Regular" size="14.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="photoName" editable="false" layoutX="184.0" layoutY="39.0" prefHeight="30.0" prefWidth="205.0" text="Name of Photo" AnchorPane.bottomAnchor="357.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="42.0">
+                           <font>
+                              <Font name="AppleGothic Regular" size="14.0" />
+                           </font>
+                        </TextField>
+                        <Text layoutX="62.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" AnchorPane.bottomAnchor="303.94999980926514" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="106.52600002288818">
+                           <font>
+                              <Font name="AppleGothic Regular" size="14.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="photoDate" editable="false" layoutX="196.0" layoutY="102.0" prefHeight="30.0" prefWidth="205.0" text="Date" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="99.0">
+                           <font>
+                              <Font name="AppleGothic Regular" size="14.0" />
+                           </font>
+                        </TextField>
+                        <Text layoutX="62.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Albums" AnchorPane.bottomAnchor="229.94999980926514" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="358.6560001373291" AnchorPane.topAnchor="163.0">
+                           <font>
+                              <Font name="AppleGothic Regular" size="14.0" />
+                           </font>
+                        </Text>
+                        <TextArea fx:id="photoAlbums" editable="false" layoutX="182.0" layoutY="163.0" prefHeight="30.0" prefWidth="205.0" text="Albums" AnchorPane.bottomAnchor="225.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="156.0">
+                           <font>
+                              <Font name="AppleGothic Regular" size="14.0" />
+                           </font>
+                        </TextArea>
+                        <Text layoutX="57.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption" AnchorPane.bottomAnchor="115.94999980926514" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="382.1560001373291" AnchorPane.topAnchor="240.0">
+                           <font>
+                              <Font name="AppleGothic Regular" size="14.0" />
+                           </font>
+                        </Text>
+                        <TextArea fx:id="photoCaption" layoutX="204.0" layoutY="233.0" prefHeight="60.0" prefWidth="205.0" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="235.0">
+                           <font>
+                              <Font name="AppleGothic Regular" size="14.0" />
+                           </font>
+                        </TextArea>
+                        <Button fx:id="cancel" layoutX="112.0" layoutY="350.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="87.0" text="Cancel" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="112.0" AnchorPane.rightAnchor="283.5" AnchorPane.topAnchor="350.0">
+                           <font>
+                              <Font name="AppleGothic Regular" size="15.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="save" layoutX="234.0" layoutY="350.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="87.0" text="Save" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="234.0" AnchorPane.rightAnchor="161.5" AnchorPane.topAnchor="350.0">
+                           <font>
+                              <Font name="AppleGothic Regular" size="15.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </content></Tab>
+          <Tab fx:id="tagsTab" text="Tags">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <ListView fx:id="tags" layoutX="86.0" layoutY="27.0" prefHeight="298.0" prefWidth="300.0" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="25.0" />
+                        <TextField fx:id="tagInput" layoutX="46.0" layoutY="338.0" promptText="Tag" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="235.0" AnchorPane.topAnchor="335.0" />
+                        <TextField fx:id="valueInput" layoutX="243.0" layoutY="336.0" promptText="Value" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="235.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="335.0" />
+                        <Button fx:id="add" layoutX="183.0" layoutY="367.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="87.0" text="Add" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="181.5" AnchorPane.rightAnchor="181.5" AnchorPane.topAnchor="380.0">
+                           <font>
+                              <Font name="AppleGothic Regular" size="15.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </content></Tab>
         </tabs>
       </TabPane>
       <ToolBar layoutY="682.0" prefHeight="68.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="682.0">
          <items>
-            
+            <AnchorPane prefHeight="50.0" prefWidth="985.0">
+               <children>
+                  <Button fx:id="move" layoutX="366.0" layoutY="14.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="87.0" text="Move" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="366.0" AnchorPane.rightAnchor="533.0" AnchorPane.topAnchor="14.0">
+                     <font>
+                        <Font name="AppleGothic Regular" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="copy" layoutX="476.0" layoutY="14.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="87.0" text="Copy" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="476.0" AnchorPane.rightAnchor="422.0" AnchorPane.topAnchor="14.0">
+                     <font>
+                        <Font name="AppleGothic Regular" size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
          </items></ToolBar>
-      <ImageView fitHeight="400.0" fitWidth="400.0" layoutX="48.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="552.0" AnchorPane.topAnchor="150.0" />
+      <ImageView fx:id="photoImage" fitHeight="400.0" fitWidth="400.0" layoutX="48.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="552.0" AnchorPane.topAnchor="150.0" />
    </children>
 </AnchorPane>

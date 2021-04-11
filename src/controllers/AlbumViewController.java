@@ -78,7 +78,6 @@ public class AlbumViewController {
 		File selectedPhoto = fileChooser.showOpenDialog(primaryStage);
 
 		if (selectedPhoto != null) {
-
 			if (currentAlbum.addPhoto(new Photo(selectedPhoto))) {
 				loadAlbum();
 			} else {
