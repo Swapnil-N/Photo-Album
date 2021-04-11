@@ -40,10 +40,24 @@ public class Album implements Serializable {
 		return true;
 	}
 
-	public boolean deletePhoto(Photo photo) { //TODO update dates
+	public boolean deletePhoto(Photo photo) { 
 		for (int i = 0; i < photoList.size(); i++) {
 			if (photo.equals(photoList.get(i))) {
 				photoList.remove(i);
+				if (photo.getDate().equals(firstDate)) {
+					firstDate = null;
+					for (Photo currPhoto : photoList) {
+						if (firstDate == null || firstDate.after(currPhoto.getDate()))
+							firstDate = currPhoto.getDate();
+					}
+				}
+				else if (photo.getDate().equals(lastDate)) {
+					lastDate = null;
+					for (Photo currPhoto : photoList) {
+						if (lastDate == null || lastDate.before(currPhoto.getDate()))
+							lastDate = currPhoto.getDate();
+					}
+				}
 				return true;
 			}
 		}
