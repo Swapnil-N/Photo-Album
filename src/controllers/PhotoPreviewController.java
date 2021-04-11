@@ -32,20 +32,21 @@ public class PhotoPreviewController {
 	Photo currentPhoto;
 	Album currentAlbum;
 	
+	AlbumViewController albumViewController;
+	
 	public void start(Album currentAlbum, Photo currentPhoto) throws MalformedURLException {
+		this.currentPhoto = currentPhoto;
+		this.currentAlbum = currentAlbum;
 		
 		photoName.setText(currentPhoto.getName());
 		caption.setText(currentPhoto.getCaption());
 		imageView.setImage(new Image(currentPhoto.getFile().toURI().toURL().toString()));
-		this.currentPhoto = currentPhoto;
-		this.currentAlbum = currentAlbum;
 	}
 	
 	
-	public void onActionDelete(ActionEvent e){
-		
+	public void onActionDelete(ActionEvent e) throws IOException{
 		currentAlbum.deletePhoto(currentPhoto);
-		
+		albumViewController.loadAlbum();
 	}
 	
 	public void imageViewMouseClicked(MouseEvent e) throws IOException {
@@ -63,6 +64,10 @@ public class PhotoPreviewController {
 		primaryStage.setTitle("Edit Photo");
 		primaryStage.setResizable(false);
 		primaryStage.show();
+	}
+	
+	public void setAlbumViewController(AlbumViewController controller) {
+		albumViewController = controller;
 	}
 
 }

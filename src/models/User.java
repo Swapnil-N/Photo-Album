@@ -20,7 +20,8 @@ public class User implements Serializable {
 	// TODO: decide whether album names must be case sensitive
 	public boolean hasAlbumWithName(String name) {
 		for (Album item : albums) {
-			if (item.getName().toLowerCase().equals(name.toLowerCase()))
+//			if (item.getName().toLowerCase().equals(name.toLowerCase()))
+			if (item.getName().equals(name))
 				return true;
 		}
 		return false;
@@ -49,6 +50,18 @@ public class User implements Serializable {
 
 	public String getUsername() {
 		return username;
+	}
+	
+	public Album getAlbumWithName(String name) {
+		if (!hasAlbumWithName(name))
+			return null;
+		
+		for (Album album: albums) {
+			if (album.getName().equals(name))
+				return album;
+		}
+		
+		return null;
 	}
 
 	public List<Album> getAlbums() {

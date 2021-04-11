@@ -40,7 +40,7 @@ public class UserHomeController {
 
 			AlbumPreviewController albumPreviewController = loader.getController();
 			albumPreviewController.start(currentUser, currentAlbums.get(i));
-			albumPreviewController.setUserLandingController(this);
+			albumPreviewController.setUserHomeController(this);
 
 			tilepane.getChildren().add(root);
 		}

@@ -38,7 +38,7 @@ public class AlbumPreviewController {
 
 	Album album;
 	User currentUser;
-	UserHomeController userLandingController;
+	UserHomeController userHomeController;
 
 	public void start(User currentUser, Album album) {
 		this.currentUser = currentUser;
@@ -102,7 +102,7 @@ public class AlbumPreviewController {
 	}
 
 	public void onActionDelete(ActionEvent e) throws IOException {
-		userLandingController.deleteAlbum(album.getName());
+		userHomeController.deleteAlbum(album.getName());
 	}
 
 	public void imageViewMouseClicked(MouseEvent e) throws IOException {
@@ -123,7 +123,7 @@ public class AlbumPreviewController {
 		primaryStage.show();
 	}
 
-	public void setUserLandingController(UserHomeController controller) {
-		userLandingController = controller;
+	public void setUserHomeController(UserHomeController controller) {
+		userHomeController = controller;
 	}
 }

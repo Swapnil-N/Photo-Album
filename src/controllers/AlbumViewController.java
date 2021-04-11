@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +13,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -27,6 +30,9 @@ public class AlbumViewController {
 
 	@FXML
 	Button logout, home, addPhoto, slideshow;
+	
+	@FXML
+	TilePane tilepane;
 
 	User currentUser;
 	Album currentAlbum;
@@ -36,8 +42,28 @@ public class AlbumViewController {
 		this.currentAlbum = currentAlbum;
 		albumName.setText(currentAlbum.getName());
 	}
+	
+	public void loadAlbum() throws IOException {
+		tilepane.getChildren().clear();
 
-	public void onActionAddPhoto(ActionEvent e) {
+		Album album = currentUser.getAlbumWithName(currentAlbum.getName());
+		if (album == null)
+			return;
+		
+		List<Photo> albumPhotos = album.getPhotoList();
+		for (int i = 0; i < albumPhotos.size(); i++) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/photoPreview.fxml"));
+			VBox root = (VBox) loader.load();
+
+			PhotoPreviewController photoPreviewController = loader.getController();
+			photoPreviewController.start(album, albumPhotos.get(i));
+			photoPreviewController.setAlbumViewController(this);
+
+			tilepane.getChildren().add(root);
+		}
+	}
+
+	public void onActionAddPhoto(ActionEvent e) throws IOException {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Choose an image");
 
@@ -51,7 +77,7 @@ public class AlbumViewController {
 		if (selectedPhoto != null) {
 
 			if (currentAlbum.addPhoto(new Photo(selectedPhoto))) {
-				// refresh tile pane
+				loadAlbum();
 			} else {
 				invalidPhotoAlert();
 			}
