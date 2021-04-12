@@ -1,17 +1,16 @@
 package controllers;
 
-import javafx.scene.Node;
-
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import models.User;
 import models.UserList;
@@ -30,7 +29,7 @@ public class LoginController {
 
 			Node node = (Node) e.getSource();
 			Stage primaryStage = (Stage) node.getScene().getWindow();
-			
+
 			AdminController adminController = loader.getController();
 			adminController.start(primaryStage);
 
@@ -45,18 +44,18 @@ public class LoginController {
 				invalidUsernameAlert();
 			} else {
 				User user = UserList.getUserWithName(usernameInput);
-				
+
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/userHome.fxml"));
 				AnchorPane root = (AnchorPane) loader.load();
 
 				Node node = (Node) e.getSource();
 				Stage primaryStage = (Stage) node.getScene().getWindow();
 
-				UserHomeController userLandingController = loader.getController();
-				userLandingController.start(user);
+				UserHomeController userHomeController = loader.getController();
+				userHomeController.start(user);
 
 				Scene scene = new Scene(root, 1000, 750);
-				
+
 				primaryStage.setScene(scene);
 				primaryStage.setTitle("Home Screen");
 				primaryStage.setResizable(false);
@@ -74,4 +73,5 @@ public class LoginController {
 
 		username.setText("");
 	}
+	
 }

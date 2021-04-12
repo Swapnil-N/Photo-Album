@@ -1,6 +1,5 @@
 package models;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -21,8 +20,8 @@ public class Album implements Serializable {
 	public Album(String name) {
 		this.name = name;
 		photoList = new ArrayList<>();
-		this.firstDate = null;
-		this.lastDate = null;
+		firstDate = null;
+		lastDate = null;
 	}
 
 	public boolean addPhoto(Photo newPhoto) {
@@ -37,29 +36,30 @@ public class Album implements Serializable {
 			lastDate = newPhoto.getDate();
 
 		photoList.add(newPhoto);
+
 		UserList.serialize();
-		
 		return true;
 	}
 
-	public boolean deletePhoto(Photo photo) { 
+	public boolean deletePhoto(Photo photo) {
 		for (int i = 0; i < photoList.size(); i++) {
 			if (photo.equals(photoList.get(i))) {
 				photoList.remove(i);
+
 				if (photo.getDate().equals(firstDate)) {
 					firstDate = null;
 					for (Photo currPhoto : photoList) {
 						if (firstDate == null || firstDate.after(currPhoto.getDate()))
 							firstDate = currPhoto.getDate();
 					}
-				}
-				else if (photo.getDate().equals(lastDate)) {
+				} else if (photo.getDate().equals(lastDate)) {
 					lastDate = null;
 					for (Photo currPhoto : photoList) {
 						if (lastDate == null || lastDate.before(currPhoto.getDate()))
 							lastDate = currPhoto.getDate();
 					}
 				}
+
 				UserList.serialize();
 				return true;
 			}
@@ -70,12 +70,8 @@ public class Album implements Serializable {
 
 	private String formatDate(Date date) {
 		DateFormat format = new SimpleDateFormat("MM.d.yyyy", Locale.ENGLISH);
-		String dateFormatted = format.format(date);
-		return dateFormatted;
-	}
-
-	public int getSize() {
-		return photoList.size();
+		String formattedDate = format.format(date);
+		return formattedDate;
 	}
 
 	public String getName() {
@@ -88,6 +84,10 @@ public class Album implements Serializable {
 
 	public List<Photo> getPhotoList() {
 		return photoList;
+	}
+
+	public int getSize() {
+		return photoList.size();
 	}
 
 	public String getFirstDate() {

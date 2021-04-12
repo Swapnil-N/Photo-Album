@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-
 public class photos extends Application {
 
 	public static void main(String[] args) {
@@ -15,7 +14,6 @@ public class photos extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();
 

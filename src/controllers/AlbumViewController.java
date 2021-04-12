@@ -10,8 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -26,41 +26,38 @@ import models.User;
 public class AlbumViewController {
 
 	@FXML
-	Text albumName;
-
-	@FXML
 	Button logout, home, addPhoto, slideshow;
-	
+	@FXML
+	Text albumName;
 	@FXML
 	TilePane tilepane;
 
-	User currentUser;
-	Album currentAlbum;
+	private User currentUser;
+	private Album currentAlbum;
 
 	public void start(User currentUser, Album currentAlbum) throws IOException {
 		this.currentUser = currentUser;
 		this.currentAlbum = currentAlbum;
-		
+
 		albumName.setText(currentAlbum.getName());
-		
+
 		loadAlbum();
 	}
-	
+
 	public void loadAlbum() throws IOException {
 		tilepane.getChildren().clear();
 
 		Album album = currentUser.getAlbumWithName(currentAlbum.getName());
 		if (album == null)
 			return;
-		
+
 		List<Photo> albumPhotos = album.getPhotoList();
 		for (int i = 0; i < albumPhotos.size(); i++) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/photoPreview.fxml"));
 			VBox root = (VBox) loader.load();
 
 			PhotoPreviewController photoPreviewController = loader.getController();
-			photoPreviewController.start(album, albumPhotos.get(i), currentUser);
-			photoPreviewController.setAlbumViewController(this);
+			photoPreviewController.start(album, albumPhotos.get(i), currentUser, this);
 
 			tilepane.getChildren().add(root);
 		}
@@ -68,7 +65,7 @@ public class AlbumViewController {
 
 	public void onActionAddPhoto(ActionEvent e) throws IOException {
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Choose an image");
+		fileChooser.setTitle("Choose an Image");
 
 		fileChooser.getExtensionFilters()
 				.add(new ExtensionFilter("Image Files", "*.png", "*.jpeg", "*.jpg", "*.gif", "*.bmp"));
@@ -79,14 +76,14 @@ public class AlbumViewController {
 
 		if (selectedFile != null) {
 			Photo selectedPhoto = new Photo(selectedFile);
-			
-			for (Album iterAlbum: currentUser.getAlbums()) {
-				for (Photo iterPhoto: iterAlbum.getPhotoList()) {
+
+			for (Album iterAlbum : currentUser.getAlbums()) {
+				for (Photo iterPhoto : iterAlbum.getPhotoList()) {
 					if (iterPhoto.equals(selectedPhoto))
 						selectedPhoto = iterPhoto;
 				}
 			}
-			
+
 			if (currentAlbum.addPhoto(selectedPhoto)) {
 				loadAlbum();
 			} else {
@@ -134,7 +131,7 @@ public class AlbumViewController {
 		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
-	
+
 	public void onActionSlideshow(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/slideshow.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();

@@ -20,14 +20,15 @@ public class UserList implements Serializable {
 
 	public static void serialize() {
 		try {
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
+			ObjectOutputStream oos = new ObjectOutputStream(
+					new FileOutputStream(storeDir + File.separator + storeFile));
 			oos.writeObject(userList);
 			oos.close();
 		} catch (IOException e) {
-			e.printStackTrace(); //TODO: remove
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public static void deserialize() {
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));
@@ -41,49 +42,49 @@ public class UserList implements Serializable {
 
 	public static boolean containsUser(String username) {
 		deserialize();
-		
+
 		for (User currentUser : userList) {
-			if (currentUser.getUsername().equals(username)) 
+			if (currentUser.getUsername().equals(username))
 				return true;
 		}
-		
+
 		return false;
 	}
-	
+
 	public static User getUserWithName(String username) {
 		deserialize();
-		
+
 		for (User currentUser : userList) {
 			if (currentUser.getUsername().equals(username))
 				return currentUser;
 		}
-		
+
 		return null;
 	}
 
-	public static boolean addUser(String username) throws IOException {
+	public static boolean addUser(String username) {
 		deserialize();
-		
+
 		if (username.isEmpty() || containsUser(username))
 			return false;
 
 		User user = new User(username);
 		userList.add(user);
-		
-		serialize();
 
+		serialize();
 		return true;
 	}
 
-	public static boolean deleteUser(String username) throws IOException {
+	public static boolean deleteUser(String username) {
 		deserialize();
-		
+
 		if (username.equals("admin"))
 			return false;
 
 		for (int i = 0; i < userList.size(); i++) {
 			if (userList.get(i).getUsername().equals(username)) {
 				userList.remove(i);
+
 				serialize();
 				return true;
 			}
@@ -94,6 +95,7 @@ public class UserList implements Serializable {
 
 	public static List<User> getUsers() {
 		deserialize();
+
 		return userList;
 	}
 

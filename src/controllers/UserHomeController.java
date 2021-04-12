@@ -19,25 +19,23 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import models.Album;
 import models.User;
-import models.UserList;
 
 public class UserHomeController {
 
 	@FXML
 	Button logout, search, newAlbum;
-
 	@FXML
 	TilePane tilepane;
 
-	User currentUser;
-	
+	private User currentUser;
+
 	public void start(User currentUser) throws IOException {
 		this.currentUser = currentUser;
-		
+
 		loadAlbums();
 	}
 
-	public void loadAlbums() throws IOException {
+	private void loadAlbums() throws IOException {
 		tilepane.getChildren().clear();
 
 		List<Album> currentAlbums = currentUser.getAlbums();
@@ -46,8 +44,7 @@ public class UserHomeController {
 			VBox root = (VBox) loader.load();
 
 			AlbumPreviewController albumPreviewController = loader.getController();
-			albumPreviewController.start(currentUser, currentAlbums.get(i));
-			albumPreviewController.setUserHomeController(this);
+			albumPreviewController.start(currentUser, currentAlbums.get(i), this);
 
 			tilepane.getChildren().add(root);
 		}
@@ -55,40 +52,8 @@ public class UserHomeController {
 
 	public void deleteAlbum(String albumName) throws IOException {
 		currentUser.deleteAlbum(albumName);
+
 		loadAlbums();
-	}
-
-	public void onActionLogout(ActionEvent e) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
-		AnchorPane root = (AnchorPane) loader.load();
-
-		Node node = (Node) e.getSource();
-		Stage primaryStage = (Stage) node.getScene().getWindow();
-		
-		Scene scene = new Scene(root, 1000, 750);
-		
-		primaryStage.setScene(scene);
-		primaryStage.setTitle("Login Page");
-		primaryStage.setResizable(false);
-		primaryStage.show();
-	}
-	
-	public void onActionSearch(ActionEvent e) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/search.fxml"));
-		AnchorPane root = (AnchorPane) loader.load();
-
-		Node node = (Node) e.getSource();
-		Stage primaryStage = (Stage) node.getScene().getWindow();
-		
-		SearchController searchController = loader.getController();
-		searchController.start(currentUser);
-		
-		Scene scene = new Scene(root, 1000, 750);
-		
-		primaryStage.setScene(scene);
-		primaryStage.setTitle("Login Page");
-		primaryStage.setResizable(false);
-		primaryStage.show();
 	}
 
 	public void onActionAddAlbum(ActionEvent e) throws IOException {
@@ -103,22 +68,55 @@ public class UserHomeController {
 
 		String albumName = opt.get().trim();
 		if (albumName.length() == 0) {
-			invalidAlbumAlert();
+			invalidAlbumNameAlert();
 			return;
 		}
 
 		if (!currentUser.addAlbum(albumName)) {
-			invalidAlbumAlert();
+			invalidAlbumNameAlert();
 		} else {
 			loadAlbums();
 		}
 	}
 
-	private void invalidAlbumAlert() {
+	private void invalidAlbumNameAlert() {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Add Album Failed");
 		alert.setContentText("That album name is not available.");
 		alert.showAndWait();
+	}
+
+	public void onActionLogout(ActionEvent e) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
+		AnchorPane root = (AnchorPane) loader.load();
+
+		Node node = (Node) e.getSource();
+		Stage primaryStage = (Stage) node.getScene().getWindow();
+
+		Scene scene = new Scene(root, 1000, 750);
+
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("Login Page");
+		primaryStage.setResizable(false);
+		primaryStage.show();
+	}
+
+	public void onActionSearch(ActionEvent e) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/search.fxml"));
+		AnchorPane root = (AnchorPane) loader.load();
+
+		Node node = (Node) e.getSource();
+		Stage primaryStage = (Stage) node.getScene().getWindow();
+
+		SearchController searchController = loader.getController();
+		searchController.start(currentUser);
+
+		Scene scene = new Scene(root, 1000, 750);
+
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("Login Page");
+		primaryStage.setResizable(false);
+		primaryStage.show();
 	}
 
 }

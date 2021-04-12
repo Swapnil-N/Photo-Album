@@ -1,10 +1,11 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
 import java.util.Optional;
+import java.util.Set;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -43,20 +44,20 @@ import models.Photo;
 import models.User;
 
 public class EditPhotoController {
-	// yes case sensitive, fix the thing after entering in a new tag that is already taken in the alert
+
 	private static class TagValueItem extends ListCell<String> {
-		HBox hBox = new HBox();
-		Label pair = new Label("");
-		Pane blank = new Pane();
-		Button delete = new Button();
-		
-		String key, value;
-		
-		Photo photo;
+		private HBox hBox = new HBox();
+		private Label pair = new Label("");
+		private Pane blank = new Pane();
+		private Button delete = new Button();
+
+		private String key, value;
+
+		private Photo photo;
 
 		public TagValueItem(Photo photo) {
 			super();
-			
+
 			this.photo = photo;
 			key = "";
 			value = "";
@@ -64,7 +65,7 @@ public class EditPhotoController {
 			HBox.setHgrow(blank, Priority.ALWAYS);
 			hBox.getChildren().addAll(pair, blank, delete);
 			hBox.setAlignment(Pos.CENTER);
-			
+
 			delete.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
@@ -80,24 +81,25 @@ public class EditPhotoController {
 		@Override
 		protected void updateItem(String item, boolean empty) {
 			super.updateItem(item, empty);
+
 			setText(null);
 			setGraphic(null);
 
 			if (item != null && !empty) {
 				key = item.split("  tag:  ")[1];
 				value = item.split("  value:  ")[1];
-				
+
 				pair.setText(key + ": " + value);
 				setGraphic(hBox);
 			}
 
 			setStyle();
 		}
-		
+
 		private void setStyle() {
 			pair.setFont(Font.font(14));
 			setStyle("-fx-font-family: AppleGothic;");
-			
+
 			ImageView trashIcon = new ImageView(new Image("file:../../resources/images/trashcan.png"));
 			trashIcon.setFitHeight(15);
 			trashIcon.setFitWidth(15);
@@ -106,78 +108,88 @@ public class EditPhotoController {
 	}
 
 	@FXML
-	ImageView photoImage;
-
+	Button add;
 	@FXML
-	TabPane tabpane;
-
+	ChoiceBox<String> tagInput;
+	@FXML
+	ImageView photoImage;
+	@FXML
+	ListView<String> tagsView;
 	@FXML
 	Tab detailsTab, tagsTab;
-
+	@FXML
+	TabPane tabpane;
+	@FXML
+	TextArea photoAlbums, photoCaption;
 	@FXML
 	TextField photoName, photoDate, valueInput;
 
-	@FXML
-	TextArea photoAlbums, photoCaption;
-	
-	@FXML
-	ListView<String> tagsView;
+	private User currentUser;
+	private Album currentAlbum;
+	private Photo currentPhoto;
 
-	@FXML
-	ChoiceBox<String> tagInput;
-	
-	@FXML
-	Button add;
-
-	User currentUser;
-	Album currentAlbum;
-	Photo currentPhoto;
-	
 	private ObservableList<String> photoTags;
-
 
 	public void start(User currentUser, Album currentAlbum, Photo currentPhoto) {
 		this.currentUser = currentUser;
 		this.currentAlbum = currentAlbum;
 		this.currentPhoto = currentPhoto;
+		photoTags = FXCollections.observableArrayList();
 
 		photoImage.setImage(new Image(currentPhoto.getPhotoURL()));
 
 		photoName.setText(currentPhoto.getName());
 		photoDate.setText(currentPhoto.getDateTimeString());
-		photoAlbums.setText("later worry");
+		loadAlbums();
 		photoCaption.setText(currentPhoto.getCaption());
-		
+
+		photoName.textProperty().addListener((Observable, oldValue, newValue) -> {
+			currentPhoto.setName(newValue);
+		});
 		photoCaption.textProperty().addListener((Observable, oldValue, newValue) -> {
 			currentPhoto.setCaption(newValue);
 		});
-		
-		photoTags = FXCollections.observableArrayList();
+
 		Map<String, List<String>> photoTagsMap = currentPhoto.getTags();
-		for (String key: photoTagsMap.keySet()) {
-			for (String value: photoTagsMap.get(key)) {
+		for (String key : photoTagsMap.keySet()) {
+			for (String value : photoTagsMap.get(key)) {
 				photoTags.add("  tag:  " + key + "  tag:  " + "  value:  " + value + "  value:  ");
 			}
 		}
 		photoTags.sort((i, j) -> i.compareTo(j));
 		tagsView.setItems(photoTags);
 		tagsView.setCellFactory(tagValueDisplay -> new TagValueItem(currentPhoto));
-		
+
 		loadTags();
-		
+
 		tagInput.valueProperty().addListener((obs, oldItem, newItem) -> {
-            if (newItem != null && newItem.equals(currentUser.getAddNewTag())) {
-                addNewTagAlert();
-            } 
-        });
-		
+			if (newItem != null && newItem.equals(currentUser.getAddNewTag())) {
+				addNewTagAlert();
+			}
+		});
+
 		BooleanBinding valueFilled = Bindings.createBooleanBinding(() -> {
 			return !valueInput.getText().isEmpty();
 		}, valueInput.textProperty());
-		
+
 		add.disableProperty().bind(tagInput.valueProperty().isNull().or(valueFilled.not()));
 	}
-	
+
+	private void loadAlbums() {
+		photoAlbums.setText(null);
+
+		Set<String> albumStrings = new HashSet<>();
+		for (Album album : currentUser.getAlbums()) {
+			for (Photo photo : album.getPhotoList()) {
+				if (photo.equals(currentPhoto)) {
+					albumStrings.add(null);
+				}
+			}
+		}
+
+		photoAlbums.setText(String.join(",", albumStrings));
+	}
+
 	private void loadTags() {
 		List<String> tagList = currentUser.getTags();
 
@@ -186,7 +198,7 @@ public class EditPhotoController {
 			tagInput.getItems().add(tagList.get(i));
 		}
 	}
-	
+
 	private void addNewTagAlert() {
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle(" ");
@@ -195,12 +207,11 @@ public class EditPhotoController {
 		Optional<String> opt = dialog.showAndWait();
 
 		if (opt.isEmpty()) {
-			//TODO: FIX
 			tagInput.setValue(null);
 			valueInput.setText("");
 			return;
 		}
-			
+
 		String tagName = opt.get().trim();
 		if (tagName.length() == 0) {
 			invalidTagAlert();
@@ -212,15 +223,66 @@ public class EditPhotoController {
 		} else {
 			loadTags();
 		}
-		
+
 		tagInput.setValue(null);
 		valueInput.setText("");
 	}
-	
+
 	private void invalidTagAlert() {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Add Tag Failed");
 		alert.setContentText("That tag is not available.");
+		alert.showAndWait();
+	}
+
+	public void onActionMove(ActionEvent e) {
+		ChoiceDialog<Album> dialog = new ChoiceDialog<Album>(null, currentUser.getAlbums());
+		dialog.setHeaderText("Album Move Selection");
+		dialog.setContentText("Please select an album:");
+
+		Optional<Album> optional = dialog.showAndWait();
+
+		optional.ifPresent(choosenAlbum -> {
+			currentAlbum.deletePhoto(currentPhoto);
+			choosenAlbum.addPhoto(currentPhoto);
+		});
+
+		loadAlbums();
+	}
+
+	public void onActionCopy(ActionEvent e) {
+		ChoiceDialog<Album> dialog = new ChoiceDialog<Album>(null, currentUser.getAlbums());
+		dialog.setHeaderText("Album Copy Selection");
+		dialog.setContentText("Please select an album:");
+
+		Optional<Album> optional = dialog.showAndWait();
+
+		optional.ifPresent(choosenAlbum -> choosenAlbum.addPhoto(currentPhoto));
+
+		loadAlbums();
+	}
+
+	public void onActionAdd(ActionEvent e) {
+		String key = tagInput.getValue();
+		String value = valueInput.getText();
+
+		boolean success = currentPhoto.addTag(key, value);
+
+		if (success) {
+			photoTags.add("  tag:  " + key + "  tag:  " + "  value:  " + value + "  value:  ");
+			photoTags.sort((i, j) -> i.compareTo(j));
+		} else {
+			invalidTagValueAdded();
+		}
+
+		tagInput.setValue(null);
+		valueInput.setText("");
+	}
+
+	private void invalidTagValueAdded() {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Add Tag Failed");
+		alert.setContentText("An existing tag-value pair was entered.");
 		alert.showAndWait();
 	}
 
@@ -255,57 +317,6 @@ public class EditPhotoController {
 		primaryStage.setTitle("Home Screen");
 		primaryStage.setResizable(false);
 		primaryStage.show();
-	}
-
-	public void onActionMove(ActionEvent e) {
-		
-		ChoiceDialog<Album> dialog = new ChoiceDialog<Album>(null, currentUser.getAlbums());
-		dialog.setHeaderText("Album Move Selection");
-		dialog.setContentText("Please select an album:");
-		
-		Optional<Album> optional = dialog.showAndWait();
-		
-		optional.ifPresent(choosenAlbum -> {
-			currentAlbum.deletePhoto(currentPhoto); 
-			choosenAlbum.addPhoto(currentPhoto);
-			});
-				
-	}
-
-	public void onActionCopy(ActionEvent e) {
-		
-		ChoiceDialog<Album> dialog = new ChoiceDialog<Album>(null, currentUser.getAlbums());
-		dialog.setHeaderText("Album Copy Selection");
-		dialog.setContentText("Please select an album:");
-		
-		Optional<Album> optional = dialog.showAndWait();
-				
-		optional.ifPresent(choosenAlbum -> choosenAlbum.addPhoto(currentPhoto));
-		
-	}
-
-	public void onActionAdd(ActionEvent e) {
-		String key = tagInput.getValue();
-		String value = valueInput.getText();
-		
-		boolean success = currentPhoto.addTag(key, value);
-		
-		if (success) {
-			photoTags.add("  tag:  " + key + "  tag:  " + "  value:  " + value + "  value:  ");
-			photoTags.sort((i, j) -> i.compareTo(j));
-		} else {
-			invalidTagValueAdded();
-		}
-		
-		tagInput.setValue(null);
-		valueInput.setText("");
-	}
-	
-	private void invalidTagValueAdded() {
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Add Tag Failed");
-		alert.setContentText("An existing tag-value pair was entered.");
-		alert.showAndWait();
 	}
 
 }

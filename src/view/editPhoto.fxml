@@ -55,7 +55,7 @@
                               <Font name="AppleGothic Regular" size="14.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="photoName" editable="false" layoutX="189.0" layoutY="21.0" prefHeight="30.0" prefWidth="205.0" text="Name of Photo" AnchorPane.bottomAnchor="378.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="21.0">
+                        <TextField fx:id="photoName" layoutX="189.0" layoutY="21.0" prefHeight="30.0" prefWidth="205.0" text="Name of Photo" AnchorPane.bottomAnchor="378.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="21.0">
                            <font>
                               <Font name="AppleGothic Regular" size="14.0" />
                            </font>

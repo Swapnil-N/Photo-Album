@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class Photo implements Serializable {
 
@@ -19,7 +20,7 @@ public class Photo implements Serializable {
 	private String caption;
 	private File file;
 	private Date date;
-	private HashMap<String, List<String>> tags;
+	private Map<String, List<String>> tags;
 
 	public Photo(File file) {
 		this.file = file;
@@ -36,42 +37,41 @@ public class Photo implements Serializable {
 
 		return file.equals(((Photo) obj).getFile());
 	}
-	
+
 	public boolean addTag(String key, String value) {
-		key = key.trim().toLowerCase();
+		key = key.trim();
 		value = value.trim();
-		
-		if (!tags.containsKey(key)){
+
+		if (!tags.containsKey(key))
 			tags.put(key, new ArrayList<>());
-		}
-		
+
 		if (tags.get(key).contains(value)) {
 			UserList.serialize();
 			return false;
 		}
-		
+
 		tags.get(key).add(value);
+
 		UserList.serialize();
-		
 		return true;
 	}
-	
+
 	public boolean removeTag(String key, String value) {
-		key = key.trim().toLowerCase();
+		key = key.trim();
 		value = value.trim();
-		
+
 		if (!tags.containsKey(key))
 			return false;
-		
+
 		for (int i = 0; i < tags.get(key).size(); i++) {
 			if (tags.get(key).get(i).equals(value)) {
 				tags.get(key).remove(i);
+
 				UserList.serialize();
-				
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -90,7 +90,7 @@ public class Photo implements Serializable {
 	public void setCaption(String caption) {
 		this.caption = caption;
 	}
-	
+
 	public String getPhotoURL() {
 		try {
 			return file.toURI().toURL().toString();
@@ -106,20 +106,20 @@ public class Photo implements Serializable {
 	public Date getDate() {
 		return date;
 	}
-	
+
 	public String getDateString() {
 		DateFormat format = new SimpleDateFormat("MM.d.yyyy", Locale.ENGLISH);
 		String dateFormatted = format.format(date);
 		return dateFormatted;
 	}
-	
+
 	public String getDateTimeString() {
 		DateFormat format = new SimpleDateFormat("MM.d.yyyy hh:mm:ss", Locale.ENGLISH);
 		String dateFormatted = format.format(date);
 		return dateFormatted;
 	}
 
-	public HashMap<String, List<String>> getTags() {
+	public Map<String, List<String>> getTags() {
 		return tags;
 	}
 

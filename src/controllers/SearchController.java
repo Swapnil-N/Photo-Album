@@ -1,14 +1,14 @@
 package controllers;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.time.LocalDate;
-import java.time.ZoneId;
 
 import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DateCell;
@@ -24,7 +25,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -33,28 +33,26 @@ import models.Photo;
 import models.User;
 
 public class SearchController {
-	@FXML
-	DatePicker startDate, endDate;
 
 	@FXML
 	Button searchDate, searchTags, createAlbum;
-
 	@FXML
 	ChoiceBox<String> tag1, value1, tag2, value2;
-
+	@FXML
+	DatePicker startDate, endDate;
 	@FXML
 	RadioButton andChoice, orChoice;
-
 	@FXML
 	TilePane tilepane;
 
-	User currentUser;
-	ToggleGroup comboGroup;
-	List<Photo> recentSearchResults;
-	
+	private User currentUser;
+	private ToggleGroup toggleGroup;
+	private List<Photo> recentSearchResults;
 
 	public void start(User currentUser) {
 		this.currentUser = currentUser;
+		toggleGroup = new ToggleGroup();
+		recentSearchResults = new ArrayList<>();
 
 		startDate.setDayCellFactory(param -> new DateCell() {
 			@Override
@@ -80,43 +78,42 @@ public class SearchController {
 		searchDate.disableProperty().bind(startDate.valueProperty().isNull().or(endDate.valueProperty().isNull()));
 
 		value1.disableProperty().bind(tag1.valueProperty().isNull());
-		tag2.disableProperty().bind(tag1.valueProperty().isNull().or(value1.valueProperty().isNull()));
-		value2.disableProperty().bind(
-				tag1.valueProperty().isNull().or(value1.valueProperty().isNull().or(tag2.valueProperty().isNull())));
+		tag2.disableProperty().bind(value1.valueProperty().isNull());
+		value2.disableProperty().bind(tag2.valueProperty().isNull());
 
-		comboGroup = new ToggleGroup();
-		comboGroup.getToggles().add(andChoice);
-		comboGroup.getToggles().add(orChoice);
+		toggleGroup.getToggles().add(andChoice);
+		toggleGroup.getToggles().add(orChoice);
 
 		andChoice.disableProperty().bind(tag2.valueProperty().isNull().or(value2.valueProperty().isNull()));
 		orChoice.disableProperty().bind(tag2.valueProperty().isNull().or(value2.valueProperty().isNull()));
 
-		BooleanBinding pair1Bind = tag1.valueProperty().isNull().or(value1.valueProperty().isNull());
-		BooleanBinding pair2Bind = pair1Bind.not()
+		BooleanBinding pair1Binding = tag1.valueProperty().isNull().or(value1.valueProperty().isNull());
+		BooleanBinding pair2Binding = pair1Binding.not()
 				.and(tag2.valueProperty().isNotNull().and(value2.valueProperty().isNull()));
-		BooleanBinding pair2Filled = tag2.valueProperty().isNotNull().and(value2.valueProperty().isNotNull());
-		BooleanBinding comboBind = pair2Filled.and(comboGroup.selectedToggleProperty().isNull());
+		BooleanBinding pair2FilledBinding = tag2.valueProperty().isNotNull().and(value2.valueProperty().isNotNull());
+		BooleanBinding comboBinding = pair2FilledBinding.and(toggleGroup.selectedToggleProperty().isNull());
 
-		searchTags.disableProperty().bind(pair1Bind.or(pair2Bind).or(comboBind));
+		searchTags.disableProperty().bind(pair1Binding.or(pair2Binding).or(comboBinding));
+
 		createAlbum.setDisable(true);
 
 		loadTags();
 
 		tag1.valueProperty().addListener((obs, oldItem, newItem) -> {
 			loadValues(newItem, 1);
+
 			value1.setValue(null);
 			tag2.setValue(null);
 			value2.setValue(null);
-			comboGroup.selectToggle(null);
+			toggleGroup.selectToggle(null);
 		});
 
 		tag2.valueProperty().addListener((obs, oldItem, newItem) -> {
 			loadValues(newItem, 2);
+
 			value2.setValue(null);
-			comboGroup.selectToggle(null);
+			toggleGroup.selectToggle(null);
 		});
-		
-		recentSearchResults = new ArrayList<>();
 	}
 
 	private void loadTags() {
@@ -159,39 +156,6 @@ public class SearchController {
 				value2.getItems().add(sortedValues.get(i));
 			}
 		}
-	}
-
-	public void onActionLogout(ActionEvent e) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
-		AnchorPane root = (AnchorPane) loader.load();
-
-		Node node = (Node) e.getSource();
-		Stage primaryStage = (Stage) node.getScene().getWindow();
-
-		Scene scene = new Scene(root, 1000, 750);
-
-		primaryStage.setScene(scene);
-		primaryStage.setTitle("Login Screen");
-		primaryStage.setResizable(false);
-		primaryStage.show();
-	}
-
-	public void onActionHome(ActionEvent e) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/userHome.fxml"));
-		AnchorPane root = (AnchorPane) loader.load();
-
-		Node node = (Node) e.getSource();
-		Stage primaryStage = (Stage) node.getScene().getWindow();
-
-		UserHomeController userLandingController = loader.getController();
-		userLandingController.start(currentUser);
-
-		Scene scene = new Scene(root, 1000, 750);
-
-		primaryStage.setScene(scene);
-		primaryStage.setTitle("Home Screen");
-		primaryStage.setResizable(false);
-		primaryStage.show();
 	}
 
 	private Set<Photo> dateSearchResults() {
@@ -243,9 +207,9 @@ public class SearchController {
 		} else {
 			tag1Include = false;
 		}
-		
+
 		if (tag2.getValue() != null) {
-			toggleValue = ((RadioButton) comboGroup.getSelectedToggle()).getText();
+			toggleValue = ((RadioButton) toggleGroup.getSelectedToggle()).getText();
 
 			if (currentPhoto.getTags().containsKey(tag2.getValue())
 					&& currentPhoto.getTags().get(tag2.getValue()).contains(value2.getValue())) {
@@ -271,7 +235,7 @@ public class SearchController {
 		value1.setValue(null);
 		tag2.setValue(null);
 		value2.setValue(null);
-		comboGroup.selectToggle(null);
+		toggleGroup.selectToggle(null);
 	}
 
 	public void onActionSearchDate(ActionEvent e) throws IOException {
@@ -303,15 +267,25 @@ public class SearchController {
 			VBox root = (VBox) loader.load();
 
 			SearchPhotoPreviewController searchPhotoPreviewController = loader.getController();
-			searchPhotoPreviewController.start(currentPhoto, currentUser);
+			searchPhotoPreviewController.start(currentPhoto);
 
 			tilepane.getChildren().add(root);
 			recentSearchResults.add(currentPhoto);
 		}
-		
+
 		createAlbum.setDisable(false);
 	}
-	
+
+	private void noSearchResultsAlert() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("No Valid Photos");
+		alert.setContentText("There are no photos that fit the desired specifications.");
+		alert.showAndWait();
+
+		tilepane.getChildren().clear();
+		createAlbum.setDisable(true);
+	}
+
 	public void onActionCreateAlbum(ActionEvent e) throws IOException {
 		String desiredAlbumName = getDesiredAlbumName();
 		if (desiredAlbumName.isEmpty()) {
@@ -327,19 +301,9 @@ public class SearchController {
 		}
 	}
 
-	private void noSearchResultsAlert() {
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("No Valid Photos");
-		alert.setContentText("There are no photos that fit the desired specifications.");
-		alert.showAndWait();
-		
-		tilepane.getChildren().clear();
-		createAlbum.setDisable(true);
-	}
-
 	private String getDesiredAlbumName() {
 		TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle(" ");
+		dialog.setTitle("New Album");
 		dialog.setHeaderText("Enter New Album Name");
 
 		Optional<String> opt = dialog.showAndWait();
@@ -350,9 +314,7 @@ public class SearchController {
 		String albumName = opt.get().trim();
 		if (albumName.length() == 0) {
 			return "";
-		}
-
-		if (currentUser.getAlbumWithName(albumName) != null) {
+		} else if (currentUser.getAlbumWithName(albumName) != null) {
 			return "";
 		}
 
@@ -364,6 +326,39 @@ public class SearchController {
 		alert.setTitle("Add Album Failed");
 		alert.setContentText("That album name is not available.");
 		alert.showAndWait();
+	}
+
+	public void onActionLogout(ActionEvent e) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
+		AnchorPane root = (AnchorPane) loader.load();
+
+		Node node = (Node) e.getSource();
+		Stage primaryStage = (Stage) node.getScene().getWindow();
+
+		Scene scene = new Scene(root, 1000, 750);
+
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("Login Screen");
+		primaryStage.setResizable(false);
+		primaryStage.show();
+	}
+
+	public void onActionHome(ActionEvent e) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/userHome.fxml"));
+		AnchorPane root = (AnchorPane) loader.load();
+
+		Node node = (Node) e.getSource();
+		Stage primaryStage = (Stage) node.getScene().getWindow();
+
+		UserHomeController userLandingController = loader.getController();
+		userLandingController.start(currentUser);
+
+		Scene scene = new Scene(root, 1000, 750);
+
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("Home Screen");
+		primaryStage.setResizable(false);
+		primaryStage.show();
 	}
 
 }

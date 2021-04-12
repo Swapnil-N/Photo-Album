@@ -1,7 +1,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.Optional;
 
 import javafx.event.ActionEvent;
@@ -10,9 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -26,50 +25,57 @@ import models.User;
 public class AlbumPreviewController {
 
 	@FXML
-	VBox container;
-
-	@FXML
 	ImageView imageView;
-
-	@FXML
-	Text albumName, photoCount, dateRange;
-
 	@FXML
 	MenuButton settings;
+	@FXML
+	Text albumName, photoCount, dateRange;
+	@FXML
+	VBox container;
 
-	Album album;
-	User currentUser;
-	UserHomeController userHomeController;
+	private Album currentAlbum;
+	private User currentUser;
+	private UserHomeController userHomeController;
 
-	public void start(User currentUser, Album album) throws MalformedURLException {
+	public void start(User currentUser, Album currentAlbum, UserHomeController userHomeController) {
 		this.currentUser = currentUser;
-		this.album = album;
+		this.currentAlbum = currentAlbum;
+		this.userHomeController = userHomeController;
 
-		container.setId(album.getName());
+		container.setId(currentAlbum.getName());
 
 		setAlbum();
-
-		ImageView menuIcon = new ImageView(new Image("file:../../resources/images/settings.png"));
-		menuIcon.setFitHeight(20);
-		menuIcon.setFitWidth(20);
-		settings.setGraphic(menuIcon);
 	}
 
 	public void setAlbum() {
-		
-		if (album.getSize() > 0)
-			imageView.setImage(new Image(album.getPhotoList().get(0).getPhotoURL()));
-		else {
-			imageView.setImage(new Image("file:../../resources/images/noimageavailable.png"));
-		}
+		if (currentAlbum.getSize() > 0)
+			imageView.setImage(new Image(currentAlbum.getPhotoList().get(0).getPhotoURL()));
 
-		albumName.setText(album.getName());
-		photoCount.setText(album.getSize() + "");
+		albumName.setText(currentAlbum.getName());
+		photoCount.setText(currentAlbum.getSize() + "");
 
-		if (!album.getFirstDate().isEmpty())
-			dateRange.setText(album.getFirstDate() + " - " + album.getLastDate());
+		if (!currentAlbum.getFirstDate().isEmpty())
+			dateRange.setText(currentAlbum.getFirstDate() + " - " + currentAlbum.getLastDate());
 		else
 			dateRange.setText("N/A");
+	}
+	
+	public void imageViewMouseClicked(MouseEvent e) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/album.fxml"));
+		AnchorPane root = (AnchorPane) loader.load();
+
+		Node node = (Node) e.getSource();
+		Stage primaryStage = (Stage) node.getScene().getWindow();
+
+		AlbumViewController albumViewController = loader.getController();
+		albumViewController.start(currentUser, currentAlbum);
+
+		Scene scene = new Scene(root, 1000, 750);
+
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("Home Screen");
+		primaryStage.setResizable(false);
+		primaryStage.show();
 	}
 
 	public void onActionRename(ActionEvent e) {
@@ -91,8 +97,8 @@ public class AlbumPreviewController {
 		if (currentUser.hasAlbumWithName(newName)) {
 			invalidAlbumAlert();
 		} else {
-			album.setName(newName);
-			albumName.setText(album.getName());
+			currentAlbum.setName(newName);
+			albumName.setText(currentAlbum.getName());
 			container.setId(newName);
 		}
 	}
@@ -105,28 +111,7 @@ public class AlbumPreviewController {
 	}
 
 	public void onActionDelete(ActionEvent e) throws IOException {
-		userHomeController.deleteAlbum(album.getName());
+		userHomeController.deleteAlbum(currentAlbum.getName());
 	}
-
-	public void imageViewMouseClicked(MouseEvent e) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/album.fxml"));
-		AnchorPane root = (AnchorPane) loader.load();
-
-		Node node = (Node) e.getSource();
-		Stage primaryStage = (Stage) node.getScene().getWindow();
-
-		AlbumViewController albumViewController = loader.getController();
-		albumViewController.start(currentUser, album);
-
-		Scene scene = new Scene(root, 1000, 750);
-
-		primaryStage.setScene(scene);
-		primaryStage.setTitle("Home Screen");
-		primaryStage.setResizable(false);
-		primaryStage.show();
-	}
-
-	public void setUserHomeController(UserHomeController controller) {
-		userHomeController = controller;
-	}
+	
 }
