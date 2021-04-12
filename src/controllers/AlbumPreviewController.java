@@ -37,6 +37,12 @@ public class AlbumPreviewController {
 	private User currentUser;
 	private UserHomeController userHomeController;
 
+	
+	/** 
+	 * @param currentUser
+	 * @param currentAlbum
+	 * @param userHomeController
+	 */
 	public void start(User currentUser, Album currentAlbum, UserHomeController userHomeController) {
 		this.currentUser = currentUser;
 		this.currentAlbum = currentAlbum;
@@ -60,6 +66,11 @@ public class AlbumPreviewController {
 			dateRange.setText("N/A");
 	}
 	
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void imageViewMouseClicked(MouseEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/album.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();
@@ -78,6 +89,10 @@ public class AlbumPreviewController {
 		primaryStage.show();
 	}
 
+	
+	/** 
+	 * @param e
+	 */
 	public void onActionRename(ActionEvent e) {
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle(" ");
@@ -110,6 +125,11 @@ public class AlbumPreviewController {
 		alert.showAndWait();
 	}
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void onActionDelete(ActionEvent e) throws IOException {
 		userHomeController.deleteAlbum(currentAlbum.getName());
 	}

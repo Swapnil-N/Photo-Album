@@ -29,6 +29,11 @@ public class SlideshowController { // TODO Add more details about photos
 	private Album currentAlbum;
 	private int iter;
 
+	
+	/** 
+	 * @param currentUser
+	 * @param currentAlbum
+	 */
 	public void start(User currentUser, Album currentAlbum) {
 		this.currentUser = currentUser;
 		this.currentAlbum = currentAlbum;
@@ -44,6 +49,10 @@ public class SlideshowController { // TODO Add more details about photos
 
 	}
 
+	
+	/** 
+	 * @param e
+	 */
 	public void onActionPrevious(ActionEvent e) {
 		iter--;
 
@@ -57,6 +66,10 @@ public class SlideshowController { // TODO Add more details about photos
 
 	}
 
+	
+	/** 
+	 * @param e
+	 */
 	public void onActionNext(ActionEvent e) {
 		iter++;
 
@@ -69,6 +82,11 @@ public class SlideshowController { // TODO Add more details about photos
 		}
 	}
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void onActionLogout(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();
@@ -84,6 +102,11 @@ public class SlideshowController { // TODO Add more details about photos
 		primaryStage.show();
 	}
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void onActionHome(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/userHome.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();

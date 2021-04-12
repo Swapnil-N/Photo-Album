@@ -40,6 +40,11 @@ public class UserList implements Serializable {
 
 	}
 
+	
+	/** 
+	 * @param username
+	 * @return boolean
+	 */
 	public static boolean containsUser(String username) {
 		deserialize();
 
@@ -51,6 +56,11 @@ public class UserList implements Serializable {
 		return false;
 	}
 
+	
+	/** 
+	 * @param username
+	 * @return User
+	 */
 	public static User getUserWithName(String username) {
 		deserialize();
 
@@ -62,6 +72,11 @@ public class UserList implements Serializable {
 		return null;
 	}
 
+	
+	/** 
+	 * @param username
+	 * @return boolean
+	 */
 	public static boolean addUser(String username) {
 		deserialize();
 
@@ -75,6 +90,11 @@ public class UserList implements Serializable {
 		return true;
 	}
 
+	
+	/** 
+	 * @param username
+	 * @return boolean
+	 */
 	public static boolean deleteUser(String username) {
 		deserialize();
 
@@ -93,6 +113,10 @@ public class UserList implements Serializable {
 		return false;
 	}
 
+	
+	/** 
+	 * @return List<User>
+	 */
 	public static List<User> getUsers() {
 		deserialize();
 

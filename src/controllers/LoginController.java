@@ -20,6 +20,11 @@ public class LoginController {
 	@FXML
 	TextField username;
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void onActionLogin(ActionEvent e) throws IOException {
 		String usernameInput = username.getText().trim();
 

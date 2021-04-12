@@ -25,6 +25,11 @@ public class User implements Serializable {
 		tags.add(addNewTag);
 	}
 
+	
+	/** 
+	 * @param name
+	 * @return boolean
+	 */
 	public boolean hasAlbumWithName(String name) {
 		for (Album item : albums) {
 			if (item.getName().equals(name))
@@ -33,6 +38,11 @@ public class User implements Serializable {
 		return false;
 	}
 
+	
+	/** 
+	 * @param name
+	 * @return Album
+	 */
 	public Album getAlbumWithName(String name) {
 		if (!hasAlbumWithName(name))
 			return null;
@@ -45,6 +55,11 @@ public class User implements Serializable {
 		return null;
 	}
 
+	
+	/** 
+	 * @param name
+	 * @return boolean
+	 */
 	public boolean addAlbum(String name) {
 		if (hasAlbumWithName(name))
 			return false;
@@ -55,6 +70,11 @@ public class User implements Serializable {
 		return true;
 	}
 
+	
+	/** 
+	 * @param name
+	 * @return boolean
+	 */
 	public boolean deleteAlbum(String name) {
 		if (!hasAlbumWithName(name))
 			return false;
@@ -71,6 +91,11 @@ public class User implements Serializable {
 		return false;
 	}
 
+	
+	/** 
+	 * @param tag
+	 * @return boolean
+	 */
 	public boolean addTag(String tag) {
 		tag = tag.trim();
 
@@ -83,19 +108,35 @@ public class User implements Serializable {
 		return true;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getUsername() {
 		return username;
 	}
 
+	
+	/** 
+	 * @return List<Album>
+	 */
 	public List<Album> getAlbums() {
 		Collections.sort(albums, (a, b) -> a.getName().compareTo(b.getName()));
 		return albums;
 	}
 
+	
+	/** 
+	 * @param albums
+	 */
 	public void setAlbums(List<Album> albums) {
 		this.albums = albums;
 	}
 
+	
+	/** 
+	 * @return List<String>
+	 */
 	public List<String> getTags() {
 		tags.remove(tags.size() - 1);
 		Collections.sort(tags);
@@ -104,10 +145,18 @@ public class User implements Serializable {
 		return tags;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getAddNewTag() {
 		return addNewTag;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		return username;

@@ -87,6 +87,10 @@ public class AdminController {
 
 	private ObservableList<String> obsList;
 
+	
+	/** 
+	 * @param primaryStage
+	 */
 	public void start(Stage primaryStage) {
 		obsList = FXCollections.observableArrayList();
 
@@ -99,6 +103,10 @@ public class AdminController {
 		listView.setCellFactory(userDisplay -> new UserItem());
 	}
 
+	
+	/** 
+	 * @param e
+	 */
 	public void onActionAddUser(ActionEvent e) {
 		String usernameInput = newUsername.getText().trim();
 		if (usernameInput.equals("admin")) {
@@ -122,6 +130,11 @@ public class AdminController {
 		newUsername.setText("");
 	}
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void onActionLogout(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();

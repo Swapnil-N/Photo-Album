@@ -33,6 +33,13 @@ public class PhotoPreviewController {
 
 	private AlbumViewController albumViewController;
 
+	
+	/** 
+	 * @param currentAlbum
+	 * @param currentPhoto
+	 * @param currentUser
+	 * @param albumViewController
+	 */
 	public void start(Album currentAlbum, Photo currentPhoto, User currentUser,
 			AlbumViewController albumViewController) {
 		this.currentPhoto = currentPhoto;
@@ -45,11 +52,21 @@ public class PhotoPreviewController {
 		imageView.setImage(new Image(currentPhoto.getPhotoURL()));
 	}
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void onActionDelete(ActionEvent e) throws IOException {
 		currentAlbum.deletePhoto(currentPhoto);
 		albumViewController.loadAlbum();
 	}
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void imageViewMouseClicked(MouseEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/editPhoto.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();

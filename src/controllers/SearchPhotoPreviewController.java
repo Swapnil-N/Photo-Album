@@ -13,6 +13,10 @@ public class SearchPhotoPreviewController {
 	@FXML
 	Text photoName, caption;
 
+	
+	/** 
+	 * @param currentPhoto
+	 */
 	public void start(Photo currentPhoto) {
 		photoName.setText(currentPhoto.getName());
 		caption.setText(currentPhoto.getCaption());

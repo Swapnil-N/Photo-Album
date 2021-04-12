@@ -49,6 +49,10 @@ public class SearchController {
 	private ToggleGroup toggleGroup;
 	private List<Photo> recentSearchResults;
 
+	
+	/** 
+	 * @param currentUser
+	 */
 	public void start(User currentUser) {
 		this.currentUser = currentUser;
 		toggleGroup = new ToggleGroup();
@@ -131,6 +135,11 @@ public class SearchController {
 		}
 	}
 
+	
+	/** 
+	 * @param searchTag
+	 * @param valueBox
+	 */
 	private void loadValues(String searchTag, int valueBox) {
 		Set<String> possiblePairs = new HashSet<String>();
 
@@ -158,6 +167,10 @@ public class SearchController {
 		}
 	}
 
+	
+	/** 
+	 * @return Set<Photo>
+	 */
 	private Set<Photo> dateSearchResults() {
 		Set<Photo> desiredPhotos = new HashSet<Photo>();
 
@@ -182,6 +195,10 @@ public class SearchController {
 		endDate.setValue(null);
 	}
 
+	
+	/** 
+	 * @return Set<Photo>
+	 */
 	private Set<Photo> tagsSearchResults() {
 		Set<Photo> desiredPhotos = new HashSet<Photo>();
 
@@ -195,6 +212,11 @@ public class SearchController {
 		return desiredPhotos;
 	}
 
+	
+	/** 
+	 * @param currentPhoto
+	 * @return boolean
+	 */
 	private boolean fitsTagsSpecifications(Photo currentPhoto) {
 		boolean tag1Include = true;
 
@@ -238,6 +260,11 @@ public class SearchController {
 		toggleGroup.selectToggle(null);
 	}
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void onActionSearchDate(ActionEvent e) throws IOException {
 		Set<Photo> desiredPhotos = dateSearchResults();
 		if (desiredPhotos.size() > 0)
@@ -248,6 +275,11 @@ public class SearchController {
 		nullDateValues();
 	}
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void onActionSearchTags(ActionEvent e) throws IOException {
 		Set<Photo> desiredPhotos = tagsSearchResults();
 		if (desiredPhotos.size() > 0)
@@ -258,6 +290,11 @@ public class SearchController {
 		nullTagsValues();
 	}
 
+	
+	/** 
+	 * @param desiredPhotos
+	 * @throws IOException
+	 */
 	private void updateTilePane(Set<Photo> desiredPhotos) throws IOException {
 		tilepane.getChildren().clear();
 		recentSearchResults.clear();
@@ -286,6 +323,11 @@ public class SearchController {
 		createAlbum.setDisable(true);
 	}
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void onActionCreateAlbum(ActionEvent e) throws IOException {
 		String desiredAlbumName = getDesiredAlbumName();
 		if (desiredAlbumName.isEmpty()) {
@@ -301,6 +343,10 @@ public class SearchController {
 		}
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	private String getDesiredAlbumName() {
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle("New Album");
@@ -328,6 +374,11 @@ public class SearchController {
 		alert.showAndWait();
 	}
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void onActionLogout(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();
@@ -343,6 +394,11 @@ public class SearchController {
 		primaryStage.show();
 	}
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void onActionHome(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/userHome.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();

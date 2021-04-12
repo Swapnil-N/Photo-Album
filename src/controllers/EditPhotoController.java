@@ -130,6 +130,12 @@ public class EditPhotoController {
 
 	private ObservableList<String> photoTags;
 
+	
+	/** 
+	 * @param currentUser
+	 * @param currentAlbum
+	 * @param currentPhoto
+	 */
 	public void start(User currentUser, Album currentAlbum, Photo currentPhoto) {
 		this.currentUser = currentUser;
 		this.currentAlbum = currentAlbum;
@@ -234,6 +240,10 @@ public class EditPhotoController {
 		alert.showAndWait();
 	}
 
+	
+	/** 
+	 * @param e
+	 */
 	public void onActionMove(ActionEvent e) {
 		ChoiceDialog<Album> dialog = new ChoiceDialog<Album>(null, currentUser.getAlbums());
 		dialog.setHeaderText("Album Move Selection");
@@ -249,6 +259,10 @@ public class EditPhotoController {
 		loadAlbums();
 	}
 
+	
+	/** 
+	 * @param e
+	 */
 	public void onActionCopy(ActionEvent e) {
 		ChoiceDialog<Album> dialog = new ChoiceDialog<Album>(null, currentUser.getAlbums());
 		dialog.setHeaderText("Album Copy Selection");
@@ -261,6 +275,10 @@ public class EditPhotoController {
 		loadAlbums();
 	}
 
+	
+	/** 
+	 * @param e
+	 */
 	public void onActionAdd(ActionEvent e) {
 		String key = tagInput.getValue();
 		String value = valueInput.getText();
@@ -285,6 +303,11 @@ public class EditPhotoController {
 		alert.showAndWait();
 	}
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void onActionLogout(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();
@@ -300,6 +323,11 @@ public class EditPhotoController {
 		primaryStage.show();
 	}
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void onActionHome(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/userHome.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();

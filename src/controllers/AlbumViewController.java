@@ -35,6 +35,12 @@ public class AlbumViewController {
 	private User currentUser;
 	private Album currentAlbum;
 
+	
+	/** 
+	 * @param currentUser
+	 * @param currentAlbum
+	 * @throws IOException
+	 */
 	public void start(User currentUser, Album currentAlbum) throws IOException {
 		this.currentUser = currentUser;
 		this.currentAlbum = currentAlbum;
@@ -44,6 +50,10 @@ public class AlbumViewController {
 		loadAlbum();
 	}
 
+	
+	/** 
+	 * @throws IOException
+	 */
 	public void loadAlbum() throws IOException {
 		tilepane.getChildren().clear();
 
@@ -63,6 +73,11 @@ public class AlbumViewController {
 		}
 	}
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void onActionAddPhoto(ActionEvent e) throws IOException {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Choose an Image");
@@ -99,6 +114,11 @@ public class AlbumViewController {
 		alert.showAndWait();
 	}
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void onActionLogout(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();
@@ -114,6 +134,11 @@ public class AlbumViewController {
 		primaryStage.show();
 	}
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void onActionHome(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/userHome.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();
@@ -132,6 +157,11 @@ public class AlbumViewController {
 		primaryStage.show();
 	}
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void onActionSlideshow(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/slideshow.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();

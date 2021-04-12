@@ -30,6 +30,11 @@ public class Photo implements Serializable {
 		caption = "N/A";
 	}
 
+	
+	/** 
+	 * @param obj
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof Photo))
@@ -38,6 +43,12 @@ public class Photo implements Serializable {
 		return file.equals(((Photo) obj).getFile());
 	}
 
+	
+	/** 
+	 * @param key
+	 * @param value
+	 * @return boolean
+	 */
 	public boolean addTag(String key, String value) {
 		key = key.trim();
 		value = value.trim();
@@ -56,6 +67,12 @@ public class Photo implements Serializable {
 		return true;
 	}
 
+	
+	/** 
+	 * @param key
+	 * @param value
+	 * @return boolean
+	 */
 	public boolean removeTag(String key, String value) {
 		key = key.trim();
 		value = value.trim();
@@ -75,22 +92,42 @@ public class Photo implements Serializable {
 		return false;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getName() {
 		return name;
 	}
 
+	
+	/** 
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getCaption() {
 		return caption;
 	}
 
+	
+	/** 
+	 * @param caption
+	 */
 	public void setCaption(String caption) {
 		this.caption = caption;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getPhotoURL() {
 		try {
 			return file.toURI().toURL().toString();
@@ -99,26 +136,46 @@ public class Photo implements Serializable {
 		}
 	}
 
+	
+	/** 
+	 * @return File
+	 */
 	public File getFile() {
 		return file;
 	}
 
+	
+	/** 
+	 * @return Date
+	 */
 	public Date getDate() {
 		return date;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getDateString() {
 		DateFormat format = new SimpleDateFormat("MM.d.yyyy", Locale.ENGLISH);
 		String dateFormatted = format.format(date);
 		return dateFormatted;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getDateTimeString() {
 		DateFormat format = new SimpleDateFormat("MM.d.yyyy hh:mm:ss", Locale.ENGLISH);
 		String dateFormatted = format.format(date);
 		return dateFormatted;
 	}
 
+	
+	/** 
+	 * @return Map<String, List<String>>
+	 */
 	public Map<String, List<String>> getTags() {
 		return tags;
 	}

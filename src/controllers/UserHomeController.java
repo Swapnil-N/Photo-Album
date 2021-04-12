@@ -29,12 +29,21 @@ public class UserHomeController {
 
 	private User currentUser;
 
+	
+	/** 
+	 * @param currentUser
+	 * @throws IOException
+	 */
 	public void start(User currentUser) throws IOException {
 		this.currentUser = currentUser;
 
 		loadAlbums();
 	}
 
+	
+	/** 
+	 * @throws IOException
+	 */
 	private void loadAlbums() throws IOException {
 		tilepane.getChildren().clear();
 
@@ -50,12 +59,22 @@ public class UserHomeController {
 		}
 	}
 
+	
+	/** 
+	 * @param albumName
+	 * @throws IOException
+	 */
 	public void deleteAlbum(String albumName) throws IOException {
 		currentUser.deleteAlbum(albumName);
 
 		loadAlbums();
 	}
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void onActionAddAlbum(ActionEvent e) throws IOException {
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle(" ");
@@ -86,6 +105,11 @@ public class UserHomeController {
 		alert.showAndWait();
 	}
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void onActionLogout(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();
@@ -101,6 +125,11 @@ public class UserHomeController {
 		primaryStage.show();
 	}
 
+	
+	/** 
+	 * @param e
+	 * @throws IOException
+	 */
 	public void onActionSearch(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/search.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();

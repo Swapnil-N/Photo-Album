@@ -24,6 +24,11 @@ public class Album implements Serializable {
 		lastDate = null;
 	}
 
+	
+	/** 
+	 * @param newPhoto
+	 * @return boolean
+	 */
 	public boolean addPhoto(Photo newPhoto) {
 		for (Photo currPhoto : photoList) {
 			if (newPhoto.equals(currPhoto))
@@ -41,6 +46,11 @@ public class Album implements Serializable {
 		return true;
 	}
 
+	
+	/** 
+	 * @param photo
+	 * @return boolean
+	 */
 	public boolean deletePhoto(Photo photo) {
 		for (int i = 0; i < photoList.size(); i++) {
 			if (photo.equals(photoList.get(i))) {
@@ -68,40 +78,73 @@ public class Album implements Serializable {
 		return false;
 	}
 
+	
+	/** 
+	 * @param date
+	 * @return String
+	 */
 	private String formatDate(Date date) {
 		DateFormat format = new SimpleDateFormat("MM.d.yyyy", Locale.ENGLISH);
 		String formattedDate = format.format(date);
 		return formattedDate;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getName() {
 		return name;
 	}
 
+	
+	/** 
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	
+	/** 
+	 * @return List<Photo>
+	 */
 	public List<Photo> getPhotoList() {
 		return photoList;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	public int getSize() {
 		return photoList.size();
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getFirstDate() {
 		if (firstDate == null)
 			return "";
 		return formatDate(firstDate);
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getLastDate() {
 		if (lastDate == null)
 			return "";
 		return formatDate(lastDate);
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		return name;
