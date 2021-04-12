@@ -138,7 +138,7 @@ public class EditPhotoController {
 		photoImage.setImage(new Image(currentPhoto.getPhotoURL()));
 
 		photoName.setText(currentPhoto.getName());
-		photoDate.setText(currentPhoto.getDateString());
+		photoDate.setText(currentPhoto.getDateTimeString());
 		photoAlbums.setText("later worry");
 		
 		photoTags = FXCollections.observableArrayList();

@@ -111,6 +111,12 @@ public class Photo implements Serializable {
 		String dateFormatted = format.format(date);
 		return dateFormatted;
 	}
+	
+	public String getDateTimeString() {
+		DateFormat format = new SimpleDateFormat("MM.d.yyyy hh:mm:ss", Locale.ENGLISH);
+		String dateFormatted = format.format(date);
+		return dateFormatted;
+	}
 
 	public void setDate(Date date) {
 		this.date = date;
