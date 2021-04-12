@@ -37,7 +37,7 @@ public class SearchController {
 	DatePicker startDate, endDate;
 
 	@FXML
-	Button searchDate, createAlbumDate, searchTags, createAlbumTags;
+	Button searchDate, searchTags, createAlbum;
 
 	@FXML
 	ChoiceBox<String> tag1, value1, tag2, value2;
@@ -49,8 +49,9 @@ public class SearchController {
 	TilePane tilepane;
 
 	User currentUser;
-
 	ToggleGroup comboGroup;
+	List<Photo> recentSearchResults;
+	
 
 	public void start(User currentUser) {
 		this.currentUser = currentUser;
@@ -77,7 +78,6 @@ public class SearchController {
 		});
 
 		searchDate.disableProperty().bind(startDate.valueProperty().isNull().or(endDate.valueProperty().isNull()));
-		createAlbumDate.disableProperty().bind(startDate.valueProperty().isNull().or(endDate.valueProperty().isNull()));
 
 		value1.disableProperty().bind(tag1.valueProperty().isNull());
 		tag2.disableProperty().bind(tag1.valueProperty().isNull().or(value1.valueProperty().isNull()));
@@ -98,7 +98,7 @@ public class SearchController {
 		BooleanBinding comboBind = pair2Filled.and(comboGroup.selectedToggleProperty().isNull());
 
 		searchTags.disableProperty().bind(pair1Bind.or(pair2Bind).or(comboBind));
-		createAlbumTags.disableProperty().bind(pair1Bind.or(pair2Bind).or(comboBind));
+		createAlbum.setDisable(true);
 
 		loadTags();
 
@@ -115,6 +115,8 @@ public class SearchController {
 			value2.setValue(null);
 			comboGroup.selectToggle(null);
 		});
+		
+		recentSearchResults = new ArrayList<>();
 	}
 
 	private void loadTags() {
@@ -283,25 +285,6 @@ public class SearchController {
 		nullDateValues();
 	}
 
-	public void onActionCreateAlbumDate(ActionEvent e) throws IOException {
-		String desiredAlbumName = getDesiredAlbumName();
-		if (desiredAlbumName.isEmpty()) {
-			invalidAlbumNameAlert();
-			nullDateValues();
-			return;
-		}
-
-		Set<Photo> desiredPhotos = dateSearchResults();
-		if (desiredPhotos.size() > 0) {
-			for (Photo currentPhoto : desiredPhotos) {
-				currentUser.getAlbumWithName(desiredAlbumName).addPhoto(currentPhoto);
-			}
-		} else
-			noSearchResultsAlert();
-
-		nullDateValues();
-	}
-
 	public void onActionSearchTags(ActionEvent e) throws IOException {
 		Set<Photo> desiredPhotos = tagsSearchResults();
 		if (desiredPhotos.size() > 0)
@@ -312,27 +295,9 @@ public class SearchController {
 		nullTagsValues();
 	}
 
-	public void onActionCreateAlbumTags(ActionEvent e) {
-		String desiredAlbumName = getDesiredAlbumName();
-		if (desiredAlbumName.isEmpty()) {
-			invalidAlbumNameAlert();
-			nullTagsValues();
-			return;
-		}
-
-		Set<Photo> desiredPhotos = tagsSearchResults();
-		if (desiredPhotos.size() > 0) {
-			for (Photo currentPhoto : desiredPhotos) {
-				currentUser.getAlbumWithName(desiredAlbumName).addPhoto(currentPhoto);
-			}
-		} else
-			noSearchResultsAlert();
-
-		nullTagsValues();
-	}
-
 	private void updateTilePane(Set<Photo> desiredPhotos) throws IOException {
 		tilepane.getChildren().clear();
+		recentSearchResults.clear();
 
 		for (Photo currentPhoto : desiredPhotos) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/searchPhotoPreview.fxml"));
@@ -342,6 +307,24 @@ public class SearchController {
 			searchPhotoPreviewController.start(currentPhoto, currentUser);
 
 			tilepane.getChildren().add(root);
+			recentSearchResults.add(currentPhoto);
+		}
+		
+		createAlbum.setDisable(false);
+	}
+	
+	public void onActionCreateAlbum(ActionEvent e) throws IOException {
+		String desiredAlbumName = getDesiredAlbumName();
+		if (desiredAlbumName.isEmpty()) {
+			invalidAlbumNameAlert();
+			return;
+		}
+
+		if (recentSearchResults.size() > 0) {
+			currentUser.addAlbum(desiredAlbumName);
+			for (Photo currentPhoto : recentSearchResults) {
+				currentUser.getAlbumWithName(desiredAlbumName).addPhoto(currentPhoto);
+			}
 		}
 	}
 
@@ -350,6 +333,9 @@ public class SearchController {
 		alert.setTitle("No Valid Photos");
 		alert.setContentText("There are no photos that fit the desired specifications.");
 		alert.showAndWait();
+		
+		tilepane.getChildren().clear();
+		createAlbum.setDisable(true);
 	}
 
 	private String getDesiredAlbumName() {
@@ -367,7 +353,7 @@ public class SearchController {
 			return "";
 		}
 
-		if (!currentUser.addAlbum(albumName)) {
+		if (currentUser.getAlbumWithName(albumName) != null) {
 			return "";
 		}
 
