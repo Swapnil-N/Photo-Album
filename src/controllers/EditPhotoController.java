@@ -181,9 +181,8 @@ public class EditPhotoController {
 		Set<String> albumStrings = new HashSet<>();
 		for (Album album : currentUser.getAlbums()) {
 			for (Photo photo : album.getPhotoList()) {
-				if (photo.equals(currentPhoto)) {
-					albumStrings.add(null);
-				}
+				if (photo.equals(currentPhoto))
+					albumStrings.add(album.getName());
 			}
 		}
 
