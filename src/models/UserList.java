@@ -14,18 +14,18 @@ public class UserList implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static final String storeDir = "resources";
-	private static final String storeFile = "SerializedUsers.dat";
+	private static final String storeFile = "SerializedData.dat";
 
-	static List<User> userList = new ArrayList<>();
+	private static List<User> userList = new ArrayList<>();
 
-	public UserList() {
-		deserialize();
-	}
-
-	public static void serialize() throws IOException {
-		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
-		oos.writeObject(userList);
-		oos.close();
+	public static void serialize() {
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
+			oos.writeObject(userList);
+			oos.close();
+		} catch (IOException e) {
+			e.printStackTrace(); //TODO: remove
+		}
 	}
 
 	public static void deserialize() {
@@ -39,42 +39,50 @@ public class UserList implements Serializable {
 
 	}
 
-	public boolean containsUser(User user) {
+	public static boolean containsUser(String username) {
+		deserialize();
+		
 		for (User currentUser : userList) {
-			if (currentUser.getUsername().equals(user.getUsername())) {
+			if (currentUser.getUsername().equals(username)) 
 				return true;
-			}
-
 		}
+		
 		return false;
-
 	}
 	
-	public User getUserWithName(String name) {
+	public static User getUserWithName(String username) {
+		deserialize();
+		
 		for (User currentUser : userList) {
-			if (currentUser.getUsername().equals(name))
+			if (currentUser.getUsername().equals(username))
 				return currentUser;
 		}
 		
 		return null;
 	}
 
-	public boolean addUser(User user) throws IOException {
-		if (user.getUsername().isEmpty() || containsUser(user))
+	public static boolean addUser(String username) throws IOException {
+		deserialize();
+		
+		if (username.isEmpty() || containsUser(username))
 			return false;
 
+		User user = new User(username);
 		userList.add(user);
+		
 		serialize();
 
 		return true;
 	}
 
-	public boolean deleteUser(User user) throws IOException {
-		if (user.getUsername().equals("admin"))
+	public static boolean deleteUser(String username) throws IOException {
+		deserialize();
+		
+		if (username.equals("admin"))
 			return false;
 
 		for (int i = 0; i < userList.size(); i++) {
-			if (userList.get(i).getUsername().equals(user.getUsername())) {
+			if (userList.get(i).getUsername().equals(username)) {
 				userList.remove(i);
 				serialize();
 				return true;
@@ -84,7 +92,8 @@ public class UserList implements Serializable {
 		return false;
 	}
 
-	public List<User> getUsers() {
+	public static List<User> getUsers() {
+		deserialize();
 		return userList;
 	}
 

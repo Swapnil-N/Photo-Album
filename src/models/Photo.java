@@ -46,10 +46,13 @@ public class Photo implements Serializable {
 		}
 		
 		if (tags.get(key).contains(value)) {
+			UserList.serialize();
 			return false;
 		}
 		
 		tags.get(key).add(value);
+		UserList.serialize();
+		
 		return true;
 	}
 	
@@ -63,6 +66,8 @@ public class Photo implements Serializable {
 		for (int i = 0; i < tags.get(key).size(); i++) {
 			if (tags.get(key).get(i).equals(value)) {
 				tags.get(key).remove(i);
+				UserList.serialize();
+				
 				return true;
 			}
 		}
@@ -98,10 +103,6 @@ public class Photo implements Serializable {
 		return file;
 	}
 
-	public void setFile(File file) {
-		this.file = file;
-	}
-
 	public Date getDate() {
 		return date;
 	}
@@ -118,16 +119,8 @@ public class Photo implements Serializable {
 		return dateFormatted;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
 	public HashMap<String, List<String>> getTags() {
 		return tags;
-	}
-
-	public void setTags(HashMap<String, List<String>> tags) {
-		this.tags = tags;
 	}
 
 }

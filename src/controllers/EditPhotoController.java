@@ -247,8 +247,7 @@ public class EditPhotoController {
 		Stage primaryStage = (Stage) node.getScene().getWindow();
 
 		UserHomeController userLandingController = loader.getController();
-		userLandingController.setCurrentUser(currentUser);
-		userLandingController.loadAlbums();
+		userLandingController.start(currentUser);
 
 		Scene scene = new Scene(root, 1000, 750);
 

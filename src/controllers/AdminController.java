@@ -38,22 +38,22 @@ public class AdminController {
 
 		public UserItem() {
 			super();
-			
+
 			HBox.setHgrow(blank, Priority.ALWAYS);
 			hBox.getChildren().addAll(username, blank, delete);
 			hBox.setAlignment(Pos.CENTER);
-			
+
 			delete.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					UserList userList = new UserList();
 					boolean success = false;
 
 					try {
-						success = userList.deleteUser(new User(username.getText()));
+						success = UserList.deleteUser(username.getText());
 					} catch (IOException e) {
-						e.printStackTrace();
+						e.printStackTrace(); // TODO: Remove
 					}
+
 					if (success)
 						getListView().getItems().remove(getItem());
 				}
@@ -92,11 +92,12 @@ public class AdminController {
 
 	public void start(Stage primaryStage) {
 		obsList = FXCollections.observableArrayList();
-		List<User> users = new UserList().getUsers();
+		List<User> users = UserList.getUsers();
 
 		for (int i = 0; i < users.size(); i++) {
 			obsList.add(users.get(i).getUsername());
 		}
+		
 		listView.setItems(obsList);
 		listView.setCellFactory(userDisplay -> new UserItem());
 	}
@@ -106,19 +107,11 @@ public class AdminController {
 		if (usernameInput.equals("admin")) {
 			invalidUsernameAlert();
 		} else {
-			UserList userList = new UserList();
-			User user = new User(usernameInput);
-
-			if (userList.containsUser(user) || usernameInput.equals("")) {
-				invalidUsernameAlert();
+			if (UserList.addUser(usernameInput)) {
+				newUsername.setText("");
+				obsList.add(usernameInput);
 			} else {
-				boolean success = userList.addUser(user);
-				if (success) {
-					newUsername.setText("");
-					obsList.add(usernameInput);
-				} else {
-					invalidUsernameAlert();
-				}
+				invalidUsernameAlert();
 			}
 		}
 	}
@@ -138,7 +131,7 @@ public class AdminController {
 
 		Node node = (Node) e.getSource();
 		Stage primaryStage = (Stage) node.getScene().getWindow();
-		
+
 		Scene scene = new Scene(root, 1000, 750);
 
 		primaryStage.setScene(scene);

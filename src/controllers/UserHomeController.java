@@ -30,6 +30,12 @@ public class UserHomeController {
 	TilePane tilepane;
 
 	User currentUser;
+	
+	public void start(User currentUser) throws IOException {
+		this.currentUser = currentUser;
+		
+		loadAlbums();
+	}
 
 	public void loadAlbums() throws IOException {
 		tilepane.getChildren().clear();
@@ -105,7 +111,6 @@ public class UserHomeController {
 			invalidAlbumAlert();
 		} else {
 			loadAlbums();
-			UserList.serialize();
 		}
 	}
 
@@ -114,10 +119,6 @@ public class UserHomeController {
 		alert.setTitle("Add Album Failed");
 		alert.setContentText("That album name is not available.");
 		alert.showAndWait();
-	}
-
-	public void setCurrentUser(User user) {
-		currentUser = user;
 	}
 
 }

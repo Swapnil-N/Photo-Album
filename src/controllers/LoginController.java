@@ -41,13 +41,10 @@ public class LoginController {
 			primaryStage.setResizable(false);
 			primaryStage.show();
 		} else {
-			UserList userList = new UserList();
-			User user = new User(usernameInput);
-
-			if (!userList.containsUser(user)) {
+			if (!UserList.containsUser(usernameInput)) {
 				invalidUsernameAlert();
 			} else {
-				user = userList.getUserWithName(usernameInput);
+				User user = UserList.getUserWithName(usernameInput);
 				
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/userHome.fxml"));
 				AnchorPane root = (AnchorPane) loader.load();
@@ -56,8 +53,7 @@ public class LoginController {
 				Stage primaryStage = (Stage) node.getScene().getWindow();
 
 				UserHomeController userLandingController = loader.getController();
-				userLandingController.setCurrentUser(user);
-				userLandingController.loadAlbums();
+				userLandingController.start(user);
 
 				Scene scene = new Scene(root, 1000, 750);
 				

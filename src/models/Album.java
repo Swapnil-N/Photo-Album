@@ -1,5 +1,6 @@
 package models;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -36,7 +37,8 @@ public class Album implements Serializable {
 			lastDate = newPhoto.getDate();
 
 		photoList.add(newPhoto);
-
+		UserList.serialize();
+		
 		return true;
 	}
 
@@ -58,6 +60,7 @@ public class Album implements Serializable {
 							lastDate = currPhoto.getDate();
 					}
 				}
+				UserList.serialize();
 				return true;
 			}
 		}
@@ -87,28 +90,16 @@ public class Album implements Serializable {
 		return photoList;
 	}
 
-	public void setPhotoList(List<Photo> photoList) {
-		this.photoList = photoList;
-	}
-
 	public String getFirstDate() {
 		if (firstDate == null)
 			return "";
 		return formatDate(firstDate);
 	}
 
-	public void setFirstDate(Date firstDate) {
-		this.firstDate = firstDate;
-	}
-
 	public String getLastDate() {
 		if (lastDate == null)
 			return "";
 		return formatDate(lastDate);
-	}
-
-	public void setLastDate(Date lastDate) {
-		this.lastDate = lastDate;
 	}
 
 	@Override

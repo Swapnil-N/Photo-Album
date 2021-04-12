@@ -1,5 +1,6 @@
 package models;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,21 +34,24 @@ public class User implements Serializable {
 		return false;
 	}
 	
-	public boolean addAlbum(String name) {
+	public boolean addAlbum(String name) throws IOException {
 		if (hasAlbumWithName(name))
 			return false;
 
 		albums.add(new Album(name));
+		UserList.serialize();
+		
 		return true;
 	}
 
-	public boolean deleteAlbum(String name) {
+	public boolean deleteAlbum(String name){
 		if (!hasAlbumWithName(name))
 			return false;
 
 		for (int i = 0; i < albums.size(); i++) {
 			if (albums.get(i).getName().equals(name)) {
 				albums.remove(i);
+				UserList.serialize();
 				return true;
 			}
 		}
@@ -59,6 +63,7 @@ public class User implements Serializable {
 		
 		if (tag.equals(addNewTag.toLowerCase()) && !tags.contains(addNewTag)) {
 			tags.add(tag);
+			UserList.serialize();
 			return true;
 		} else if (tag.equals(addNewTag.toLowerCase()))
 			return false;
@@ -69,6 +74,7 @@ public class User implements Serializable {
 			return false;
 		
 		tags.add(0, tag);
+		UserList.serialize();
 		
 		return true;
 	}
