@@ -22,14 +22,13 @@ public class UserList implements Serializable {
 		deserialize();
 	}
 
-	private static void serialize() throws IOException {
+	public static void serialize() throws IOException {
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
 		oos.writeObject(userList);
 		oos.close();
 	}
 
-	@SuppressWarnings("unchecked")
-	private static void deserialize() {
+	public static void deserialize() {
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));
 			userList = (List<User>) ois.readObject();
@@ -49,6 +48,15 @@ public class UserList implements Serializable {
 		}
 		return false;
 
+	}
+	
+	public User getUserWithName(String name) {
+		for (User currentUser : userList) {
+			if (currentUser.getUsername().equals(name))
+				return currentUser;
+		}
+		
+		return null;
 	}
 
 	public boolean addUser(User user) throws IOException {

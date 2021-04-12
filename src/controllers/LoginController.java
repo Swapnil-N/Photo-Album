@@ -47,6 +47,8 @@ public class LoginController {
 			if (!userList.containsUser(user)) {
 				invalidUsernameAlert();
 			} else {
+				user = userList.getUserWithName(usernameInput);
+				
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/userHome.fxml"));
 				AnchorPane root = (AnchorPane) loader.load();
 

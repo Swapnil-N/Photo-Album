@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import models.Album;
 import models.User;
+import models.UserList;
 
 public class UserHomeController {
 
@@ -104,6 +105,7 @@ public class UserHomeController {
 			invalidAlbumAlert();
 		} else {
 			loadAlbums();
+			UserList.serialize();
 		}
 	}
 
