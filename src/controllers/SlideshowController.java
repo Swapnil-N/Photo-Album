@@ -38,6 +38,9 @@ public class SlideshowController { // TODO Add more details about photos
 			imageView.setImage(new Image(currentAlbum.getPhotoList().get(iter).getPhotoURL()));
 			photoName.setText(currentAlbum.getPhotoList().get(iter).getName());
 		}
+		else {
+			photoName.setText("No Image Available");
+		}
 
 	}
 
