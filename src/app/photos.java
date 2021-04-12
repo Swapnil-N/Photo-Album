@@ -20,16 +20,16 @@ public class photos extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Photo newPhoto = new Photo(new File("file:///Users/srinandinim/Documents/Coursework/software-methodology/Photo-Album/resources/images/noimageavailable.png"));
-		User user = new User("fake");
-		user.addAlbum("fake");
-		user.getAlbumWithName("fake").addPhoto(newPhoto);
+//		Photo newPhoto = new Photo(new File("file:///Users/srinandinim/Documents/Coursework/software-methodology/Photo-Album/resources/images/noimageavailable.png"));
+//		User user = new User("fake");
+//		user.addAlbum("fake");
+//		user.getAlbumWithName("fake").addPhoto(newPhoto);
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/editPhoto.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();
 		
-		EditPhotoController controller = loader.getController();
-		controller.start(user, newPhoto);
+//		EditPhotoController controller = loader.getController();
+//		controller.start(user, newPhoto);
 
 		Scene scene = new Scene(root, 1000, 750);
 		primaryStage.setScene(scene);

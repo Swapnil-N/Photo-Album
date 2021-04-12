@@ -244,7 +244,7 @@ public class SearchController {
 		} else {
 			tag1Include = false;
 		}
-
+		
 		if (tag2.getValue() != null) {
 			toggleValue = ((RadioButton) comboGroup.getSelectedToggle()).getText();
 

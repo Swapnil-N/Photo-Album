@@ -3,6 +3,7 @@ package controllers;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Optional;
 
 import javafx.beans.binding.Bindings;
@@ -20,6 +21,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -36,6 +38,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import models.Album;
 import models.Photo;
 import models.User;
 
@@ -127,12 +130,15 @@ public class EditPhotoController {
 	Button add;
 
 	User currentUser;
+	Album currentAlbum;
 	Photo currentPhoto;
 	
 	private ObservableList<String> photoTags;
 
-	public void start(User currentUser, Photo currentPhoto) {
+
+	public void start(User currentUser, Album currentAlbum, Photo currentPhoto) {
 		this.currentUser = currentUser;
+		this.currentAlbum = currentAlbum;
 		this.currentPhoto = currentPhoto;
 
 		photoImage.setImage(new Image(currentPhoto.getPhotoURL()));
@@ -140,6 +146,11 @@ public class EditPhotoController {
 		photoName.setText(currentPhoto.getName());
 		photoDate.setText(currentPhoto.getDateTimeString());
 		photoAlbums.setText("later worry");
+		photoCaption.setText(currentPhoto.getCaption());
+		
+		photoCaption.textProperty().addListener((Observable, oldValue, newValue) -> {
+			currentPhoto.setCaption(newValue);
+		});
 		
 		photoTags = FXCollections.observableArrayList();
 		Map<String, List<String>> photoTagsMap = currentPhoto.getTags();
@@ -248,19 +259,30 @@ public class EditPhotoController {
 	}
 
 	public void onActionMove(ActionEvent e) {
-		System.out.println("move");
+		
+		ChoiceDialog<Album> dialog = new ChoiceDialog<Album>(null, currentUser.getAlbums());
+		dialog.setHeaderText("Album Move Selection");
+		dialog.setContentText("Please select an album:");
+		
+		Optional<Album> optional = dialog.showAndWait();
+		
+		optional.ifPresent(choosenAlbum -> {
+			currentAlbum.deletePhoto(currentPhoto); 
+			choosenAlbum.addPhoto(currentPhoto);
+			});
+				
 	}
 
 	public void onActionCopy(ActionEvent e) {
-		System.out.println("copy");
-	}
-
-	public void onActionCancel(ActionEvent e) {
-		System.out.println("cancel");
-	}
-
-	public void onActionSave(ActionEvent e) {
-		System.out.println("save");
+		
+		ChoiceDialog<Album> dialog = new ChoiceDialog<Album>(null, currentUser.getAlbums());
+		dialog.setHeaderText("Album Copy Selection");
+		dialog.setContentText("Please select an album:");
+		
+		Optional<Album> optional = dialog.showAndWait();
+				
+		optional.ifPresent(choosenAlbum -> choosenAlbum.addPhoto(currentPhoto));
+		
 	}
 
 	public void onActionAdd(ActionEvent e) {

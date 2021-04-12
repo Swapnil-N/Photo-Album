@@ -30,7 +30,7 @@ public class LoginController {
 
 			Node node = (Node) e.getSource();
 			Stage primaryStage = (Stage) node.getScene().getWindow();
-
+			
 			AdminController adminController = loader.getController();
 			adminController.start(primaryStage);
 

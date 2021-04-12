@@ -44,7 +44,7 @@
             </BorderPane>
          </items>
       </ToolBar>
-      <TabPane fx:id="tabpane" layoutX="495.0" layoutY="123.0" prefHeight="450.0" prefWidth="450.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="495.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="110.0">
+      <TabPane fx:id="tabpane" layoutX="500.0" layoutY="138.0" prefHeight="450.0" prefWidth="450.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="152.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="138.0">
         <tabs>
           <Tab fx:id="detailsTab" text="Details">
                <content>
@@ -90,16 +90,6 @@
                               <Font name="AppleGothic Regular" size="14.0" />
                            </font>
                         </TextArea>
-                        <Button fx:id="cancel" layoutX="150.0" layoutY="383.0" mnemonicParsing="false" onAction="#onActionCancel" prefHeight="32.0" prefWidth="87.0" text="Cancel" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="245.5" AnchorPane.topAnchor="383.0">
-                           <font>
-                              <Font name="AppleGothic Regular" size="15.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="save" layoutX="272.0" layoutY="383.0" mnemonicParsing="false" onAction="#onActionSave" prefHeight="32.0" prefWidth="87.0" text="Save" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="272.0" AnchorPane.rightAnchor="123.5" AnchorPane.topAnchor="383.0">
-                           <font>
-                              <Font name="AppleGothic Regular" size="15.0" />
-                           </font>
-                        </Button>
                      </children>
                   </AnchorPane>
                </content></Tab>

@@ -113,8 +113,7 @@ public class Album implements Serializable {
 
 	@Override
 	public String toString() {
-		return name + " " + photoList.size() + " " + getFirstDate() + " " + getLastDate();
-
+		return name;
 	}
 
 }

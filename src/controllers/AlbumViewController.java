@@ -75,10 +75,19 @@ public class AlbumViewController {
 
 		Node node = (Node) e.getSource();
 		Stage primaryStage = (Stage) node.getScene().getWindow();
-		File selectedPhoto = fileChooser.showOpenDialog(primaryStage);
+		File selectedFile = fileChooser.showOpenDialog(primaryStage);
 
-		if (selectedPhoto != null) {
-			if (currentAlbum.addPhoto(new Photo(selectedPhoto))) {
+		if (selectedFile != null) {
+			Photo selectedPhoto = new Photo(selectedFile);
+			
+			for (Album iterAlbum: currentUser.getAlbums()) {
+				for (Photo iterPhoto: iterAlbum.getPhotoList()) {
+					if (iterPhoto.equals(selectedPhoto))
+						selectedPhoto = iterPhoto;
+				}
+			}
+			
+			if (currentAlbum.addPhoto(selectedPhoto)) {
 				loadAlbum();
 			} else {
 				invalidPhotoAlert();
