@@ -3,6 +3,7 @@ package app;
 import java.io.File;
 
 import controllers.EditPhotoController;
+import controllers.SearchController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

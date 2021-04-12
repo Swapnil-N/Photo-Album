@@ -65,6 +65,24 @@ public class UserHomeController {
 		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
+	
+	public void onActionSearch(ActionEvent e) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/search.fxml"));
+		AnchorPane root = (AnchorPane) loader.load();
+
+		Node node = (Node) e.getSource();
+		Stage primaryStage = (Stage) node.getScene().getWindow();
+		
+		SearchController searchController = loader.getController();
+		searchController.start(currentUser);
+		
+		Scene scene = new Scene(root, 1000, 750);
+		
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("Login Page");
+		primaryStage.setResizable(false);
+		primaryStage.show();
+	}
 
 	public void onActionAddAlbum(ActionEvent e) throws IOException {
 		TextInputDialog dialog = new TextInputDialog();

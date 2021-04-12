@@ -41,7 +41,7 @@
       </ToolBar>
       <ScrollPane fx:id="scrollpane" layoutX="35.0" layoutY="70.0" prefHeight="580.0" prefWidth="930.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="70.0">
          <content>
-            <TilePane fx:id="tilepane" alignment="CENTER_LEFT" hgap="25.0" prefHeight="550.0" prefWidth="900.0" translateX="15.0" translateY="13.0" vgap="0.0">
+            <TilePane fx:id="tilepane" hgap="25.0" prefHeight="550.0" prefWidth="900.0" translateX="15.0" translateY="13.0" vgap="0.0">
                <padding>
                   <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
                </padding></TilePane>
@@ -51,7 +51,7 @@
          <items>
             <AnchorPane prefHeight="200.0" prefWidth="985.0">
                <children>
-                <Button fx:id="slideshow" onAction="#onActionSlideshow" contentDisplay="CENTER" layoutX="492.0" layoutY="10.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="113.0" text="Slideshow" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="492.0" AnchorPane.rightAnchor="380.0" AnchorPane.topAnchor="10.0">
+                <Button fx:id="slideshow" contentDisplay="CENTER" layoutX="492.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionSlideshow" prefHeight="32.0" prefWidth="113.0" text="Slideshow" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="492.0" AnchorPane.rightAnchor="380.0" AnchorPane.topAnchor="10.0">
                      <font>
                         <Font name="AppleGothic Regular" size="15.0" />
                      </font>

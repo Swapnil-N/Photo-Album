@@ -161,6 +161,7 @@ public class EditPhotoController {
 				photoTags.add("  tag:  " + key + "  tag:  " + "  value:  " + value + "  value:  ");
 			}
 		}
+		photoTags.sort((i, j) -> i.compareTo(j));
 		tagsView.setItems(photoTags);
 		tagsView.setCellFactory(tagValueDisplay -> new TagValueItem(currentPhoto));
 		
@@ -283,6 +284,7 @@ public class EditPhotoController {
 		
 		if (success) {
 			photoTags.add("  tag:  " + key + "  tag:  " + "  value:  " + value + "  value:  ");
+			photoTags.sort((i, j) -> i.compareTo(j));
 		} else {
 			invalidTagValueAdded();
 		}
