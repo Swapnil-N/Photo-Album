@@ -26,6 +26,7 @@ public class Photo implements Serializable {
 		name = file.getName();
 		date = new Date(file.lastModified());
 		tags = new HashMap<>();
+		caption = "N/A";
 	}
 
 	@Override
