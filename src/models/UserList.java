@@ -10,14 +10,38 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Stores the list of all users
+ * 
+ * @author Swapnil Napuri
+ * @author Srinandini Marpaka
+ */
+
 public class UserList implements Serializable {
 
+	/**
+	 * Identifier used to serialize/deserialize an object
+	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Directory in which the serialized file is stored
+	 */
 	private static final String storeDir = "resources";
+
+	/**
+	 * Name of the serialized file
+	 */
 	private static final String storeFile = "SerializedData.dat";
 
+	/**
+	 * List of users of the application
+	 */
 	private static List<User> userList = new ArrayList<>();
 
+	/**
+	 * Serializes the user data
+	 */
 	public static void serialize() {
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(
@@ -28,6 +52,9 @@ public class UserList implements Serializable {
 		}
 	}
 
+	/**
+	 * Deserializes the user data
+	 */
 	@SuppressWarnings("unchecked")
 	public static void deserialize() {
 		try {
@@ -40,10 +67,11 @@ public class UserList implements Serializable {
 
 	}
 
-	
-	/** 
-	 * @param username
-	 * @return boolean
+	/**
+	 * Returns whether a specific user exists or not
+	 * 
+	 * @param username username of the user
+	 * @return boolean true if user exists; false otherwise
 	 */
 	public static boolean containsUser(String username) {
 		deserialize();
@@ -56,10 +84,12 @@ public class UserList implements Serializable {
 		return false;
 	}
 
-	
-	/** 
-	 * @param username
-	 * @return User
+	/**
+	 * Returns the instance of the desired user
+	 * 
+	 * @param username username of the desired user
+	 * @return User instance of the desired user if it exists; null if such user
+	 *         does not exist
 	 */
 	public static User getUserWithName(String username) {
 		deserialize();
@@ -72,10 +102,11 @@ public class UserList implements Serializable {
 		return null;
 	}
 
-	
-	/** 
-	 * @param username
-	 * @return boolean
+	/**
+	 * Adds an user to the list of users
+	 * 
+	 * @param username username of the new user
+	 * @return boolean true if successfully added; false otherwise
 	 */
 	public static boolean addUser(String username) {
 		deserialize();
@@ -90,10 +121,11 @@ public class UserList implements Serializable {
 		return true;
 	}
 
-	
-	/** 
-	 * @param username
-	 * @return boolean
+	/**
+	 * Deletes a specific user from the list of users
+	 * 
+	 * @param username username of the user to be deleted
+	 * @return boolean true of successfully deleted, false otherwise
 	 */
 	public static boolean deleteUser(String username) {
 		deserialize();
@@ -113,9 +145,10 @@ public class UserList implements Serializable {
 		return false;
 	}
 
-	
-	/** 
-	 * @return List<User>
+	/**
+	 * Returns the list of users of the application
+	 * 
+	 * @return List<User> list of users of the application
 	 */
 	public static List<User> getUsers() {
 		deserialize();

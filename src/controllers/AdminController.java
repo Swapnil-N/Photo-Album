@@ -28,6 +28,13 @@ import javafx.stage.Stage;
 import models.User;
 import models.UserList;
 
+/**
+ * Handles the admin page
+ * 
+ * @author Swapnil Napuri
+ * @author Srinandini Marpaka
+ */
+
 public class AdminController {
 
 	private static class UserItem extends ListCell<String> {
@@ -78,20 +85,41 @@ public class AdminController {
 		}
 	}
 
+	/**
+	 * Component through which the admin can add a new user
+	 */
 	@FXML
-	Button addUser, logout;
+	Button addUser;
+
+	/**
+	 * Component through which the admin can return to the login page
+	 */
+	@FXML
+	Button logout;
+
+	/**
+	 * Component in which the admin can view the existing users and delete them
+	 */
 	@FXML
 	ListView<String> listView;
+
+	/**
+	 * Component in which the admin enters the username of the user he/she wishes to
+	 * add
+	 */
 	@FXML
 	TextField newUsername;
 
+	/**
+	 * Allows the listView to track changes in the user list as they occur
+	 */
 	private ObservableList<String> obsList;
 
-	
-	/** 
-	 * @param primaryStage
+	/**
+	 * Populates the listView through which the admin can view and modify the list
+	 * of users
 	 */
-	public void start(Stage primaryStage) {
+	public void start() {
 		obsList = FXCollections.observableArrayList();
 
 		List<User> users = UserList.getUsers();
@@ -103,9 +131,10 @@ public class AdminController {
 		listView.setCellFactory(userDisplay -> new UserItem());
 	}
 
-	
-	/** 
-	 * @param e
+	/**
+	 * Adds an user to the application
+	 * 
+	 * @param e represents that the 'Add User' button has been clicked
 	 */
 	public void onActionAddUser(ActionEvent e) {
 		String usernameInput = newUsername.getText().trim();
@@ -121,6 +150,9 @@ public class AdminController {
 		}
 	}
 
+	/**
+	 * Shows an alert that informs the admin that he/she entered an invalid username
+	 */
 	public void invalidUsernameAlert() {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Add User Failed");
@@ -130,9 +162,8 @@ public class AdminController {
 		newUsername.setText("");
 	}
 
-	
-	/** 
-	 * @param e
+	/**
+	 * @param e represents that the 'Logout' button has been clicked
 	 * @throws IOException
 	 */
 	public void onActionLogout(ActionEvent e) throws IOException {

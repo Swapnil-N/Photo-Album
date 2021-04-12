@@ -12,16 +12,50 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * Represents a photo
+ * 
+ * @author Swapnil Napuri
+ * @author Srinandini Marpaka
+ */
+
 public class Photo implements Serializable {
 
+	/**
+	 * Identifier used to serialize/deserialize an object
+	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Name of the photo
+	 */
 	private String name;
+
+	/**
+	 * Caption of the photo
+	 */
 	private String caption;
+
+	/**
+	 * Location of the photo on the disk
+	 */
 	private File file;
+
+	/**
+	 * Date-time of the photo capture
+	 */
 	private Date date;
+
+	/**
+	 * List of tags associated with photo
+	 */
 	private Map<String, List<String>> tags;
 
+	/**
+	 * Initializes an album
+	 * 
+	 * @param file location of the photo on the disk
+	 */
 	public Photo(File file) {
 		this.file = file;
 		name = file.getName();
@@ -30,10 +64,11 @@ public class Photo implements Serializable {
 		caption = "N/A";
 	}
 
-	
-	/** 
-	 * @param obj
-	 * @return boolean
+	/**
+	 * Indicates whether some other object is "equal to" this photo
+	 * 
+	 * @param obj the reference object with which to compare
+	 * @return boolean true if the same photo; false otherwise
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -43,11 +78,12 @@ public class Photo implements Serializable {
 		return file.equals(((Photo) obj).getFile());
 	}
 
-	
-	/** 
-	 * @param key
-	 * @param value
-	 * @return boolean
+	/**
+	 * Adds a tag-value pair to the photo's tags
+	 * 
+	 * @param key   tag of the pair
+	 * @param value value of the pair
+	 * @return boolean true if tag was successfully added; false otherwise
 	 */
 	public boolean addTag(String key, String value) {
 		key = key.trim();
@@ -67,11 +103,12 @@ public class Photo implements Serializable {
 		return true;
 	}
 
-	
-	/** 
-	 * @param key
-	 * @param value
-	 * @return boolean
+	/**
+	 * Deletes a tag-value pair from the photo's tags
+	 * 
+	 * @param key   tag of the pair
+	 * @param value value of the pair
+	 * @return boolean true if tag was successfully deleted; false otherwise
 	 */
 	public boolean removeTag(String key, String value) {
 		key = key.trim();
@@ -92,41 +129,46 @@ public class Photo implements Serializable {
 		return false;
 	}
 
-	
-	/** 
-	 * @return String
+	/**
+	 * Returns the photo name
+	 * 
+	 * @return String photo name
 	 */
 	public String getName() {
 		return name;
 	}
 
-	
-	/** 
-	 * @param name
+	/**
+	 * Sets the photo name
+	 * 
+	 * @param name new photo name
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	
-	/** 
-	 * @return String
+	/**
+	 * Returns the photo caption
+	 * 
+	 * @return String photo caption
 	 */
 	public String getCaption() {
 		return caption;
 	}
 
-	
-	/** 
-	 * @param caption
+	/**
+	 * Sets the photo caption
+	 * 
+	 * @param caption new photo caption
 	 */
 	public void setCaption(String caption) {
 		this.caption = caption;
 	}
 
-	
-	/** 
-	 * @return String
+	/**
+	 * Returns the photo URL
+	 * 
+	 * @return String photo URL
 	 */
 	public String getPhotoURL() {
 		try {
@@ -136,25 +178,28 @@ public class Photo implements Serializable {
 		}
 	}
 
-	
-	/** 
-	 * @return File
+	/**
+	 * Returns the photo file
+	 * 
+	 * @return File photo file
 	 */
 	public File getFile() {
 		return file;
 	}
 
-	
-	/** 
-	 * @return Date
+	/**
+	 * Returns the date-time of capture
+	 * 
+	 * @return Date date-time of capture
 	 */
 	public Date getDate() {
 		return date;
 	}
 
-	
-	/** 
-	 * @return String
+	/**
+	 * Returns the date of capture formatted as a string
+	 * 
+	 * @return String date of capture
 	 */
 	public String getDateString() {
 		DateFormat format = new SimpleDateFormat("MM.d.yyyy", Locale.ENGLISH);
@@ -162,9 +207,10 @@ public class Photo implements Serializable {
 		return dateFormatted;
 	}
 
-	
-	/** 
-	 * @return String
+	/**
+	 * Returns the date-time of capture formatted as a string
+	 * 
+	 * @return String date-time of capture
 	 */
 	public String getDateTimeString() {
 		DateFormat format = new SimpleDateFormat("MM.d.yyyy hh:mm:ss", Locale.ENGLISH);
@@ -172,9 +218,10 @@ public class Photo implements Serializable {
 		return dateFormatted;
 	}
 
-	
-	/** 
-	 * @return Map<String, List<String>>
+	/**
+	 * Returns the tag-value pairs associated with the photo
+	 * 
+	 * @return Map<String, List<String>> tag-value pairs associated with photo
 	 */
 	public Map<String, List<String>> getTags() {
 		return tags;

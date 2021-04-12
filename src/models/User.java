@@ -5,18 +5,47 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Represents an user
+ * 
+ * @author Swapnil Napuri
+ * @author Srinandini Marpaka
+ */
+
 public class User implements Serializable {
 
+	/**
+	 * Identifier used to serialize/deserialize an object
+	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Username of the user
+	 */
 	private String username;
+
+	/**
+	 * Albums of the user
+	 */
 	private List<Album> albums;
+
+	/**
+	 * Master list of the tags on the user's photos
+	 */
 	private List<String> tags;
 
+	/**
+	 * Label of the option to create a new tag
+	 */
 	private String addNewTag = "Add New Tag";
 
+	/**
+	 * Initializes an user
+	 * 
+	 * @param username username of the user
+	 */
 	public User(String username) {
-		this.username = username.toLowerCase();
+		this.username = username;
 		albums = new ArrayList<>();
 		tags = new ArrayList<>();
 
@@ -25,10 +54,11 @@ public class User implements Serializable {
 		tags.add(addNewTag);
 	}
 
-	
-	/** 
-	 * @param name
-	 * @return boolean
+	/**
+	 * Returns whether a specific album exists or not
+	 * 
+	 * @param name name of the album
+	 * @return boolean true if album exists; false otherwise
 	 */
 	public boolean hasAlbumWithName(String name) {
 		for (Album item : albums) {
@@ -38,10 +68,12 @@ public class User implements Serializable {
 		return false;
 	}
 
-	
-	/** 
-	 * @param name
-	 * @return Album
+	/**
+	 * Returns the instance of the desired album
+	 * 
+	 * @param name name of the desired album
+	 * @return Album instance of the desired album if it exists; null if such
+	 *         album does not exist
 	 */
 	public Album getAlbumWithName(String name) {
 		if (!hasAlbumWithName(name))
@@ -55,10 +87,11 @@ public class User implements Serializable {
 		return null;
 	}
 
-	
-	/** 
-	 * @param name
-	 * @return boolean
+	/**
+	 * Adds an album to the user's albums
+	 * 
+	 * @param name name of the new album
+	 * @return boolean true if successfully added; false otherwise
 	 */
 	public boolean addAlbum(String name) {
 		if (hasAlbumWithName(name))
@@ -70,10 +103,11 @@ public class User implements Serializable {
 		return true;
 	}
 
-	
-	/** 
-	 * @param name
-	 * @return boolean
+	/**
+	 * Deletes a specific album from the user's albums
+	 * 
+	 * @param name name of the album to be deleted
+	 * @return boolean true of successfully deleted, false otherwise
 	 */
 	public boolean deleteAlbum(String name) {
 		if (!hasAlbumWithName(name))
@@ -91,10 +125,11 @@ public class User implements Serializable {
 		return false;
 	}
 
-	
-	/** 
-	 * @param tag
-	 * @return boolean
+	/**
+	 * Adds a tag to the user's master list of tags
+	 * 
+	 * @param tag tag to be added
+	 * @return boolean true if successfully added; false if it already exists
 	 */
 	public boolean addTag(String tag) {
 		tag = tag.trim();
@@ -108,34 +143,29 @@ public class User implements Serializable {
 		return true;
 	}
 
-	
-	/** 
-	 * @return String
+	/**
+	 * Returns the user's username
+	 * 
+	 * @return String user's username
 	 */
 	public String getUsername() {
 		return username;
 	}
 
-	
-	/** 
-	 * @return List<Album>
+	/**
+	 * Returns the user's list of albums
+	 * 
+	 * @return List<Album> user's list of albums
 	 */
 	public List<Album> getAlbums() {
 		Collections.sort(albums, (a, b) -> a.getName().compareTo(b.getName()));
 		return albums;
 	}
 
-	
-	/** 
-	 * @param albums
-	 */
-	public void setAlbums(List<Album> albums) {
-		this.albums = albums;
-	}
-
-	
-	/** 
-	 * @return List<String>
+	/**
+	 * Returns the master list of the user's tags
+	 * 
+	 * @return List<String> master list of the user's tags
 	 */
 	public List<String> getTags() {
 		tags.remove(tags.size() - 1);
@@ -145,22 +175,13 @@ public class User implements Serializable {
 		return tags;
 	}
 
-	
-	/** 
-	 * @return String
+	/**
+	 * Returns the label of the option to add a new tag
+	 * 
+	 * @return String label of the option to add a new tag
 	 */
 	public String getAddNewTag() {
 		return addNewTag;
-	}
-
-	
-	/** 
-	 * @return String
-	 */
-	@Override
-	public String toString() {
-		return username;
-
 	}
 
 }

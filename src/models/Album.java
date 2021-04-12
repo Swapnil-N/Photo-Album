@@ -8,15 +8,45 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Represents an album
+ * 
+ * @author Swapnil Napuri
+ * @author Srinandini Marpaka
+ */
+
 public class Album implements Serializable {
 
+	/**
+	 * Identifier used to serialize/deserialize an object
+	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Name of the album
+	 */
 	private String name;
+
+	/**
+	 * List of photos in the album
+	 */
 	private List<Photo> photoList;
+
+	/**
+	 * Earliest date that a photo in the album was taken
+	 */
 	private Date firstDate;
+
+	/**
+	 * Latest date that a photo in the album was taken
+	 */
 	private Date lastDate;
 
+	/**
+	 * Initializes an album
+	 * 
+	 * @param name name of the album
+	 */
 	public Album(String name) {
 		this.name = name;
 		photoList = new ArrayList<>();
@@ -24,10 +54,11 @@ public class Album implements Serializable {
 		lastDate = null;
 	}
 
-	
-	/** 
-	 * @param newPhoto
-	 * @return boolean
+	/**
+	 * Adds photo to the album
+	 * 
+	 * @param newPhoto photo to be added
+	 * @return boolean true if photo was successfully added; false otherwise
 	 */
 	public boolean addPhoto(Photo newPhoto) {
 		for (Photo currPhoto : photoList) {
@@ -46,10 +77,11 @@ public class Album implements Serializable {
 		return true;
 	}
 
-	
-	/** 
-	 * @param photo
-	 * @return boolean
+	/**
+	 * Deletes photo from the album
+	 * 
+	 * @param photo photo to be deleted
+	 * @return boolean true if photo was successfully deleted; false otherwise
 	 */
 	public boolean deletePhoto(Photo photo) {
 		for (int i = 0; i < photoList.size(); i++) {
@@ -78,10 +110,11 @@ public class Album implements Serializable {
 		return false;
 	}
 
-	
-	/** 
-	 * @param date
-	 * @return String
+	/**
+	 * Formats a date into a string
+	 * 
+	 * @param date date to be formatted
+	 * @return String formatted date
 	 */
 	private String formatDate(Date date) {
 		DateFormat format = new SimpleDateFormat("MM.d.yyyy", Locale.ENGLISH);
@@ -89,41 +122,46 @@ public class Album implements Serializable {
 		return formattedDate;
 	}
 
-	
-	/** 
-	 * @return String
+	/**
+	 * Returns the album name
+	 * 
+	 * @return String album name
 	 */
 	public String getName() {
 		return name;
 	}
 
-	
-	/** 
-	 * @param name
+	/**
+	 * Sets the album name
+	 * 
+	 * @param name new album name
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	
-	/** 
-	 * @return List<Photo>
+	/**
+	 * Returns a list of photos in the album
+	 * 
+	 * @return List<Photo> list of photos in the album
 	 */
 	public List<Photo> getPhotoList() {
 		return photoList;
 	}
 
-	
-	/** 
-	 * @return int
+	/**
+	 * Returns the size of the album
+	 * 
+	 * @return int size of the album
 	 */
 	public int getSize() {
 		return photoList.size();
 	}
 
-	
-	/** 
-	 * @return String
+	/**
+	 * Returns the earliest date of photos in the album
+	 * 
+	 * @return String formatted earliest date
 	 */
 	public String getFirstDate() {
 		if (firstDate == null)
@@ -131,23 +169,15 @@ public class Album implements Serializable {
 		return formatDate(firstDate);
 	}
 
-	
-	/** 
-	 * @return String
+	/**
+	 * Returns the latest date of photos in the album
+	 * 
+	 * @return String formatted latest date
 	 */
 	public String getLastDate() {
 		if (lastDate == null)
 			return "";
 		return formatDate(lastDate);
-	}
-
-	
-	/** 
-	 * @return String
-	 */
-	@Override
-	public String toString() {
-		return name;
 	}
 
 }

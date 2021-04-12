@@ -15,13 +15,24 @@ import javafx.stage.Stage;
 import models.User;
 import models.UserList;
 
+/**
+ * Handles the login page
+ * 
+ * @author Swapnil Napuri
+ * @author Srinandini Marpaka
+ */
+
 public class LoginController {
 
+	/**
+	 * Component in which the user enters his/her username
+	 */
 	@FXML
 	TextField username;
 
-	
-	/** 
+	/**
+	 * Logins an user based on the username entered
+	 * 
 	 * @param e
 	 * @throws IOException
 	 */
@@ -36,7 +47,7 @@ public class LoginController {
 			Stage primaryStage = (Stage) node.getScene().getWindow();
 
 			AdminController adminController = loader.getController();
-			adminController.start(primaryStage);
+			adminController.start();
 
 			Scene scene = new Scene(root, 1000, 750);
 
@@ -70,6 +81,9 @@ public class LoginController {
 
 	}
 
+	/**
+	 * Shows an alert that informs the user that he/she entered an invalid username
+	 */
 	public void invalidUsernameAlert() {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Login Failed");
@@ -78,5 +92,5 @@ public class LoginController {
 
 		username.setText("");
 	}
-	
+
 }
