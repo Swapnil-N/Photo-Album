@@ -11,7 +11,10 @@
 <VBox fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="275.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchPhotoPreviewController">
    <children>
       <BorderPane prefHeight="40.0" prefWidth="233.0">
-         <left>
+         <padding>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </padding>
+         <center>
             <Text fx:id="photoName" strokeType="OUTSIDE" strokeWidth="0.0" text="Photo Name" BorderPane.alignment="CENTER">
                <font>
                   <Font name="AppleGothic Regular" size="14.0" />
@@ -20,10 +23,7 @@
                   <Insets />
                </BorderPane.margin>
             </Text>
-         </left>
-         <padding>
-            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-         </padding>
+         </center>
       </BorderPane>
       <HBox alignment="CENTER" prefHeight="180.0" prefWidth="265.0">
          <children>

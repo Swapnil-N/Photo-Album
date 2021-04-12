@@ -33,8 +33,6 @@ import models.Photo;
 import models.User;
 
 public class SearchController {
-	// todo: make sure cannot choose the same tag-value pair, LOAD wehn clicking the
-	// same value twice, should we have it so that they can select n/a for tag2
 	@FXML
 	DatePicker startDate, endDate;
 
@@ -128,6 +126,7 @@ public class SearchController {
 		}
 
 		tag2.getItems().clear();
+		tag2.getItems().add(null);
 		for (int i = 0; i < tagList.size() - 1; i++) {
 			tag2.getItems().add(tagList.get(i));
 		}
@@ -221,7 +220,49 @@ public class SearchController {
 	private Set<Photo> tagsSearchResults() {
 		Set<Photo> desiredPhotos = new HashSet<Photo>();
 
+		for (int i = 0; i < currentUser.getAlbums().size(); i++) {
+			for (Photo currentPhoto : currentUser.getAlbums().get(i).getPhotoList()) {
+				if (fitsTagsSpecifications(currentPhoto))
+					desiredPhotos.add(currentPhoto);
+			}
+		}
+
 		return desiredPhotos;
+	}
+
+	private boolean fitsTagsSpecifications(Photo currentPhoto) {
+		boolean tag1Include = true;
+
+		String toggleValue = null;
+		boolean tag2Include = true;
+
+		if (currentPhoto.getTags().containsKey(tag1.getValue())
+				&& currentPhoto.getTags().get(tag1.getValue()).contains(value1.getValue())) {
+			tag1Include = true;
+		} else {
+			tag1Include = false;
+		}
+
+		if (tag2.getValue() != null) {
+			toggleValue = ((RadioButton) comboGroup.getSelectedToggle()).getText();
+
+			if (currentPhoto.getTags().containsKey(tag2.getValue())
+					&& currentPhoto.getTags().get(tag2.getValue()).contains(value2.getValue())) {
+				tag2Include = true;
+			} else {
+				tag2Include = false;
+			}
+		}
+
+		if (toggleValue == null) {
+			return tag1Include;
+		} else if (toggleValue.equals(andChoice.getText())) {
+			return tag1Include && tag2Include;
+		} else if (toggleValue.equals(orChoice.getText())) {
+			return tag1Include || tag2Include;
+		}
+
+		return false;
 	}
 
 	private void nullTagsValues() {
@@ -234,7 +275,11 @@ public class SearchController {
 
 	public void onActionSearchDate(ActionEvent e) throws IOException {
 		Set<Photo> desiredPhotos = dateSearchResults();
-		updateTilePane(desiredPhotos);
+		if (desiredPhotos.size() > 0)
+			updateTilePane(desiredPhotos);
+		else
+			noSearchResultsAlert();
+
 		nullDateValues();
 	}
 
@@ -247,16 +292,23 @@ public class SearchController {
 		}
 
 		Set<Photo> desiredPhotos = dateSearchResults();
-		for (Photo currentPhoto : desiredPhotos) {
-			currentUser.getAlbumWithName(desiredAlbumName).addPhoto(currentPhoto);
-		}
+		if (desiredPhotos.size() > 0) {
+			for (Photo currentPhoto : desiredPhotos) {
+				currentUser.getAlbumWithName(desiredAlbumName).addPhoto(currentPhoto);
+			}
+		} else
+			noSearchResultsAlert();
 
 		nullDateValues();
 	}
 
 	public void onActionSearchTags(ActionEvent e) throws IOException {
 		Set<Photo> desiredPhotos = tagsSearchResults();
-		updateTilePane(desiredPhotos);
+		if (desiredPhotos.size() > 0)
+			updateTilePane(desiredPhotos);
+		else
+			noSearchResultsAlert();
+
 		nullTagsValues();
 	}
 
@@ -269,9 +321,12 @@ public class SearchController {
 		}
 
 		Set<Photo> desiredPhotos = tagsSearchResults();
-		for (Photo currentPhoto : desiredPhotos) {
-			currentUser.getAlbumWithName(desiredAlbumName).addPhoto(currentPhoto);
-		}
+		if (desiredPhotos.size() > 0) {
+			for (Photo currentPhoto : desiredPhotos) {
+				currentUser.getAlbumWithName(desiredAlbumName).addPhoto(currentPhoto);
+			}
+		} else
+			noSearchResultsAlert();
 
 		nullTagsValues();
 	}
@@ -288,6 +343,13 @@ public class SearchController {
 
 			tilepane.getChildren().add(root);
 		}
+	}
+
+	private void noSearchResultsAlert() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("No Valid Photos");
+		alert.setContentText("There are no photos that fit the desired specifications.");
+		alert.showAndWait();
 	}
 
 	private String getDesiredAlbumName() {

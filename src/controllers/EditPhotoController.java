@@ -7,8 +7,6 @@ import java.util.Optional;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -138,17 +136,6 @@ public class EditPhotoController {
 		this.currentPhoto = currentPhoto;
 
 		photoImage.setImage(new Image(currentPhoto.getPhotoURL()));
-
-//		tabpane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
-//			@Override
-//			public void changed(ObservableValue<? extends Tab> observable, Tab arg1, Tab arg2) {
-//				if (arg2.equals(detailsTab)) {
-//					System.out.println("details is selected");
-//				} else if (arg2.equals(tagsTab)) {
-//					System.out.println("tags is selected");
-//				}
-//			}
-//		});
 
 		photoName.setText(currentPhoto.getName());
 		photoDate.setText(currentPhoto.getDateString());
