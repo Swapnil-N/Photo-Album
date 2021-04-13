@@ -1,5 +1,6 @@
 package app;
 
+import java.io.File;
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -7,6 +8,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import models.Photo;
+import models.User;
+import models.UserList;
 
 public class photos extends Application {
 
@@ -16,6 +20,20 @@ public class photos extends Application {
 	 * @param args command-line arguments
 	 */
 	public static void main(String[] args) {
+		/*
+		User stockUser = UserList.getUserWithName("stock");
+		stockUser.deleteAlbum("stock");
+		stockUser.addAlbum("stock");
+		stockUser.getAlbumWithName("stock").addPhoto(new Photo(new File("file:../../data/antelopecanyon.jpeg")));
+		stockUser.getAlbumWithName("stock").addPhoto(new Photo(new File("file:../../data/grandcanyon.jpeg")));
+		stockUser.getAlbumWithName("stock").addPhoto(new Photo(new File("file:../../data/halekalanationalpark.jpeg")));
+		stockUser.getAlbumWithName("stock").addPhoto(new Photo(new File("file:../../data/havasufalls.jpeg")));
+		stockUser.getAlbumWithName("stock").addPhoto(new Photo(new File("file:../../data/sacredfalls.jpeg")));
+		stockUser.getAlbumWithName("stock").addPhoto(new Photo(new File("file:../../data/shoshonefalls.jpeg")));
+		stockUser.getAlbumWithName("stock").addPhoto(new Photo(new File("file:../../data/volcanoesnationalpark.jpeg")));
+		stockUser.getAlbumWithName("stock").addPhoto(new Photo(new File("file:../../data/yellowstonenationalpark.jpeg")));
+		stockUser.getAlbumWithName("stock").addPhoto(new Photo(new File("file:../../data/yosemitenationalpark.jpeg")));
+		*/
 		launch(args);
 	}
 

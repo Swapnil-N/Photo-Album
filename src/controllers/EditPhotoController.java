@@ -54,15 +54,12 @@ public class EditPhotoController {
 
 		private String key, value;
 
-//		private Photo photo;
-
 		/**
 		 * Initializes a cell in the ListView
 		 */
 		public TagValueItem(Photo photo) {
 			super();
 
-//			this.photo = photo;
 			key = "";
 			value = "";
 
@@ -182,11 +179,6 @@ public class EditPhotoController {
 	private User currentUser;
 
 	/**
-	 * Album in before arriving to this page
-	 */
-	private Album currentAlbum;
-
-	/**
 	 * Photo to be edited
 	 */
 	private Photo currentPhoto;
@@ -200,12 +192,10 @@ public class EditPhotoController {
 	 * Sets up the 'Edit Photo' page
 	 * 
 	 * @param currentUser  user logged in
-	 * @param currentAlbum album clicked from to come here
 	 * @param currentPhoto photo to be edited
 	 */
-	public void start(User currentUser, Album currentAlbum, Photo currentPhoto) {
+	public void start(User currentUser, Photo currentPhoto) {
 		this.currentUser = currentUser;
-		this.currentAlbum = currentAlbum;
 		this.currentPhoto = currentPhoto;
 		photoTags = FXCollections.observableArrayList();
 
@@ -262,7 +252,7 @@ public class EditPhotoController {
 			}
 		}
 
-		photoAlbums.setText(String.join(",", albumStrings));
+		photoAlbums.setText(String.join(", ", albumStrings));
 	}
 
 	/**
@@ -325,16 +315,35 @@ public class EditPhotoController {
 	 * @param e represents that the 'Move' button has been clicked
 	 */
 	public void onActionMove(ActionEvent e) {
-		ChoiceDialog<Album> dialog = new ChoiceDialog<Album>(null, currentUser.getAlbums());
+
+		Set<Album> currentlyInAlbums = new HashSet<>();
+		for (Album album : currentUser.getAlbums()) {
+			for (Photo photo : album.getPhotoList()) {
+				if (photo.equals(currentPhoto))
+					currentlyInAlbums.add(album);
+			}
+		}
+
+		ChoiceDialog<Album> dialog = new ChoiceDialog<Album>(null, currentlyInAlbums);
 		dialog.setHeaderText("Album Move Selection");
-		dialog.setContentText("Please select an album:");
+		dialog.setContentText("Please select an album to move from:");
 
 		Optional<Album> optional = dialog.showAndWait();
 
-		optional.ifPresent(choosenAlbum -> {
-			currentAlbum.deletePhoto(currentPhoto);
-			choosenAlbum.addPhoto(currentPhoto);
-		});
+		if (optional.isEmpty())
+			return;
+
+		ChoiceDialog<Album> dialog2 = new ChoiceDialog<Album>(null, currentUser.getAlbums());
+		dialog2.setHeaderText("Album Move Selection");
+		dialog2.setContentText("Please select an album to move to:");
+
+		Optional<Album> optional2 = dialog2.showAndWait();
+
+		if (optional2.isEmpty())
+			return;
+
+		optional.get().deletePhoto(currentPhoto);
+		optional2.get().addPhoto(currentPhoto);
 
 		loadAlbums();
 	}

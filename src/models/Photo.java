@@ -236,7 +236,7 @@ public class Photo implements Serializable {
 	 * @return String date-time of capture
 	 */
 	public String getDateTimeString() {
-		DateFormat format = new SimpleDateFormat("MM.d.yyyy hh:mm:ss", Locale.ENGLISH);
+		DateFormat format = new SimpleDateFormat("MM.d.yyyy HH:mm", Locale.ENGLISH);
 		String dateFormatted = format.format(date);
 		return dateFormatted;
 	}

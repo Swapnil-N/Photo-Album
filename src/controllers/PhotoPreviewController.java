@@ -109,7 +109,7 @@ public class PhotoPreviewController {
 		Stage primaryStage = (Stage) node.getScene().getWindow();
 
 		EditPhotoController editPhotoController = loader.getController();
-		editPhotoController.start(currentUser, currentAlbum, currentPhoto);
+		editPhotoController.start(currentUser, currentPhoto);
 
 		Scene scene = new Scene(root, 1000, 750);
 		primaryStage.setScene(scene);
