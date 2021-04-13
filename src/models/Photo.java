@@ -89,15 +89,34 @@ public class Photo implements Serializable {
 		key = key.trim();
 		value = value.trim();
 
-		if (!tags.containsKey(key))
-			tags.put(key, new ArrayList<>());
+		String storedKey = key;
+		boolean exists = false;
 
-		if (tags.get(key).contains(value)) {
-			UserList.serialize();
-			return false;
+		for (String existingKey : tags.keySet()) {
+			if (key.toLowerCase().equals(existingKey.toLowerCase())) {
+				exists = true;
+				storedKey = existingKey;
+				break;
+			}
 		}
 
-		tags.get(key).add(value);
+		if (!exists)
+			tags.put(storedKey, new ArrayList<>());
+
+		exists = false;
+
+		for (String existingKey : tags.keySet()) {
+			if (key.toLowerCase().equals(existingKey.toLowerCase())) {
+				for (String existingValue : tags.get(existingKey)) {
+					if (value.toLowerCase().equals(existingValue.toLowerCase())) {
+						UserList.serialize();
+						return false;
+					}
+				}
+			}
+		}
+
+		tags.get(storedKey).add(value);
 
 		UserList.serialize();
 		return true;
@@ -114,15 +133,17 @@ public class Photo implements Serializable {
 		key = key.trim();
 		value = value.trim();
 
-		if (!tags.containsKey(key))
-			return false;
+		for (String existingKey : tags.keySet()) {
+			if (key.toLowerCase().equals(existingKey.toLowerCase())) {
+				for (int i = 0; i < tags.get(existingKey).size(); i++) {
+					String existingValue = tags.get(existingKey).get(i);
+					if (value.toLowerCase().equals(existingValue.toLowerCase())) {
+						tags.get(existingKey).remove(i);
 
-		for (int i = 0; i < tags.get(key).size(); i++) {
-			if (tags.get(key).get(i).equals(value)) {
-				tags.get(key).remove(i);
-
-				UserList.serialize();
-				return true;
+						UserList.serialize();
+						return true;
+					}
+				}
 			}
 		}
 
