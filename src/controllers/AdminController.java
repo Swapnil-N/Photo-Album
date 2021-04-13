@@ -37,8 +37,8 @@ import models.UserList;
 
 public class AdminController {
 
-	/** 
-	 * Inner class for user list view row
+	/**
+	 * Nested class used to control cells in the tags ListView
 	 */
 	private static class UserItem extends ListCell<String> {
 		private HBox hBox = new HBox();
@@ -47,7 +47,7 @@ public class AdminController {
 		private Button delete = new Button("Delete");
 
 		/**
-		 * Initializes a line for the user item
+		 * Initializes a cell in the ListView
 		 */
 		public UserItem() {
 			super();
@@ -68,11 +68,11 @@ public class AdminController {
 
 			setStyle();
 		}
-		
+
 		/**
-		 * Updates the line with the new string
+		 * Updates the ListView cell with a user's username
 		 * 
-		 * @param item	new string to update items
+		 * @param item  new string to update items
 		 * @param empty true if empty, false otherwise
 		 */
 		@Override
@@ -91,7 +91,7 @@ public class AdminController {
 		}
 
 		/**
-		 * Sets the font and font size
+		 * Sets the components' font and font size
 		 */
 		private void setStyle() {
 			username.setFont(Font.font(16));

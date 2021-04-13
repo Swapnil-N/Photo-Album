@@ -43,7 +43,6 @@ public class UserList implements Serializable {
 	 * Serializes the user data
 	 */
 	public static void serialize() {
-		System.out.println("serialized");
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(
 					new FileOutputStream(storeDir + File.separator + storeFile));
@@ -58,7 +57,6 @@ public class UserList implements Serializable {
 	 */
 	@SuppressWarnings("unchecked")
 	public static void deserialize() {
-		System.out.println("deserialize");
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));
 			userList = (List<User>) ois.readObject();

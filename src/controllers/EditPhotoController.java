@@ -43,8 +43,8 @@ import models.User;
 
 public class EditPhotoController {
 
-	/** 
-	 * Inner class for tag list view row
+	/**
+	 * Nested class used to control cells in the user ListView
 	 */
 	private static class TagValueItem extends ListCell<String> {
 		private HBox hBox = new HBox();
@@ -54,15 +54,15 @@ public class EditPhotoController {
 
 		private String key, value;
 
-		private Photo photo;
+//		private Photo photo;
 
 		/**
-		 * Initializes a tag-value pair for the photo
+		 * Initializes a cell in the ListView
 		 */
 		public TagValueItem(Photo photo) {
 			super();
 
-			this.photo = photo;
+//			this.photo = photo;
 			key = "";
 			value = "";
 
@@ -81,11 +81,11 @@ public class EditPhotoController {
 
 			setStyle();
 		}
-		
+
 		/**
-		 * Updates the tag-value with the new string
+		 * Updates the ListView cell with a tag-value pair
 		 * 
-		 * @param item	new string to update items
+		 * @param item  new string to update items
 		 * @param empty true if empty, false otherwise
 		 */
 		@Override
@@ -107,7 +107,7 @@ public class EditPhotoController {
 		}
 
 		/**
-		 * Sets the font and font size
+		 * Sets the components' font and font size
 		 */
 		private void setStyle() {
 			pair.setFont(Font.font(14));
@@ -121,55 +121,57 @@ public class EditPhotoController {
 	}
 
 	/**
-	 * Button to add a tag to the photo
+	 * Component that adds a new tag-value pair to a picture
 	 */
 	@FXML
 	Button add;
-	
+
 	/**
-	 * Drop-down for possible tag options
+	 * Component that displays the existing tag options and allows the user to
+	 * create a new one
 	 */
 	@FXML
 	ChoiceBox<String> tagInput;
-	
+
 	/**
-	 * Picture of the photo being displayed
+	 * Component that displays the photo's picture
 	 */
 	@FXML
 	ImageView photoImage;
-	
+
 	/**
-	 * Listview to display tags
+	 * Component that displays the photo's tags
 	 */
 	@FXML
 	ListView<String> tagsView;
-	
+
 	/**
-	 * Display area to show the albums the photo is in
+	 * Component that displays the albums the photo is in
 	 */
 	@FXML
 	TextArea photoAlbums;
 
 	/**
-	 * Display area to show the photo caption
+	 * Component that displays and allows the user to edit the photo's caption
 	 */
 	@FXML
 	TextArea photoCaption;
-	
+
 	/**
-	 * Display area to show the photo name
+	 * Component that displays and allows the user to edit the photo's name
 	 */
 	@FXML
 	TextField photoName;
 
 	/**
-	 * Display area to show the date of photo
+	 * Component that displays the photo's date-time of capture
 	 */
 	@FXML
 	TextField photoDate;
 
 	/**
-	 * Display area to show valueInput
+	 * Component that allows the user to enter a value when trying to add a new
+	 * tag-value pair to a photo
 	 */
 	@FXML
 	TextField valueInput;
@@ -178,29 +180,28 @@ public class EditPhotoController {
 	 * User logged in
 	 */
 	private User currentUser;
-	
+
 	/**
 	 * Album in before arriving to this page
 	 */
 	private Album currentAlbum;
-	
+
 	/**
 	 * Photo to be edited
 	 */
 	private Photo currentPhoto;
-	
+
 	/**
 	 * Tags attached to this photo
 	 */
 	private ObservableList<String> photoTags;
 
-	
-	/** 
-	 * Sets up the 'edit photo page'
+	/**
+	 * Sets up the 'Edit Photo' page
 	 * 
-	 * @param currentUser	user logged in
-	 * @param currentAlbum 	album clicked from to come here
-	 * @param currentPhoto	photo to be edited
+	 * @param currentUser  user logged in
+	 * @param currentAlbum album clicked from to come here
+	 * @param currentPhoto photo to be edited
 	 */
 	public void start(User currentUser, Album currentAlbum, Photo currentPhoto) {
 		this.currentUser = currentUser;
@@ -247,7 +248,7 @@ public class EditPhotoController {
 		add.disableProperty().bind(tagInput.valueProperty().isNull().or(valueFilled.not()));
 	}
 
-	/** 
+	/**
 	 * Gets all the albums that the photo is in
 	 */
 	private void loadAlbums() {
@@ -264,7 +265,7 @@ public class EditPhotoController {
 		photoAlbums.setText(String.join(",", albumStrings));
 	}
 
-	/** 
+	/**
 	 * Loads the tags associated with photo
 	 */
 	private void loadTags() {
@@ -276,7 +277,7 @@ public class EditPhotoController {
 		}
 	}
 
-	/** 
+	/**
 	 * Pop-up to open a dialog to enter new tag key
 	 */
 	private void addNewTagAlert() {
@@ -308,8 +309,8 @@ public class EditPhotoController {
 		valueInput.setText("");
 	}
 
-	/** 
-	 * Creates a pop-up error for tag key repeats
+	/**
+	 * Informs the user that he/she attempted to add an existing tag
 	 */
 	private void invalidTagAlert() {
 		Alert alert = new Alert(AlertType.ERROR);
@@ -318,9 +319,8 @@ public class EditPhotoController {
 		alert.showAndWait();
 	}
 
-	
-	/** 
-	 * Allows a user to move a photo to another album
+	/**
+	 * Allows an user to move a photo to another album
 	 * 
 	 * @param e represents that the 'Move' button has been clicked
 	 */
@@ -338,9 +338,9 @@ public class EditPhotoController {
 
 		loadAlbums();
 	}
-	
-	/** 
-	 * Allows a user to copy a photo to another album
+
+	/**
+	 * Allows an user to copy a photo to another album
 	 * 
 	 * @param e represents that the 'Copy' button has been clicked
 	 */
@@ -356,9 +356,8 @@ public class EditPhotoController {
 		loadAlbums();
 	}
 
-	
 	/**
-	 * Adds a tag to the photo
+	 * Adds a tag-value pair to the photo
 	 * 
 	 * @param e represents that the 'Add Tag' button has been clicked
 	 */
@@ -379,8 +378,8 @@ public class EditPhotoController {
 		valueInput.setText("");
 	}
 
-	/** 
-	 * Creates a pop-up error for tag repeats
+	/**
+	 * Informs the user that he/she attempted to add an existing tag-value pair
 	 */
 	private void invalidTagValueAdded() {
 		Alert alert = new Alert(AlertType.ERROR);
@@ -389,7 +388,6 @@ public class EditPhotoController {
 		alert.showAndWait();
 	}
 
-	
 	/**
 	 * Logs the user out and takes him/her to the login screen
 	 * 
@@ -411,7 +409,6 @@ public class EditPhotoController {
 		primaryStage.show();
 	}
 
-	
 	/**
 	 * Takes the user to his/her home screen
 	 * 
