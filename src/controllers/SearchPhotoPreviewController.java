@@ -6,16 +6,37 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import models.Photo;
 
+/**
+ * Handles each search result's display
+ * 
+ * @author Swapnil Napuri
+ * @author Srinandini Marpaka
+ */
+
 public class SearchPhotoPreviewController {
 
+	/**
+	 * Container that stores the picture of a photo
+	 */
 	@FXML
 	ImageView imageView;
-	@FXML
-	Text photoName, caption;
 
-	
-	/** 
-	 * @param currentPhoto
+	/**
+	 * Container that stores the name of a photo
+	 */
+	@FXML
+	Text photoName;
+
+	/**
+	 * Container that stores the caption of a photo
+	 */
+	@FXML
+	Text caption;
+
+	/**
+	 * Sets up the container displaying a photo on the 'Search' screen
+	 * 
+	 * @param currentPhoto photo to be displayed
 	 */
 	public void start(Photo currentPhoto) {
 		photoName.setText(currentPhoto.getName());

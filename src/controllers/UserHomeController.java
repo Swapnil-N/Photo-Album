@@ -11,7 +11,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
@@ -20,19 +19,31 @@ import javafx.stage.Stage;
 import models.Album;
 import models.User;
 
+/**
+ * Handles the user landing page
+ * 
+ * @author Swapnil Napuri
+ * @author Srinandini Marpaka
+ */
+
 public class UserHomeController {
 
-	@FXML
-	Button logout, search, newAlbum;
+	/**
+	 * Component that displays all of the user's albums
+	 */
 	@FXML
 	TilePane tilepane;
 
+	/**
+	 * User logged in
+	 */
 	private User currentUser;
 
-	
-	/** 
-	 * @param currentUser
-	 * @throws IOException
+	/**
+	 * Sets up the 'Home' screen
+	 * 
+	 * @param currentUser user logged in
+	 * @throws IOException if album preview file is not found
 	 */
 	public void start(User currentUser) throws IOException {
 		this.currentUser = currentUser;
@@ -40,9 +51,10 @@ public class UserHomeController {
 		loadAlbums();
 	}
 
-	
-	/** 
-	 * @throws IOException
+	/**
+	 * Loads the TilePane with the user's albums
+	 * 
+	 * @throws IOException if album preview file is not found
 	 */
 	private void loadAlbums() throws IOException {
 		tilepane.getChildren().clear();
@@ -59,10 +71,11 @@ public class UserHomeController {
 		}
 	}
 
-	
-	/** 
-	 * @param albumName
-	 * @throws IOException
+	/**
+	 * Deletes an album from the user's albums
+	 * 
+	 * @param albumName name of the album to be deleted
+	 * @throws IOException if album preview file is not found
 	 */
 	public void deleteAlbum(String albumName) throws IOException {
 		currentUser.deleteAlbum(albumName);
@@ -70,10 +83,11 @@ public class UserHomeController {
 		loadAlbums();
 	}
 
-	
-	/** 
-	 * @param e
-	 * @throws IOException
+	/**
+	 * Adds an album to the user's albums
+	 * 
+	 * @param e represents that the 'Create New Album' button has been clicked
+	 * @throws IOException if album preview file is not found
 	 */
 	public void onActionAddAlbum(ActionEvent e) throws IOException {
 		TextInputDialog dialog = new TextInputDialog();
@@ -98,6 +112,9 @@ public class UserHomeController {
 		}
 	}
 
+	/**
+	 * Informs the user that he/she entered an invalid album name
+	 */
 	private void invalidAlbumNameAlert() {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Add Album Failed");
@@ -105,10 +122,11 @@ public class UserHomeController {
 		alert.showAndWait();
 	}
 
-	
-	/** 
-	 * @param e
-	 * @throws IOException
+	/**
+	 * Logs the user out and takes him/her to the login screen
+	 * 
+	 * @param e represents that the 'Logout' button has been clicked
+	 * @throws IOException if login screen file is not found
 	 */
 	public void onActionLogout(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
@@ -125,10 +143,11 @@ public class UserHomeController {
 		primaryStage.show();
 	}
 
-	
-	/** 
-	 * @param e
-	 * @throws IOException
+	/**
+	 * Takes the user to the search screen
+	 * 
+	 * @param e represents that the 'Search' button has been clicked
+	 * @throws IOException if search screen file is not found
 	 */
 	public void onActionSearch(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/search.fxml"));

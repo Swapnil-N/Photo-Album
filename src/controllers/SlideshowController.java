@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,23 +15,47 @@ import javafx.stage.Stage;
 import models.Album;
 import models.User;
 
-public class SlideshowController { // TODO Add more details about photos
+/**
+ * Handles the slideshow page
+ * 
+ * @author Swapnil Napuri
+ * @author Srinandini Marpaka
+ */
 
-	@FXML
-	Button logout, home, previous, next;
+public class SlideshowController {
+
+	/**
+	 * Picture of the photo being displayed
+	 */
 	@FXML
 	ImageView imageView;
+
+	/**
+	 * Name of the photo being displayed
+	 */
 	@FXML
 	Label photoName;
 
+	/**
+	 * User logged in
+	 */
 	private User currentUser;
+
+	/**
+	 * Album to be displayed
+	 */
 	private Album currentAlbum;
+
+	/**
+	 * Represents position in the album
+	 */
 	private int iter;
 
-	
-	/** 
-	 * @param currentUser
-	 * @param currentAlbum
+	/**
+	 * Sets up the 'Slideshow' screen
+	 * 
+	 * @param currentUser  user logged in
+	 * @param currentAlbum album to be displayed
 	 */
 	public void start(User currentUser, Album currentAlbum) {
 		this.currentUser = currentUser;
@@ -42,16 +65,16 @@ public class SlideshowController { // TODO Add more details about photos
 		if (currentAlbum.getSize() > 0) {
 			imageView.setImage(new Image(currentAlbum.getPhotoList().get(iter).getPhotoURL()));
 			photoName.setText(currentAlbum.getPhotoList().get(iter).getName());
-		}
-		else {
+		} else {
 			photoName.setText("No Image Available");
 		}
 
 	}
 
-	
-	/** 
-	 * @param e
+	/**
+	 * Moves the slideshow to the previous image of the album
+	 * 
+	 * @param e represents that the 'Previous' button has been clicked
 	 */
 	public void onActionPrevious(ActionEvent e) {
 		iter--;
@@ -66,9 +89,10 @@ public class SlideshowController { // TODO Add more details about photos
 
 	}
 
-	
-	/** 
-	 * @param e
+	/**
+	 * Moves the slideshow to the next image of the album
+	 * 
+	 * @param e represents that the 'Next' button has been clicked
 	 */
 	public void onActionNext(ActionEvent e) {
 		iter++;
@@ -82,10 +106,11 @@ public class SlideshowController { // TODO Add more details about photos
 		}
 	}
 
-	
-	/** 
-	 * @param e
-	 * @throws IOException
+	/**
+	 * Logs the user out and takes him/her to the login screen
+	 * 
+	 * @param e represents that the 'Logout' button has been clicked
+	 * @throws IOException if logout screen file is not found
 	 */
 	public void onActionLogout(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
@@ -102,10 +127,11 @@ public class SlideshowController { // TODO Add more details about photos
 		primaryStage.show();
 	}
 
-	
-	/** 
-	 * @param e
-	 * @throws IOException
+	/**
+	 * Takes the user to his/her home screen
+	 * 
+	 * @param e represents that the 'Home' button has been clicked
+	 * @throws IOException if home screen file is not found
 	 */
 	public void onActionHome(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/userHome.fxml"));
@@ -124,5 +150,5 @@ public class SlideshowController { // TODO Add more details about photos
 		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
-	
+
 }

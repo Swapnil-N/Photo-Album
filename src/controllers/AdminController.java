@@ -86,38 +86,24 @@ public class AdminController {
 	}
 
 	/**
-	 * Component through which the admin can add a new user
-	 */
-	@FXML
-	Button addUser;
-
-	/**
-	 * Component through which the admin can return to the login page
-	 */
-	@FXML
-	Button logout;
-
-	/**
-	 * Component in which the admin can view the existing users and delete them
+	 * Component through which the admin views and deletes existing users
 	 */
 	@FXML
 	ListView<String> listView;
 
 	/**
-	 * Component in which the admin enters the username of the user he/she wishes to
-	 * add
+	 * Component in which admin enters the username of the new user
 	 */
 	@FXML
 	TextField newUsername;
 
 	/**
-	 * Allows the listView to track changes in the user list as they occur
+	 * Allows the ListView to track changes in the user list as they occur
 	 */
 	private ObservableList<String> obsList;
 
 	/**
-	 * Populates the listView through which the admin can view and modify the list
-	 * of users
+	 * Sets up the 'Admin Control' screen
 	 */
 	public void start() {
 		obsList = FXCollections.observableArrayList();
@@ -151,7 +137,7 @@ public class AdminController {
 	}
 
 	/**
-	 * Shows an alert that informs the admin that he/she entered an invalid username
+	 * Informs the admin that he/she entered an invalid username
 	 */
 	public void invalidUsernameAlert() {
 		Alert alert = new Alert(AlertType.ERROR);
@@ -163,8 +149,10 @@ public class AdminController {
 	}
 
 	/**
+	 * Logs the admin out and takes him/her to the login screen
+	 * 
 	 * @param e represents that the 'Logout' button has been clicked
-	 * @throws IOException
+	 * @throws IOException if login screen file is not found
 	 */
 	public void onActionLogout(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));

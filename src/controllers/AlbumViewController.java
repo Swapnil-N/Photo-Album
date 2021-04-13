@@ -11,7 +11,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -23,23 +22,43 @@ import models.Album;
 import models.Photo;
 import models.User;
 
+/**
+ * Handles the album view page
+ * 
+ * @author Swapnil Napuri
+ * @author Srinandini Marpaka
+ */
+
 public class AlbumViewController {
 
-	@FXML
-	Button logout, home, addPhoto, slideshow;
+	/**
+	 * Component that indicates current album
+	 */
 	@FXML
 	Text albumName;
+
+	/**
+	 * Component that holds the album photos
+	 */
 	@FXML
 	TilePane tilepane;
 
+	/**
+	 * User logged in
+	 */
 	private User currentUser;
+
+	/**
+	 * Album opened
+	 */
 	private Album currentAlbum;
 
-	
-	/** 
-	 * @param currentUser
-	 * @param currentAlbum
-	 * @throws IOException
+	/**
+	 * Sets up the 'Album View' screen
+	 * 
+	 * @param currentUser  user logged in
+	 * @param currentAlbum album opened
+	 * @throws IOException if photo preview file is not found
 	 */
 	public void start(User currentUser, Album currentAlbum) throws IOException {
 		this.currentUser = currentUser;
@@ -50,9 +69,10 @@ public class AlbumViewController {
 		loadAlbum();
 	}
 
-	
-	/** 
-	 * @throws IOException
+	/**
+	 * Loads the photos in the album
+	 * 
+	 * @throws IOException if photo preview file is not found
 	 */
 	public void loadAlbum() throws IOException {
 		tilepane.getChildren().clear();
@@ -73,10 +93,11 @@ public class AlbumViewController {
 		}
 	}
 
-	
-	/** 
-	 * @param e
-	 * @throws IOException
+	/**
+	 * Adds the selected photo to the album
+	 * 
+	 * @param e represents that the 'Add Photo' button has been clicked
+	 * @throws IOException if photo preview file is not found
 	 */
 	public void onActionAddPhoto(ActionEvent e) throws IOException {
 		FileChooser fileChooser = new FileChooser();
@@ -107,6 +128,9 @@ public class AlbumViewController {
 		}
 	}
 
+	/**
+	 * Informs the user that he/she added a photo already in the album
+	 */
 	private void invalidPhotoAlert() {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Add Photo Failed");
@@ -114,10 +138,11 @@ public class AlbumViewController {
 		alert.showAndWait();
 	}
 
-	
-	/** 
-	 * @param e
-	 * @throws IOException
+	/**
+	 * Logs the user out and takes him/her to the login screen
+	 * 
+	 * @param e represents that the 'Logout' button has been clicked
+	 * @throws IOException if logout screen file is not found
 	 */
 	public void onActionLogout(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
@@ -134,10 +159,11 @@ public class AlbumViewController {
 		primaryStage.show();
 	}
 
-	
-	/** 
-	 * @param e
-	 * @throws IOException
+	/**
+	 * Takes the user to his/her home screen
+	 * 
+	 * @param e represents that the 'Home' button has been clicked
+	 * @throws IOException if home screen file is not found
 	 */
 	public void onActionHome(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/userHome.fxml"));
@@ -157,10 +183,11 @@ public class AlbumViewController {
 		primaryStage.show();
 	}
 
-	
-	/** 
-	 * @param e
-	 * @throws IOException
+	/**
+	 * Takes the user to the album slideshow screen
+	 * 
+	 * @param e represents that the 'Slideshow' button has been clicked
+	 * @throws IOException if slideshow screen file is not found
 	 */
 	public void onActionSlideshow(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/slideshow.fxml"));

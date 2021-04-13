@@ -31,10 +31,10 @@ public class LoginController {
 	TextField username;
 
 	/**
-	 * Logins an user based on the username entered
+	 * Logs a user in
 	 * 
-	 * @param e
-	 * @throws IOException
+	 * @param e represents that the 'Login' button has been clicked
+	 * @throws IOException if admin screen or user home screen file is not found
 	 */
 	public void onActionLogin(ActionEvent e) throws IOException {
 		String usernameInput = username.getText().trim();
@@ -82,7 +82,7 @@ public class LoginController {
 	}
 
 	/**
-	 * Shows an alert that informs the user that he/she entered an invalid username
+	 * Informs the user that he/she entered an invalid username
 	 */
 	public void invalidUsernameAlert() {
 		Alert alert = new Alert(AlertType.ERROR);

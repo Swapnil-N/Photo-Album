@@ -72,8 +72,8 @@ public class User implements Serializable {
 	 * Returns the instance of the desired album
 	 * 
 	 * @param name name of the desired album
-	 * @return Album instance of the desired album if it exists; null if such
-	 *         album does not exist
+	 * @return Album instance of the desired album if it exists; null if such album
+	 *         does not exist
 	 */
 	public Album getAlbumWithName(String name) {
 		if (!hasAlbumWithName(name))

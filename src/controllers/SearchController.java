@@ -32,31 +32,114 @@ import javafx.stage.Stage;
 import models.Photo;
 import models.User;
 
+/**
+ * Handles the search page
+ * 
+ * @author Swapnil Napuri
+ * @author Srinandini Marpaka
+ */
+
 public class SearchController {
 
+	/**
+	 * Component through which the user indicates he/she wants to perform a 'Search
+	 * by Date'
+	 */
 	@FXML
-	Button searchDate, searchTags, createAlbum;
+	Button searchDate;
+
+	/**
+	 * Component through which the user indicates he/she wants to perform a 'Search
+	 * by Tags'
+	 */
 	@FXML
-	ChoiceBox<String> tag1, value1, tag2, value2;
+	Button searchTags;
+
+	/**
+	 * Component through which the user indicates he/she wants to create an album
+	 * with the search results
+	 */
 	@FXML
-	DatePicker startDate, endDate;
+	Button createAlbum;
+
+	/**
+	 * Component through which the user selects tag 1
+	 */
 	@FXML
-	RadioButton andChoice, orChoice;
+	ChoiceBox<String> tag1;
+
+	/**
+	 * Component through which the user selects the value of the tag 1
+	 */
+	@FXML
+	ChoiceBox<String> value1;
+
+	/**
+	 * Component through which the user selects tag 2
+	 */
+	@FXML
+	ChoiceBox<String> tag2;
+
+	/**
+	 * Component through which the user selects the value of the tag 2
+	 */
+	@FXML
+	ChoiceBox<String> value2;
+
+	/**
+	 * Component that holds the beginning of the date range
+	 */
+	@FXML
+	DatePicker startDate;
+
+	/**
+	 * Component that holds the end of the date range
+	 */
+	@FXML
+	DatePicker endDate;
+
+	/**
+	 * Component that indicates conjunctive combination
+	 */
+	@FXML
+	RadioButton andChoice;
+
+	/**
+	 * Component that indicates disjunctive combination
+	 */
+	@FXML
+	RadioButton orChoice;
+
+	/**
+	 * Component that holds the search results
+	 */
 	@FXML
 	TilePane tilepane;
 
+	/**
+	 * User logged in
+	 */
 	private User currentUser;
-	private ToggleGroup toggleGroup;
-	private List<Photo> recentSearchResults;
 
-	
-	/** 
-	 * @param currentUser
+	/**
+	 * Holds the conjunction and disjunction radio buttons
+	 */
+	private ToggleGroup toggleGroup;
+
+	/**
+	 * Photos resulted from the most recent search
+	 */
+	private Set<Photo> recentSearchResults;
+
+	/**
+	 * Sets up the 'Search' screen
+	 * 
+	 * @param currentUser user logged in
 	 */
 	public void start(User currentUser) {
 		this.currentUser = currentUser;
 		toggleGroup = new ToggleGroup();
-		recentSearchResults = new ArrayList<>();
+		recentSearchResults = new HashSet<>();
 
 		startDate.setDayCellFactory(param -> new DateCell() {
 			@Override
@@ -120,6 +203,9 @@ public class SearchController {
 		});
 	}
 
+	/**
+	 * Populates the tag ChoiceBox based on the user's master list of tags
+	 */
 	private void loadTags() {
 		List<String> tagList = currentUser.getTags();
 
@@ -135,10 +221,11 @@ public class SearchController {
 		}
 	}
 
-	
-	/** 
-	 * @param searchTag
-	 * @param valueBox
+	/**
+	 * Populates the value ChoiceBox based on the tag selected
+	 * 
+	 * @param searchTag tag
+	 * @param valueBox  which value box to populate (1 or 2)
 	 */
 	private void loadValues(String searchTag, int valueBox) {
 		Set<String> possiblePairs = new HashSet<String>();
@@ -167,9 +254,10 @@ public class SearchController {
 		}
 	}
 
-	
-	/** 
-	 * @return Set<Photo>
+	/**
+	 * Searches the user's photos based on date criteria
+	 * 
+	 * @return Set<Photo> set of photos that fit the date criteria
 	 */
 	private Set<Photo> dateSearchResults() {
 		Set<Photo> desiredPhotos = new HashSet<Photo>();
@@ -190,14 +278,18 @@ public class SearchController {
 		return desiredPhotos;
 	}
 
+	/**
+	 * Nulls components in the 'Search by Date' tab
+	 */
 	private void nullDateValues() {
 		startDate.setValue(null);
 		endDate.setValue(null);
 	}
 
-	
-	/** 
-	 * @return Set<Photo>
+	/**
+	 * Searches the user's photos based on tag criteria
+	 * 
+	 * @return Set<Photo> set of photos that fit the tag criteria
 	 */
 	private Set<Photo> tagsSearchResults() {
 		Set<Photo> desiredPhotos = new HashSet<Photo>();
@@ -212,10 +304,11 @@ public class SearchController {
 		return desiredPhotos;
 	}
 
-	
-	/** 
-	 * @param currentPhoto
-	 * @return boolean
+	/**
+	 * Checks whether a photo has the desired tags
+	 * 
+	 * @param currentPhoto photo to be checked
+	 * @return boolean true if photo fits the tag criteria; false otherwise
 	 */
 	private boolean fitsTagsSpecifications(Photo currentPhoto) {
 		boolean tag1Include = true;
@@ -252,6 +345,9 @@ public class SearchController {
 		return false;
 	}
 
+	/**
+	 * Nulls components in the 'Search by Tags' tab
+	 */
 	private void nullTagsValues() {
 		tag1.setValue(null);
 		value1.setValue(null);
@@ -260,12 +356,17 @@ public class SearchController {
 		toggleGroup.selectToggle(null);
 	}
 
-	
-	/** 
-	 * @param e
-	 * @throws IOException
+	/**
+	 * Obtains the 'Search by Date' results and updates screen
+	 * 
+	 * @param e represents that the 'Search' button on the 'Search by Date' tab has
+	 *          been clicked
+	 * @throws IOException if search photo preview file is not found
 	 */
 	public void onActionSearchDate(ActionEvent e) throws IOException {
+		recentSearchResults.clear();
+		tilepane.getChildren().clear();
+
 		Set<Photo> desiredPhotos = dateSearchResults();
 		if (desiredPhotos.size() > 0)
 			updateTilePane(desiredPhotos);
@@ -275,12 +376,17 @@ public class SearchController {
 		nullDateValues();
 	}
 
-	
-	/** 
-	 * @param e
-	 * @throws IOException
+	/**
+	 * Obtains the 'Search by Tags' results and updates screen
+	 * 
+	 * @param e represents that the 'Search' button on the 'Search by Tags' tab has
+	 *          been clicked
+	 * @throws IOException if search photo preview file is not found
 	 */
 	public void onActionSearchTags(ActionEvent e) throws IOException {
+		recentSearchResults.clear();
+		tilepane.getChildren().clear();
+
 		Set<Photo> desiredPhotos = tagsSearchResults();
 		if (desiredPhotos.size() > 0)
 			updateTilePane(desiredPhotos);
@@ -290,15 +396,13 @@ public class SearchController {
 		nullTagsValues();
 	}
 
-	
-	/** 
-	 * @param desiredPhotos
-	 * @throws IOException
+	/**
+	 * Updates the TilePane with the search results
+	 * 
+	 * @param desiredPhotos set of photos that fit the search criteria
+	 * @throws IOException if search photo preview file is not found
 	 */
 	private void updateTilePane(Set<Photo> desiredPhotos) throws IOException {
-		tilepane.getChildren().clear();
-		recentSearchResults.clear();
-
 		for (Photo currentPhoto : desiredPhotos) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/searchPhotoPreview.fxml"));
 			VBox root = (VBox) loader.load();
@@ -313,6 +417,9 @@ public class SearchController {
 		createAlbum.setDisable(false);
 	}
 
+	/**
+	 * Informs the user that his/her search produced no results
+	 */
 	private void noSearchResultsAlert() {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("No Valid Photos");
@@ -323,12 +430,13 @@ public class SearchController {
 		createAlbum.setDisable(true);
 	}
 
-	
-	/** 
-	 * @param e
-	 * @throws IOException
+	/**
+	 * Creates album with the search results
+	 * 
+	 * @param e represents that the 'Create Album with Results' button has been
+	 *          clicked
 	 */
-	public void onActionCreateAlbum(ActionEvent e) throws IOException {
+	public void onActionCreateAlbum(ActionEvent e) {
 		String desiredAlbumName = getDesiredAlbumName();
 		if (desiredAlbumName.isEmpty()) {
 			invalidAlbumNameAlert();
@@ -343,9 +451,10 @@ public class SearchController {
 		}
 	}
 
-	
-	/** 
-	 * @return String
+	/**
+	 * Prompts the user to enter a name for the new album
+	 * 
+	 * @return String new album name
 	 */
 	private String getDesiredAlbumName() {
 		TextInputDialog dialog = new TextInputDialog();
@@ -367,6 +476,9 @@ public class SearchController {
 		return albumName;
 	}
 
+	/**
+	 * Informs the user that he/she entered an invalid album name
+	 */
 	private void invalidAlbumNameAlert() {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Add Album Failed");
@@ -374,10 +486,11 @@ public class SearchController {
 		alert.showAndWait();
 	}
 
-	
-	/** 
-	 * @param e
-	 * @throws IOException
+	/**
+	 * Logs the user out and takes him/her to the login screen
+	 * 
+	 * @param e represents that the 'Logout' button has been clicked
+	 * @throws IOException if logout screen file is not found
 	 */
 	public void onActionLogout(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
@@ -394,10 +507,11 @@ public class SearchController {
 		primaryStage.show();
 	}
 
-	
-	/** 
-	 * @param e
-	 * @throws IOException
+	/**
+	 * Takes the user to his/her home screen
+	 * 
+	 * @param e represents that the 'Home' button has been clicked
+	 * @throws IOException if home screen file is not found
 	 */
 	public void onActionHome(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/userHome.fxml"));
