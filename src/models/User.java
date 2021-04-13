@@ -135,13 +135,13 @@ public class User implements Serializable {
 		if (tag.isEmpty())
 			return false;
 
-		tag = tag.trim().toLowerCase();
+		tag = tag.trim();
 
-		if (tag.equals(addNewTag.toLowerCase()) && tags.contains(addNewTag))
-			return false;
-
-		if (tags.contains(tag))
-			return false;
+		for (String existingTag : tags) {
+			if (tag.toLowerCase().equals(existingTag.toLowerCase())) {
+				return false;
+			}
+		}
 
 		tags.add(0, tag);
 
