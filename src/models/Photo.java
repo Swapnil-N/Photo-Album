@@ -145,6 +145,7 @@ public class Photo implements Serializable {
 	 */
 	public void setName(String name) {
 		this.name = name;
+		UserList.serialize();
 	}
 
 	/**
@@ -163,6 +164,7 @@ public class Photo implements Serializable {
 	 */
 	public void setCaption(String caption) {
 		this.caption = caption;
+		UserList.serialize();
 	}
 
 	/**

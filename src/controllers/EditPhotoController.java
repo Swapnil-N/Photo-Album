@@ -26,8 +26,6 @@ import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
@@ -45,6 +43,9 @@ import models.User;
 
 public class EditPhotoController {
 
+	/** 
+	 * Inner class for tag list view row
+	 */
 	private static class TagValueItem extends ListCell<String> {
 		private HBox hBox = new HBox();
 		private Label pair = new Label("");
@@ -55,6 +56,9 @@ public class EditPhotoController {
 
 		private Photo photo;
 
+		/**
+		 * Initializes a tag-value pair for the photo
+		 */
 		public TagValueItem(Photo photo) {
 			super();
 
@@ -77,7 +81,13 @@ public class EditPhotoController {
 
 			setStyle();
 		}
-
+		
+		/**
+		 * Updates the tag-value with the new string
+		 * 
+		 * @param item	new string to update items
+		 * @param empty true if empty, false otherwise
+		 */
 		@Override
 		protected void updateItem(String item, boolean empty) {
 			super.updateItem(item, empty);
@@ -96,6 +106,9 @@ public class EditPhotoController {
 			setStyle();
 		}
 
+		/**
+		 * Sets the font and font size
+		 */
 		private void setStyle() {
 			pair.setFont(Font.font(14));
 			setStyle("-fx-font-family: AppleGothic;");
@@ -107,34 +120,87 @@ public class EditPhotoController {
 		}
 	}
 
+	/**
+	 * Button to add a tag to the photo
+	 */
 	@FXML
 	Button add;
+	
+	/**
+	 * Drop-down for possible tag options
+	 */
 	@FXML
 	ChoiceBox<String> tagInput;
+	
+	/**
+	 * Picture of the photo being displayed
+	 */
 	@FXML
 	ImageView photoImage;
+	
+	/**
+	 * Listview to display tags
+	 */
 	@FXML
 	ListView<String> tagsView;
+	
+	/**
+	 * Display area to show the albums the photo is in
+	 */
 	@FXML
-	Tab detailsTab, tagsTab;
-	@FXML
-	TabPane tabpane;
-	@FXML
-	TextArea photoAlbums, photoCaption;
-	@FXML
-	TextField photoName, photoDate, valueInput;
+	TextArea photoAlbums;
 
+	/**
+	 * Display area to show the photo caption
+	 */
+	@FXML
+	TextArea photoCaption;
+	
+	/**
+	 * Display area to show the photo name
+	 */
+	@FXML
+	TextField photoName;
+
+	/**
+	 * Display area to show the date of photo
+	 */
+	@FXML
+	TextField photoDate;
+
+	/**
+	 * Display area to show valueInput
+	 */
+	@FXML
+	TextField valueInput;
+
+	/**
+	 * User logged in
+	 */
 	private User currentUser;
+	
+	/**
+	 * Album in before arriving to this page
+	 */
 	private Album currentAlbum;
+	
+	/**
+	 * Photo to be edited
+	 */
 	private Photo currentPhoto;
-
+	
+	/**
+	 * Tags attached to this photo
+	 */
 	private ObservableList<String> photoTags;
 
 	
 	/** 
-	 * @param currentUser
-	 * @param currentAlbum
-	 * @param currentPhoto
+	 * Sets up the 'edit photo page'
+	 * 
+	 * @param currentUser	user logged in
+	 * @param currentAlbum 	album clicked from to come here
+	 * @param currentPhoto	photo to be edited
 	 */
 	public void start(User currentUser, Album currentAlbum, Photo currentPhoto) {
 		this.currentUser = currentUser;
@@ -181,6 +247,9 @@ public class EditPhotoController {
 		add.disableProperty().bind(tagInput.valueProperty().isNull().or(valueFilled.not()));
 	}
 
+	/** 
+	 * Gets all the albums that the photo is in
+	 */
 	private void loadAlbums() {
 		photoAlbums.setText(null);
 
@@ -195,6 +264,9 @@ public class EditPhotoController {
 		photoAlbums.setText(String.join(",", albumStrings));
 	}
 
+	/** 
+	 * Loads the tags associated with photo
+	 */
 	private void loadTags() {
 		List<String> tagList = currentUser.getTags();
 
@@ -204,6 +276,9 @@ public class EditPhotoController {
 		}
 	}
 
+	/** 
+	 * Pop-up to open a dialog to enter new tag key
+	 */
 	private void addNewTagAlert() {
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle(" ");
@@ -233,6 +308,9 @@ public class EditPhotoController {
 		valueInput.setText("");
 	}
 
+	/** 
+	 * Creates a pop-up error for tag key repeats
+	 */
 	private void invalidTagAlert() {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Add Tag Failed");
@@ -242,7 +320,9 @@ public class EditPhotoController {
 
 	
 	/** 
-	 * @param e
+	 * Allows a user to move a photo to another album
+	 * 
+	 * @param e represents that the 'Move' button has been clicked
 	 */
 	public void onActionMove(ActionEvent e) {
 		ChoiceDialog<Album> dialog = new ChoiceDialog<Album>(null, currentUser.getAlbums());
@@ -258,10 +338,11 @@ public class EditPhotoController {
 
 		loadAlbums();
 	}
-
 	
 	/** 
-	 * @param e
+	 * Allows a user to copy a photo to another album
+	 * 
+	 * @param e represents that the 'Copy' button has been clicked
 	 */
 	public void onActionCopy(ActionEvent e) {
 		ChoiceDialog<Album> dialog = new ChoiceDialog<Album>(null, currentUser.getAlbums());
@@ -276,8 +357,10 @@ public class EditPhotoController {
 	}
 
 	
-	/** 
-	 * @param e
+	/**
+	 * Adds a tag to the photo
+	 * 
+	 * @param e represents that the 'Add Tag' button has been clicked
 	 */
 	public void onActionAdd(ActionEvent e) {
 		String key = tagInput.getValue();
@@ -296,6 +379,9 @@ public class EditPhotoController {
 		valueInput.setText("");
 	}
 
+	/** 
+	 * Creates a pop-up error for tag repeats
+	 */
 	private void invalidTagValueAdded() {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Add Tag Failed");
@@ -304,9 +390,11 @@ public class EditPhotoController {
 	}
 
 	
-	/** 
-	 * @param e
-	 * @throws IOException
+	/**
+	 * Logs the user out and takes him/her to the login screen
+	 * 
+	 * @param e represents that the 'Logout' button has been clicked
+	 * @throws IOException if login screen file is not found
 	 */
 	public void onActionLogout(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
@@ -324,9 +412,11 @@ public class EditPhotoController {
 	}
 
 	
-	/** 
-	 * @param e
-	 * @throws IOException
+	/**
+	 * Takes the user to his/her home screen
+	 * 
+	 * @param e represents that the 'Home' button has been clicked
+	 * @throws IOException if home screen file is not found
 	 */
 	public void onActionHome(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/userHome.fxml"));

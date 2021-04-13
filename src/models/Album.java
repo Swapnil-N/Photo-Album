@@ -138,6 +138,7 @@ public class Album implements Serializable {
 	 */
 	public void setName(String name) {
 		this.name = name;
+		UserList.serialize();
 	}
 
 	/**
@@ -178,6 +179,15 @@ public class Album implements Serializable {
 		if (lastDate == null)
 			return "";
 		return formatDate(lastDate);
+	}
+	
+	/**
+	 * Returns the toString of the album. Used in copy/move album
+	 * 
+	 * @return String toString of the album
+	 */
+	public String toString() {
+		return name;
 	}
 
 }

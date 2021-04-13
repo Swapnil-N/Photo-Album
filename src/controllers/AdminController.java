@@ -37,12 +37,18 @@ import models.UserList;
 
 public class AdminController {
 
+	/** 
+	 * Inner class for user list view row
+	 */
 	private static class UserItem extends ListCell<String> {
 		private HBox hBox = new HBox();
 		private Label username = new Label("");
 		private Pane blank = new Pane();
 		private Button delete = new Button("Delete");
 
+		/**
+		 * Initializes a line for the user item
+		 */
 		public UserItem() {
 			super();
 
@@ -62,7 +68,13 @@ public class AdminController {
 
 			setStyle();
 		}
-
+		
+		/**
+		 * Updates the line with the new string
+		 * 
+		 * @param item	new string to update items
+		 * @param empty true if empty, false otherwise
+		 */
 		@Override
 		protected void updateItem(String item, boolean empty) {
 			super.updateItem(item, empty);
@@ -78,6 +90,9 @@ public class AdminController {
 			setStyle();
 		}
 
+		/**
+		 * Sets the font and font size
+		 */
 		private void setStyle() {
 			username.setFont(Font.font(16));
 			delete.setFont(Font.font(15));
