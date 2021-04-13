@@ -61,8 +61,8 @@ public class User implements Serializable {
 	 * @return boolean true if album exists; false otherwise
 	 */
 	public boolean hasAlbumWithName(String name) {
-		for (Album item : albums) {
-			if (item.getName().equals(name))
+		for (Album album : albums) {
+			if (album.getName().toLowerCase().equals(name.toLowerCase()))
 				return true;
 		}
 		return false;
@@ -80,7 +80,7 @@ public class User implements Serializable {
 			return null;
 
 		for (Album album : albums) {
-			if (album.getName().equals(name))
+			if (album.getName().toLowerCase().equals(name.toLowerCase()))
 				return album;
 		}
 
@@ -114,7 +114,7 @@ public class User implements Serializable {
 			return false;
 
 		for (int i = 0; i < albums.size(); i++) {
-			if (albums.get(i).getName().equals(name)) {
+			if (albums.get(i).getName().toLowerCase().equals(name.toLowerCase())) {
 				albums.remove(i);
 
 				UserList.serialize();
@@ -132,7 +132,13 @@ public class User implements Serializable {
 	 * @return boolean true if successfully added; false if it already exists
 	 */
 	public boolean addTag(String tag) {
-		tag = tag.trim();
+		if (tag.isEmpty())
+			return false;
+
+		tag = tag.trim().toLowerCase();
+
+		if (tag.equals(addNewTag.toLowerCase()) && tags.contains(addNewTag))
+			return false;
 
 		if (tags.contains(tag))
 			return false;
@@ -158,7 +164,7 @@ public class User implements Serializable {
 	 * @return List<Album> user's list of albums
 	 */
 	public List<Album> getAlbums() {
-		Collections.sort(albums, (a, b) -> a.getName().compareTo(b.getName()));
+		Collections.sort(albums, (a, b) -> a.getName().toLowerCase().compareTo(b.getName().toLowerCase()));
 		return albums;
 	}
 
