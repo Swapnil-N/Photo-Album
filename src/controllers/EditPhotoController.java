@@ -41,6 +41,13 @@ import models.Album;
 import models.Photo;
 import models.User;
 
+/**
+ * Handles the edit page
+ * 
+ * @author Swapnil Napuri
+ * @author Srinandini Marpaka
+ */
+
 public class EditPhotoController {
 
 	/**

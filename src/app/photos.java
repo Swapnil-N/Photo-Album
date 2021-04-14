@@ -12,6 +12,13 @@ import models.Photo;
 import models.User;
 import models.UserList;
 
+/**
+ * Contains the main method
+ * 
+ * @author Swapnil Napuri
+ * @author Srinandini Marpaka
+ */
+
 public class photos extends Application {
 
 	/**
